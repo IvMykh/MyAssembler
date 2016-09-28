@@ -16,7 +16,7 @@ namespace MyAssembler.Tests
         public void TestListsCount()
         {
             // Arrange.
-            var strings = new string[] 
+            var strings = new List<string> 
                 { 
                     string.Empty, 
                     string.Empty, 
@@ -27,13 +27,13 @@ namespace MyAssembler.Tests
             var tokenslists = _testedInstance.Tokenize(strings);
 
             // Assert.
-            Assert.AreEqual(tokenslists.Count(), strings.Length);
+            Assert.AreEqual(tokenslists.Count(), strings.Count);
         }
 
         private void runTest(string sampleString, List<Token> expectedTokens)
         {
             // Arrange.
-            var sampleStrings = new string[] { sampleString };
+            var sampleStrings = new List<string> { sampleString };
 
             // Act.
             var tokensLists = _testedInstance.Tokenize(sampleStrings);
@@ -323,7 +323,7 @@ namespace MyAssembler.Tests
         public void TestGeneralTokenization()
         {
             // Arrange.
-            string[] linesOfCode = File.ReadAllLines(Resources.SampleFileForLexer);
+            var linesOfCode = new List<string>(File.ReadAllLines(Resources.SampleFileForLexer));
             var expectedTokensLists = getTokensLists();
 
             // Act.

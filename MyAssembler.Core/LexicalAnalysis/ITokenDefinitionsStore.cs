@@ -4,6 +4,6 @@ namespace MyAssembler.Core.LexicalAnalysis
 {
     public interface ITokenDefinitionsStore
     {
-        IEnumerable<TokenDefinition> GetTokenDefinitions();
+        List<TokenDefinition> GetTokenDefinitions();
     }
 }

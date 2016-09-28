@@ -68,7 +68,7 @@ namespace MyAssembler.Core.LexicalAnalysis
             Literal     = @"^""(?:\\.|[^""\\])*""";
         }
 
-        public IEnumerable<TokenDefinition> GetTokenDefinitions()
+        public List<TokenDefinition> GetTokenDefinitions()
         {
             var tokenDefs = new List<TokenDefinition>()
                 {

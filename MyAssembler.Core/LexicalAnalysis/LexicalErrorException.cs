@@ -3,7 +3,7 @@
 namespace MyAssembler.Core.LexicalAnalysis
 {
     public class LexicalErrorException
-        : ApplicationException
+        : CompilationErrorException
     {
         public LexicalErrorException()
             : base()

@@ -1,25 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-
 using MyAssembler.Core.Properties;
 
 namespace MyAssembler.Core.LexicalAnalysis
 {    
     public class Lexer
     {
-        private IEnumerable<TokenDefinition>    _tokenDefinitions;
+        private List<TokenDefinition>   _tokenDefinitions;
 
         public Lexer(ITokenDefinitionsStore store)
         {
             _tokenDefinitions = store.GetTokenDefinitions();
         }
 
-        private void prepareCode(string[] lines)
+        private void prepareCode(List<string> lines)
         {
             var commentStartSymbol = char.Parse(Resources.CommentStartSymbol);
 
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < lines.Count; i++)
             {
                 int commentStartPos = lines[i].IndexOf(commentStartSymbol);
 
@@ -31,7 +30,7 @@ namespace MyAssembler.Core.LexicalAnalysis
             }
         }
 
-        public IEnumerable<IEnumerable<Token>> Tokenize(string[] linesOfCode)
+        public List<List<Token>> Tokenize(List<string> linesOfCode)
         {
             prepareCode(linesOfCode);
 

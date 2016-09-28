@@ -2,15 +2,25 @@
 using System.IO;
 using System.Text;
 
-using MyAssembler.Core.Properties;
-
 namespace MyAssembler.Core
 {
     public class Assembler
     {
-        private string[] loadFile(string filePath)
+        private List<string> loadFile(string filePath)
         {
-            string[] linesOfCode = File.ReadAllLines(filePath, Encoding.Default);
+            var linesOfCode = new List<string>();
+
+            using (var fileStream = new FileStream(filePath, FileMode.Open))
+            {
+                using (var reader = new StreamReader(fileStream, Encoding.Default))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        linesOfCode.Add(reader.ReadLine());
+                    }
+                }
+            }
+
             return linesOfCode;
         }
 
