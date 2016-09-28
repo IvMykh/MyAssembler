@@ -8,16 +8,17 @@
         CloseSquareBracket  = 3,
         Plus                = 4,
         Colon               = 5,
+        QuestionMark        = 6,
         /* Names */
-        Directive       = 13,
-        Command         = 12,
-        Register        = 11,
-        Identifier      = 10,
+        Directive       = 14,
+        Command         = 13,
+        Register        = 12,
+        Identifier      = 11,
         /* Constants */
-        BinConstant     = 6,
-        DecConstant     = 7,
-        HexConstant     = 8,
-        Literal         = 9
+        BinConstant     = 7,
+        DecConstant     = 8,
+        HexConstant     = 9,
+        Literal         = 10
     }
 
     public struct Token
@@ -26,7 +27,7 @@
         public string        Value    { get; private set; }
         public TokenPosition Position { get; private set; }
 
-        public Token(TokenType type, string value, TokenPosition position)
+        public Token(TokenType type, string value, TokenPosition position = default(TokenPosition))
             : this()
         {
             Type = type;

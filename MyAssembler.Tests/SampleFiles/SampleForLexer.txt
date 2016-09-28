@@ -1,0 +1,18 @@
+﻿            ORG     100H                            ; резерв для PSP-префікса прогр. сегмента
+MESS1       DB      "Testing: \"print a line:\""    ; рядок тексту
+MAXLEN      DB      30                              ; максимальна довжина введеного рядка
+            DB      "$"
+REAL_LEN    DW      ?                               ; кількість фактично введених символів
+BEGIN:      JMP     MAINPROG                        ; обхід даних
+            MOV     AH,09                           ; вивести на екран рядок до '$';
+            JE      EXIT                            ; вихід
+            MOV     AH,40H                          ; вивести рядок вказаної довжини на екран
+            MOV     BX,1
+            MOV     CL,REALLEN                      ; кількість введених символів
+EXIT:       add     ax , dx
+            sub     cl , ah
+            IMUL    01110B
+            IDIV    846456d
+            AND     SI,DI
+            XOR     bp,sp
+            JNE     exit

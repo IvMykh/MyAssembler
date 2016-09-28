@@ -12,6 +12,7 @@ namespace MyAssembler.Core.LexicalAnalysis
         public string CloseSquareBracket { get; private set; }
         public string Colon              { get; private set; }
         public string Plus               { get; private set; }
+        public string QuestionMark       { get; private set; }
         /* Names */
         public string Directive          { get; private set; }
         public string Command            { get; private set; }
@@ -49,6 +50,7 @@ namespace MyAssembler.Core.LexicalAnalysis
             CloseSquareBracket   = @"^\]";
             Colon                = @"^:";
             Plus                 = @"^\+";
+            QuestionMark         = @"^\?";
             /* Names */
             Directive   = oneOfMany("^DW", "^DB", "^ORG");
             Command     = oneOfMany("^MOV", 
@@ -85,7 +87,8 @@ namespace MyAssembler.Core.LexicalAnalysis
                     new TokenDefinition(TokenType.OpenSquareBracket,  OpenSquareBracket),
                     new TokenDefinition(TokenType.CloseSquareBracket, CloseSquareBracket),
                     new TokenDefinition(TokenType.Plus,               Plus),
-                    new TokenDefinition(TokenType.Colon,              Colon)
+                    new TokenDefinition(TokenType.Colon,              Colon),
+                    new TokenDefinition(TokenType.QuestionMark,       QuestionMark)
                 };
 
             return tokenDefs;

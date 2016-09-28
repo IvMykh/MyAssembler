@@ -10,14 +10,31 @@ namespace MyAssembler.Core.LexicalAnalysis
     {
         private IEnumerable<TokenDefinition>    _tokenDefinitions;
 
-
         public Lexer(ITokenDefinitionsStore store)
         {
             _tokenDefinitions = store.GetTokenDefinitions();
         }
 
-        public IEnumerable<IEnumerable<Token>> Tokenize(IEnumerable<string> linesOfCode)
+        private void prepareCode(string[] lines)
         {
+            var commentStartSymbol = char.Parse(Resources.CommentStartSymbol);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                int commentStartPos = lines[i].IndexOf(commentStartSymbol);
+
+                if (commentStartPos > -1)
+                {
+                    lines[i] = lines[i].Remove(commentStartPos)
+                                       .TrimEnd();
+                }
+            }
+        }
+
+        public IEnumerable<IEnumerable<Token>> Tokenize(string[] linesOfCode)
+        {
+            prepareCode(linesOfCode);
+
             int linesCount = linesOfCode.Count();
             var tokensLists = new List<List<Token>>(linesCount);
 

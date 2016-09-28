@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using MyAssembler.Core.LexicalAnalysis;
+using MyAssembler.Tests.Properties;
 
 namespace MyAssembler.Tests
 {
@@ -15,7 +16,7 @@ namespace MyAssembler.Tests
         public void TestListsCount()
         {
             // Arrange.
-            var strings = new List<string> 
+            var strings = new string[] 
                 { 
                     string.Empty, 
                     string.Empty, 
@@ -26,13 +27,13 @@ namespace MyAssembler.Tests
             var tokenslists = _testedInstance.Tokenize(strings);
 
             // Assert.
-            Assert.AreEqual(tokenslists.Count(), strings.Count);
+            Assert.AreEqual(tokenslists.Count(), strings.Length);
         }
 
         private void runTest(string sampleString, List<Token> expectedTokens)
         {
             // Arrange.
-            var sampleStrings = new List<string> { sampleString };
+            var sampleStrings = new string[] { sampleString };
 
             // Act.
             var tokensLists = _testedInstance.Tokenize(sampleStrings);
@@ -57,7 +58,7 @@ namespace MyAssembler.Tests
         [TestMethod]
         public void TestSpecialSymbolsTokenization()
         {
-            var sampleString = ",:[]+";
+            var sampleString = ",:[]+?";
             var expectedTokens = new List<Token> 
                 { 
                     new Token(TokenType.Comma,              ",", new TokenPosition(0, 0)),
@@ -65,6 +66,7 @@ namespace MyAssembler.Tests
                     new Token(TokenType.OpenSquareBracket,  "[", new TokenPosition(0, 2)),
                     new Token(TokenType.CloseSquareBracket, "]", new TokenPosition(0, 3)),
                     new Token(TokenType.Plus,               "+", new TokenPosition(0, 4)),
+                    new Token(TokenType.QuestionMark,       "?", new TokenPosition(0, 5))
                 };
 
             runTest(sampleString, expectedTokens);
@@ -190,7 +192,7 @@ namespace MyAssembler.Tests
         [TestMethod]
         public void TestHexConstantTokenization()
         {
-            var sampleString = "0a5h 4FfH 012H";
+            var sampleString = "0a5h 4FfH 012H     ";
             var expectedTokens = new List<Token> 
                 { 
                     new Token(TokenType.HexConstant, "0a5h", new TokenPosition(0, 0)),
@@ -215,12 +217,140 @@ namespace MyAssembler.Tests
             runTest(sampleString, expectedTokens);
         }
 
+        private List<List<Token>> getTokensLists()
+        {
+            return new List<List<Token>> 
+                {
+                    new List<Token> {
+                        new Token(TokenType.Directive, "ORG"),
+                        new Token(TokenType.HexConstant, "100H")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Identifier, "MESS1"),
+                        new Token(TokenType.Directive, "DB"),
+                        new Token(TokenType.Literal, @"""Testing: \""print a line:\""""")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Identifier, "MAXLEN"),
+                        new Token(TokenType.Directive, "DB"),
+                        new Token(TokenType.DecConstant, "30")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Directive, "DB"),
+                        new Token(TokenType.Literal, @"""$""")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Identifier, "REAL_LEN"),
+                        new Token(TokenType.Directive, "DW"),
+                        new Token(TokenType.QuestionMark, "?")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Identifier, "BEGIN"),
+                        new Token(TokenType.Colon, ":"),
+                        new Token(TokenType.Command, "JMP"),
+                        new Token(TokenType.Identifier, "MAINPROG")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "MOV"),
+                        new Token(TokenType.Register, "AH"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.DecConstant, "09")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "JE"),
+                        new Token(TokenType.Identifier, "EXIT"),
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "MOV"),
+                        new Token(TokenType.Register, "AH"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.HexConstant, "40H")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "MOV"),
+                        new Token(TokenType.Register, "BX"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.DecConstant, "1")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "MOV"),
+                        new Token(TokenType.Register, "CL"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.Identifier, "REALLEN")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Identifier, "EXIT"),
+                        new Token(TokenType.Colon, ":"),
+                        new Token(TokenType.Command, "add"),
+                        new Token(TokenType.Register, "ax"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.Register, "dx")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "sub"),
+                        new Token(TokenType.Register, "cl"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.Register, "ah")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "IMUL"),
+                        new Token(TokenType.BinConstant, "01110B")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "IDIV"),
+                        new Token(TokenType.DecConstant, "846456d")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "AND"),
+                        new Token(TokenType.Register, "SI"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.Register, "DI")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "XOR"),
+                        new Token(TokenType.Register, "bp"),
+                        new Token(TokenType.Comma, ","),
+                        new Token(TokenType.Register, "sp")
+                    },
+                    new List<Token> {
+                        new Token(TokenType.Command, "JNE"),
+                        new Token(TokenType.Identifier, "exit")
+                    }
+                };
+        }
 
+        [TestMethod]
+        public void TestGeneralTokenization()
+        {
+            // Arrange.
+            string[] linesOfCode = File.ReadAllLines(Resources.SampleFileForLexer);
+            var expectedTokensLists = getTokensLists();
 
-        //[TestMethod]
-        //public void TestGeneralTokenization()
-        //{
-        //    Assert.Fail("Not implemented yet.");
-        //}
+            // Act.
+            var actualTokensLists = _testedInstance.Tokenize(linesOfCode);
+
+            // Assert.
+            Assert.AreEqual(expectedTokensLists.Count, actualTokensLists.Count());
+
+            int i = 0;
+            foreach (var actualTokens in actualTokensLists)
+            {
+                Assert.AreEqual(
+                    expectedTokensLists[i].Count, actualTokens.Count());
+
+                int j = 0;
+                foreach (var actualToken in actualTokens)
+                {
+                    Assert.AreEqual(
+                        expectedTokensLists[i][j].Type, actualToken.Type);
+                    Assert.AreEqual(
+                        expectedTokensLists[i][j].Value, actualToken.Value);
+
+                    ++j;
+                }
+
+                ++i;
+            }
+        }
     }
 }
