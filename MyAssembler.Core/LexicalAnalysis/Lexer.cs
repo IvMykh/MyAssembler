@@ -4,7 +4,10 @@ using System.Text.RegularExpressions;
 using MyAssembler.Core.Properties;
 
 namespace MyAssembler.Core.LexicalAnalysis
-{    
+{
+    /// <summary>
+    /// Splits source code into tokens line by line, converting non-literals to upper case.
+    /// </summary>
     public class Lexer
     {
         private List<TokenDefinition>   _tokenDefinitions;
@@ -53,15 +56,18 @@ namespace MyAssembler.Core.LexicalAnalysis
                                     orderby match.Length descending, tokenDef.Type descending
                                     select new { 
                                         TokenType = tokenDef.Type, 
-                                        Value = match.Value 
+                                        Value = (tokenDef.Type != TokenType.Literal) ? 
+                                                    match.Value.ToUpper() :
+                                                    match.Value
                                     }).First();
 
                     if (bestMatch.Value.Length == 0)
                     {
-                        throw new LexicalErrorException(string.Format(Resources.LexicalErrorFormat,
-                            remainingLine.First(),
-                            currLine + 1,
-                            currIndex + 1));
+                        throw new LexicalErrorException(
+                            string.Format(Resources.UnexpectedTokenErrorMsgFormat,
+                                remainingLine.First(),
+                                currLine + 1,
+                                currIndex + 1));
                     }
 
                     tokensLists[currLine].Add(

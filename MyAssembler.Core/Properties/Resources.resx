@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CommandNotExistErrorMsgFormat" xml:space="preserve">
+    <value>"{0}": such command does not exist (line {1}, index {2}).</value>
+  </data>
+  <data name="CommandNotImplementedErrorMsgFormat" xml:space="preserve">
+    <value>"{0}": command is not implemented yet (line {1}, index {2}).</value>
+  </data>
   <data name="CommentStartSymbol" xml:space="preserve">
     <value>;</value>
   </data>
-  <data name="LexicalErrorFormat" xml:space="preserve">
+  <data name="DirectiveNotExistErrorMsgFormat" xml:space="preserve">
+    <value>"{0}": such directive does not exist (line {1}, index {2}).</value>
+  </data>
+  <data name="DirectiveNotImplementedErrorMsgFormat" xml:space="preserve">
+    <value>"{0}": directive is not implemented yet (line {1}, index {2}).</value>
+  </data>
+  <data name="IncorrectLineErrorMsgFormat" xml:space="preserve">
+    <value>Line {0}: the line is neither command, nor directive.</value>
+  </data>
+  <data name="UndefinedParseErrorMsgFormat" xml:space="preserve">
+    <value>Line {0}: undefined parse error occurred.</value>
+  </data>
+  <data name="UnexpectedTokenErrorMsgFormat" xml:space="preserve">
     <value>"{0}": unexpected token (line {1}, index {2}).</value>
   </data>
 </root>

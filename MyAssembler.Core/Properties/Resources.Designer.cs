@@ -61,6 +61,24 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot;: such command does not exist (line {1}, index {2})..
+        /// </summary>
+        internal static string CommandNotExistErrorMsgFormat {
+            get {
+                return ResourceManager.GetString("CommandNotExistErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot;: command is not implemented yet (line {1}, index {2})..
+        /// </summary>
+        internal static string CommandNotImplementedErrorMsgFormat {
+            get {
+                return ResourceManager.GetString("CommandNotImplementedErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ;.
         /// </summary>
         internal static string CommentStartSymbol {
@@ -70,11 +88,47 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot;: such directive does not exist (line {1}, index {2})..
+        /// </summary>
+        internal static string DirectiveNotExistErrorMsgFormat {
+            get {
+                return ResourceManager.GetString("DirectiveNotExistErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot;: directive is not implemented yet (line {1}, index {2})..
+        /// </summary>
+        internal static string DirectiveNotImplementedErrorMsgFormat {
+            get {
+                return ResourceManager.GetString("DirectiveNotImplementedErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line {0}: the line is neither command, nor directive..
+        /// </summary>
+        internal static string IncorrectLineErrorMsgFormat {
+            get {
+                return ResourceManager.GetString("IncorrectLineErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line {0}: undefined parse error occurred..
+        /// </summary>
+        internal static string UndefinedParseErrorMsgFormat {
+            get {
+                return ResourceManager.GetString("UndefinedParseErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: unexpected token (line {1}, index {2})..
         /// </summary>
-        internal static string LexicalErrorFormat {
+        internal static string UnexpectedTokenErrorMsgFormat {
             get {
-                return ResourceManager.GetString("LexicalErrorFormat", resourceCulture);
+                return ResourceManager.GetString("UnexpectedTokenErrorMsgFormat", resourceCulture);
             }
         }
     }

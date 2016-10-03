@@ -47,6 +47,7 @@
     <Compile Include="LexicalAnalysis\Token.cs" />
     <Compile Include="LexicalAnalysis\TokenDefinition.cs" />
     <Compile Include="LexicalAnalysis\TokenPosition.cs" />
+    <Compile Include="LexicalAnalysis\TokenType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -55,6 +56,12 @@
     </Compile>
     <Compile Include="LexicalAnalysis\MyAsmTokenDefinitionsStore.cs" />
     <Compile Include="SyntacticAnalysis\Parser.cs" />
+    <Compile Include="SyntacticAnalysis\SyntacticalErrorException.cs" />
+    <Compile Include="Translation\MovCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Abstract\AsmCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Abstract\AsmDirective.cs" />
+    <Compile Include="Translation\TranslationUnits\Abstract\AsmTranslationUnit.cs" />
+    <Compile Include="Translation\TranslationUnits\AsmTranslationUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -62,7 +69,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

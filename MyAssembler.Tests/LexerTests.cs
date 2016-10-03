@@ -75,12 +75,11 @@ namespace MyAssembler.Tests
         [TestMethod]
         public void TestDirectivesTokenization()
         {
-            var sampleString = "DW db   OrG";
+            var sampleString = "DW db  ";
             var expectedTokens = new List<Token> 
                 { 
                     new Token(TokenType.Directive, "DW",  new TokenPosition(0, 0)),
-                    new Token(TokenType.Directive, "db",  new TokenPosition(0, 3)),
-                    new Token(TokenType.Directive, "OrG", new TokenPosition(0, 8)),
+                    new Token(TokenType.Directive, "DB",  new TokenPosition(0, 3))
                 };
 
             runTest(sampleString, expectedTokens);
@@ -93,8 +92,8 @@ namespace MyAssembler.Tests
             var expectedTokens = new List<Token> 
                 { 
                     new Token(TokenType.Command, "MOV",  new TokenPosition(0, 0)),
-                    new Token(TokenType.Command, "add",  new TokenPosition(0, 4)),
-                    new Token(TokenType.Command, "sUb",  new TokenPosition(0, 8)),
+                    new Token(TokenType.Command, "ADD",  new TokenPosition(0, 4)),
+                    new Token(TokenType.Command, "SUB",  new TokenPosition(0, 8)),
                     new Token(TokenType.Command, "IMUL", new TokenPosition(0, 12)),
                     new Token(TokenType.Command, "IDIV", new TokenPosition(0, 17)),
                     new Token(TokenType.Command, "AND",  new TokenPosition(0, 22)),
@@ -152,11 +151,11 @@ namespace MyAssembler.Tests
             var expectedTokens = new List<Token> 
                 { 
                     new Token(TokenType.Identifier, "A",         new TokenPosition(0, 0)),
-                    new Token(TokenType.Identifier, "bxc",       new TokenPosition(0, 2)),
-                    new Token(TokenType.Identifier, "a_1_2_3",   new TokenPosition(0, 6)),
-                    new Token(TokenType.Identifier, "GgGgG10__", new TokenPosition(0, 14)),
-                    new Token(TokenType.Identifier, "movE",      new TokenPosition(0, 24)),
-                    new Token(TokenType.Identifier, "add1",      new TokenPosition(0, 29))
+                    new Token(TokenType.Identifier, "BXC",       new TokenPosition(0, 2)),
+                    new Token(TokenType.Identifier, "A_1_2_3",   new TokenPosition(0, 6)),
+                    new Token(TokenType.Identifier, "GGGGG10__", new TokenPosition(0, 14)),
+                    new Token(TokenType.Identifier, "MOVE",      new TokenPosition(0, 24)),
+                    new Token(TokenType.Identifier, "ADD1",      new TokenPosition(0, 29))
                 };
 
             runTest(sampleString, expectedTokens);
@@ -168,7 +167,7 @@ namespace MyAssembler.Tests
             var sampleString = "0110b 0101B";
             var expectedTokens = new List<Token> 
                 { 
-                    new Token(TokenType.BinConstant, "0110b", new TokenPosition(0, 0)),
+                    new Token(TokenType.BinConstant, "0110B", new TokenPosition(0, 0)),
                     new Token(TokenType.BinConstant, "0101B", new TokenPosition(0, 6))
                 };
 
@@ -181,7 +180,7 @@ namespace MyAssembler.Tests
             var sampleString = "15d 10D 052";
             var expectedTokens = new List<Token> 
                 { 
-                    new Token(TokenType.DecConstant, "15d", new TokenPosition(0, 0)),
+                    new Token(TokenType.DecConstant, "15D", new TokenPosition(0, 0)),
                     new Token(TokenType.DecConstant, "10D", new TokenPosition(0, 4)),
                     new Token(TokenType.DecConstant, "052", new TokenPosition(0, 8))
                 };
@@ -195,8 +194,8 @@ namespace MyAssembler.Tests
             var sampleString = "0a5h 4FfH 012H     ";
             var expectedTokens = new List<Token> 
                 { 
-                    new Token(TokenType.HexConstant, "0a5h", new TokenPosition(0, 0)),
-                    new Token(TokenType.HexConstant, "4FfH", new TokenPosition(0, 5)),
+                    new Token(TokenType.HexConstant, "0A5H", new TokenPosition(0, 0)),
+                    new Token(TokenType.HexConstant, "4FFH", new TokenPosition(0, 5)),
                     new Token(TokenType.HexConstant, "012H", new TokenPosition(0, 10))
                 };
 
@@ -221,10 +220,6 @@ namespace MyAssembler.Tests
         {
             return new List<List<Token>> 
                 {
-                    new List<Token> {
-                        new Token(TokenType.Directive, "ORG"),
-                        new Token(TokenType.HexConstant, "100H")
-                    },
                     new List<Token> {
                         new Token(TokenType.Identifier, "MESS1"),
                         new Token(TokenType.Directive, "DB"),
@@ -281,16 +276,16 @@ namespace MyAssembler.Tests
                     new List<Token> {
                         new Token(TokenType.Identifier, "EXIT"),
                         new Token(TokenType.Colon, ":"),
-                        new Token(TokenType.Command, "add"),
-                        new Token(TokenType.Register, "ax"),
+                        new Token(TokenType.Command, "ADD"),
+                        new Token(TokenType.Register, "AX"),
                         new Token(TokenType.Comma, ","),
-                        new Token(TokenType.Register, "dx")
+                        new Token(TokenType.Register, "DX")
                     },
                     new List<Token> {
-                        new Token(TokenType.Command, "sub"),
-                        new Token(TokenType.Register, "cl"),
+                        new Token(TokenType.Command, "SUB"),
+                        new Token(TokenType.Register, "CL"),
                         new Token(TokenType.Comma, ","),
-                        new Token(TokenType.Register, "ah")
+                        new Token(TokenType.Register, "AH")
                     },
                     new List<Token> {
                         new Token(TokenType.Command, "IMUL"),
@@ -298,7 +293,7 @@ namespace MyAssembler.Tests
                     },
                     new List<Token> {
                         new Token(TokenType.Command, "IDIV"),
-                        new Token(TokenType.DecConstant, "846456d")
+                        new Token(TokenType.DecConstant, "846456D")
                     },
                     new List<Token> {
                         new Token(TokenType.Command, "AND"),
@@ -308,13 +303,13 @@ namespace MyAssembler.Tests
                     },
                     new List<Token> {
                         new Token(TokenType.Command, "XOR"),
-                        new Token(TokenType.Register, "bp"),
+                        new Token(TokenType.Register, "BP"),
                         new Token(TokenType.Comma, ","),
-                        new Token(TokenType.Register, "sp")
+                        new Token(TokenType.Register, "SP")
                     },
                     new List<Token> {
                         new Token(TokenType.Command, "JNE"),
-                        new Token(TokenType.Identifier, "exit")
+                        new Token(TokenType.Identifier, "EXIT")
                     }
                 };
         }
