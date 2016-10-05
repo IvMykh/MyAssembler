@@ -3,104 +3,94 @@ using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.Properties;
 using MyAssembler.Core.Translation.TranslationUnits.Abstract;
+using MyAssembler.Core.Translation.TranslationUnits.Commands;
+using MyAssembler.Core.Translation.TranslationUnits.Directives;
 
 namespace MyAssembler.Core.SyntacticAnalysis
 {
+    /// <summary>
+    /// Analyzes whether lines of tokens constitute valid assembly statements 
+    /// and produces translation units.
+    /// </summary>
     public class Parser
     {
-        private AsmCommand parseMov(List<Token> tokens, int commandTokenIndex)   { return null; }
+        private IAutomatonNode _automaton;
 
-        private AsmCommand parseAdd  (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseSub  (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseImul (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseIdiv (List<Token> tokens, int commandTokenIndex) { return null; }
-                                     
-        private AsmCommand parseAnd  (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseOr   (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseNot  (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseXor  (List<Token> tokens, int commandTokenIndex) { return null; }
-                                     
-        private AsmCommand parseJmp  (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseJe   (List<Token> tokens, int commandTokenIndex) { return null; }
-        private AsmCommand parseJne  (List<Token> tokens, int commandTokenIndex) { return null; }
-
-        private AsmCommand parseCommand(List<Token> tokens, int commandTokenIndex)
+        public Parser(IAutomatonBuilder automatonBuilder)
         {
-            Token commandToken = tokens[commandTokenIndex];
+            automatonBuilder.Construct();
+            _automaton = automatonBuilder.ConstructedInstance;
+        }
 
-            CommandType commandType = CommandType.None;
-            bool isParseSuccess = Enum.TryParse(commandToken.Value, out commandType);
+        private AsmCommand createAsmCommand(Token definitionToken, List<Token> tokens, OperandsSetType ost)
+        {
+            CommandType commandType = 
+                (CommandType)Enum.Parse(typeof(CommandType), definitionToken.Value);
 
-            if (!isParseSuccess || commandType == CommandType.None)
+            switch (commandType)
             {
-                throw new SyntacticalErrorException(
-                    string.Format(Resources.CommandNotExistErrorMsgFormat,
-                        commandToken.Value,
-                        commandToken.Position.Line,
-                        commandToken.Position.StartIndex));
+                case CommandType.MOV:  return new MovCommand(tokens, ost);
+                case CommandType.ADD:  return new AddCommand(tokens, ost);
+                case CommandType.SUB:  return new SubCommand(tokens, ost);
+                case CommandType.IMUL: return new ImulCommand(tokens, ost);
+                case CommandType.IDIV: return new IdivCommand(tokens, ost);
+                case CommandType.AND:  return new AndCommand(tokens, ost);
+                case CommandType.OR:   return new OrCommand(tokens, ost);
+                case CommandType.NOT:  return new NotCommand(tokens, ost);
+                case CommandType.XOR:  return new XorCommand(tokens, ost);
+                case CommandType.JMP:  return new JmpCommand(tokens, ost);
+                case CommandType.JE:   return new JeCommand(tokens, ost);
+                case CommandType.JNE:  return new JneCommand(tokens, ost);
+
+                default: throw new SyntacticalErrorException(
+                    string.Format(Resources.CmdNotImplementedMsgFormat,
+                        definitionToken.Value,
+                        definitionToken.Position.Line,
+                        definitionToken.Position.StartIndex));
             }
-            else
-            {
-                switch (commandType)
-                {
-                    case CommandType.MOV:  return parseMov  (tokens, commandTokenIndex);
-                    case CommandType.ADD:  return parseAdd  (tokens, commandTokenIndex);
-                    case CommandType.SUB:  return parseSub  (tokens, commandTokenIndex);
-                    case CommandType.IMUL: return parseImul (tokens, commandTokenIndex);
-                    case CommandType.IDIV: return parseIdiv (tokens, commandTokenIndex);
-                    case CommandType.AND:  return parseAnd  (tokens, commandTokenIndex);
-                    case CommandType.OR:   return parseOr   (tokens, commandTokenIndex);
-                    case CommandType.NOT:  return parseNot  (tokens, commandTokenIndex);
-                    case CommandType.XOR:  return parseXor  (tokens, commandTokenIndex);
-                    case CommandType.JMP:  return parseJmp  (tokens, commandTokenIndex);
-                    case CommandType.JE:   return parseJe   (tokens, commandTokenIndex);
-                    case CommandType.JNE:  return parseJne  (tokens, commandTokenIndex);
+        }
+        private AsmDirective createAsmDirective(Token definitionToken, List<Token> tokens)
+        {
+            DirectiveType directiveType =
+                (DirectiveType)Enum.Parse(typeof(DirectiveType), definitionToken.Value);
 
-                    default: throw new SyntacticalErrorException(
-                        string.Format(Resources.CommandNotImplementedErrorMsgFormat,
-                            commandToken.Value,
-                            commandToken.Position.Line,
-                            commandToken.Position.StartIndex));
-                }
+            switch (directiveType)
+            {
+                case DirectiveType.DB: return new DbDirective(tokens);
+                case DirectiveType.DW: return new DwDirective(tokens);
+
+                default: throw new SyntacticalErrorException(
+                    string.Format(Resources.DtvNotImplementedMsgFormat,
+                        definitionToken.Value,
+                        definitionToken.Position.Line,
+                        definitionToken.Position.StartIndex));
+            }
+        }
+        private AsmTranslationUnit createTranslationUnit(List<Token> tokens, OperandsSetType ost)
+        {
+            Token definitionToken = tokens.Find(
+                token => { 
+                    return token.Type == TokenType.Command || 
+                           token.Type == TokenType.Directive; 
+                });
+
+            TokenType translationUnitType = definitionToken.Type;
+
+            switch (translationUnitType)
+            {
+                case TokenType.Command:   return createAsmCommand(definitionToken, tokens, ost);
+                case TokenType.Directive: return createAsmDirective(definitionToken, tokens);
+
+                default: throw new Exception("Absolutely impossible exception!");
             }
         }
 
-
-        private AsmDirective parseDb (List<Token> tokens, int directiveTokenIndex) { return null; }
-        private AsmDirective parseDw (List<Token> tokens, int directiveTokenIndex) { return null; }
-
-        private AsmDirective parseDirective(List<Token> tokens, int directiveTokenIndex)
+        private LineParseResult parseLine(List<Token> tokens)
         {
-            Token directiveToken = tokens[directiveTokenIndex];
-
-            DirectiveType directiveType = DirectiveType.None;
-            bool isParseSuccess = Enum.TryParse(directiveToken.Value, out directiveType);
-
-            if (!isParseSuccess || directiveType == DirectiveType.None)
-            {
-                throw new SyntacticalErrorException(
-                    string.Format(Resources.DirectiveNotExistErrorMsgFormat,
-                        directiveToken.Value,
-                        directiveToken.Position.Line,
-                        directiveToken.Position.StartIndex));
-            }
-            else
-            {
-                switch (directiveType)
-                {
-                    case DirectiveType.DB: return parseDb (tokens, directiveTokenIndex);
-                    case DirectiveType.DW: return parseDw (tokens, directiveTokenIndex);
-                    
-                    default: throw new SyntacticalErrorException(
-                        string.Format(Resources.CommandNotImplementedErrorMsgFormat,
-                            directiveToken.Value,
-                            directiveToken.Position.Line,
-                            directiveToken.Position.StartIndex));
-                }
-            }
+            return _automaton.TakeInput(tokens.GetEnumerator());
         }
-
-        public void Parse(List<List<Token>> tokensLists)
+        
+        public List<AsmTranslationUnit> Parse(List<List<Token>> tokensLists)
         {
             tokensLists.RemoveAll(tokens => tokens.Count == 0);
 
@@ -108,35 +98,23 @@ namespace MyAssembler.Core.SyntacticAnalysis
 
             foreach (var tokensInLine in tokensLists)
             {
-                int foundIndex = tokensInLine.FindIndex(
-                    token => {
-                        return token.Type == TokenType.Command ||
-                               token.Type == TokenType.Directive;
-                    });
+                var parseResult = parseLine(tokensInLine);
 
-                if (foundIndex == -1)
+                if (parseResult.OperandsSetType != OperandsSetType.NotAccepting)
+                {
+                    translationUnits.Add(
+                        createTranslationUnit(tokensInLine, parseResult.OperandsSetType));
+                }
+                else
                 {
                     throw new SyntacticalErrorException(
-                        string.Format(Resources.IncorrectLineErrorMsgFormat,
-                            tokensInLine[0].Position.Line));
-                }
-
-                switch (tokensInLine[foundIndex].Type)
-                {
-                    case TokenType.Directive:
-                        {
-                            translationUnits.Add(parseDirective(tokensInLine, foundIndex));
-                        } break;
-                    case TokenType.Command:
-                        {
-                            translationUnits.Add(parseCommand(tokensInLine, foundIndex));
-                        } break;
-
-                    default: throw new SyntacticalErrorException(
-                        string.Format(Resources.UndefinedParseErrorMsgFormat,
-                            tokensInLine[0].Position.Line));
+                        string.Format(parseResult.ErrorMsgFormat,
+                            parseResult.Position.Line,
+                            parseResult.Position.StartIndex));
                 }
             }
+
+            return translationUnits;
         }
     }
 }

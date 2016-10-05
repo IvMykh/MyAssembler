@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,19 +57,38 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="LexicalAnalysis\MyAsmTokenDefinitionsStore.cs" />
+    <Compile Include="LexicalAnalysis\MyTokenDefinitionsStore.cs" />
+    <Compile Include="SyntacticAnalysis\AcceptanceState.cs" />
+    <Compile Include="SyntacticAnalysis\MyAutomatonBuilder.cs" />
+    <Compile Include="SyntacticAnalysis\MyAutomatonNode.cs" />
+    <Compile Include="SyntacticAnalysis\IAutomatonBuilder.cs" />
+    <Compile Include="SyntacticAnalysis\IAutomatonNode.cs" />
+    <Compile Include="SyntacticAnalysis\LineParseResult.cs" />
     <Compile Include="SyntacticAnalysis\Parser.cs" />
     <Compile Include="SyntacticAnalysis\SyntacticalErrorException.cs" />
-    <Compile Include="Translation\MovCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\AndCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Directives\DbDirective.cs" />
+    <Compile Include="Translation\TranslationUnits\Directives\DwDirective.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\JneCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\IdivCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\ImulCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\JeCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\JmpCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\MovCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\AsmCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\AsmDirective.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\AsmTranslationUnit.cs" />
-    <Compile Include="Translation\TranslationUnits\AsmTranslationUnit.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\NotCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\OrCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\SubCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\XorCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

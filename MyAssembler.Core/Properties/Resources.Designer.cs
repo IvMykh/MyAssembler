@@ -61,20 +61,47 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Command name expected (line {0}, index {1})..
+        /// </summary>
+        internal static string CmdExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("CmdExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: such command does not exist (line {1}, index {2})..
         /// </summary>
-        internal static string CommandNotExistErrorMsgFormat {
+        internal static string CmdNotExistMsgFormat {
             get {
-                return ResourceManager.GetString("CommandNotExistErrorMsgFormat", resourceCulture);
+                return ResourceManager.GetString("CmdNotExistMsgFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: command is not implemented yet (line {1}, index {2})..
         /// </summary>
-        internal static string CommandNotImplementedErrorMsgFormat {
+        internal static string CmdNotImplementedMsgFormat {
             get {
-                return ResourceManager.GetString("CommandNotImplementedErrorMsgFormat", resourceCulture);
+                return ResourceManager.GetString("CmdNotImplementedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;:&apos; or directive name expected (line {0}, index {1})..
+        /// </summary>
+        internal static string ColonDtvExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("ColonDtvExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;,&apos; expected (line {0}, index {1})..
+        /// </summary>
+        internal static string CommaExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("CommaExpectedMsgFormat", resourceCulture);
             }
         }
         
@@ -90,27 +117,63 @@ namespace MyAssembler.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: such directive does not exist (line {1}, index {2})..
         /// </summary>
-        internal static string DirectiveNotExistErrorMsgFormat {
+        internal static string DtvNotExistMsgFormat {
             get {
-                return ResourceManager.GetString("DirectiveNotExistErrorMsgFormat", resourceCulture);
+                return ResourceManager.GetString("DtvNotExistMsgFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: directive is not implemented yet (line {1}, index {2})..
         /// </summary>
-        internal static string DirectiveNotImplementedErrorMsgFormat {
+        internal static string DtvNotImplementedMsgFormat {
             get {
-                return ResourceManager.GetString("DirectiveNotImplementedErrorMsgFormat", resourceCulture);
+                return ResourceManager.GetString("DtvNotImplementedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of command expected (line {0}, index {1})..
+        /// </summary>
+        internal static string EndOfCmdExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("EndOfCmdExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End of directive expected (line {0}, index {1})..
+        /// </summary>
+        internal static string EndOfDtvExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("EndOfDtvExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifier or command name expected (line {0}, index {1})..
+        /// </summary>
+        internal static string IdfCmdExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("IdfCmdExpectedMsgFormat", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Line {0}: the line is neither command, nor directive..
         /// </summary>
-        internal static string IncorrectLineErrorMsgFormat {
+        internal static string IncorrectLineMsgFormat {
             get {
-                return ResourceManager.GetString("IncorrectLineErrorMsgFormat", resourceCulture);
+                return ResourceManager.GetString("IncorrectLineMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid initial value or &apos;?&apos; expected (line {0}, index {1})..
+        /// </summary>
+        internal static string InitValueOrQuestionExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("InitValueOrQuestionExpectedMsgFormat", resourceCulture);
             }
         }
         
@@ -126,9 +189,36 @@ namespace MyAssembler.Core.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: unexpected token (line {1}, index {2})..
         /// </summary>
-        internal static string UnexpectedTokenErrorMsgFormat {
+        internal static string UnexpectedTokenMsgFormat {
             get {
-                return ResourceManager.GetString("UnexpectedTokenErrorMsgFormat", resourceCulture);
+                return ResourceManager.GetString("UnexpectedTokenMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid first operand expected (line {0}, index {1})..
+        /// </summary>
+        internal static string Valid1stOpExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("Valid1stOpExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid second operand expected (line {0}, index {1})..
+        /// </summary>
+        internal static string Valid2ndOpExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("Valid2ndOpExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid third operand expected (line {0}, index {1})..
+        /// </summary>
+        internal static string Valid3rdOpExpectedMsgFormat {
+            get {
+                return ResourceManager.GetString("Valid3rdOpExpectedMsgFormat", resourceCulture);
             }
         }
     }

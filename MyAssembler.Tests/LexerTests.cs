@@ -10,7 +10,7 @@ namespace MyAssembler.Tests
     [TestClass]
     public class LexerTests
     {
-        private Lexer _testedInstance = new Lexer(new MyAsmTokenDefinitionsStore());
+        private Lexer _testedInstance = new Lexer(new MyTokenDefinitionsStore());
 
         [TestMethod]
         public void TestListsCount()

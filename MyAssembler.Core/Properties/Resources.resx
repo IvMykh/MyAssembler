@@ -117,28 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CommandNotExistErrorMsgFormat" xml:space="preserve">
+  <data name="CmdExpectedMsgFormat" xml:space="preserve">
+    <value>Command name expected (line {0}, index {1}).</value>
+  </data>
+  <data name="CmdNotExistMsgFormat" xml:space="preserve">
     <value>"{0}": such command does not exist (line {1}, index {2}).</value>
   </data>
-  <data name="CommandNotImplementedErrorMsgFormat" xml:space="preserve">
+  <data name="CmdNotImplementedMsgFormat" xml:space="preserve">
     <value>"{0}": command is not implemented yet (line {1}, index {2}).</value>
+  </data>
+  <data name="ColonDtvExpectedMsgFormat" xml:space="preserve">
+    <value>':' or directive name expected (line {0}, index {1}).</value>
+  </data>
+  <data name="CommaExpectedMsgFormat" xml:space="preserve">
+    <value>',' expected (line {0}, index {1}).</value>
   </data>
   <data name="CommentStartSymbol" xml:space="preserve">
     <value>;</value>
   </data>
-  <data name="DirectiveNotExistErrorMsgFormat" xml:space="preserve">
+  <data name="DtvNotExistMsgFormat" xml:space="preserve">
     <value>"{0}": such directive does not exist (line {1}, index {2}).</value>
   </data>
-  <data name="DirectiveNotImplementedErrorMsgFormat" xml:space="preserve">
+  <data name="DtvNotImplementedMsgFormat" xml:space="preserve">
     <value>"{0}": directive is not implemented yet (line {1}, index {2}).</value>
   </data>
-  <data name="IncorrectLineErrorMsgFormat" xml:space="preserve">
+  <data name="EndOfCmdExpectedMsgFormat" xml:space="preserve">
+    <value>End of command expected (line {0}, index {1}).</value>
+  </data>
+  <data name="EndOfDtvExpectedMsgFormat" xml:space="preserve">
+    <value>End of directive expected (line {0}, index {1}).</value>
+  </data>
+  <data name="IdfCmdExpectedMsgFormat" xml:space="preserve">
+    <value>Identifier or command name expected (line {0}, index {1}).</value>
+  </data>
+  <data name="IncorrectLineMsgFormat" xml:space="preserve">
     <value>Line {0}: the line is neither command, nor directive.</value>
+  </data>
+  <data name="InitValueOrQuestionExpectedMsgFormat" xml:space="preserve">
+    <value>Valid initial value or '?' expected (line {0}, index {1}).</value>
   </data>
   <data name="UndefinedParseErrorMsgFormat" xml:space="preserve">
     <value>Line {0}: undefined parse error occurred.</value>
   </data>
-  <data name="UnexpectedTokenErrorMsgFormat" xml:space="preserve">
+  <data name="UnexpectedTokenMsgFormat" xml:space="preserve">
     <value>"{0}": unexpected token (line {1}, index {2}).</value>
+  </data>
+  <data name="Valid1stOpExpectedMsgFormat" xml:space="preserve">
+    <value>Valid first operand expected (line {0}, index {1}).</value>
+  </data>
+  <data name="Valid2ndOpExpectedMsgFormat" xml:space="preserve">
+    <value>Valid second operand expected (line {0}, index {1}).</value>
+  </data>
+  <data name="Valid3rdOpExpectedMsgFormat" xml:space="preserve">
+    <value>Valid third operand expected (line {0}, index {1}).</value>
   </data>
 </root>

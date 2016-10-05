@@ -18,7 +18,7 @@ namespace MyAssembler.Core.LexicalAnalysis
 
     public enum RegisterType
     {
-        AX = 1,   AL,   AH, 
+        AX,   AL,   AH, 
         BX,   BL,   BH, 
         CX,   CL,   CH,
         DX,   DL,   DH,
@@ -44,7 +44,7 @@ namespace MyAssembler.Core.LexicalAnalysis
     }
 
 
-    public class MyAsmTokenDefinitionsStore
+    public class MyTokenDefinitionsStore
         : ITokenDefinitionsStore
     {
         /* Special symbols */
@@ -83,7 +83,7 @@ namespace MyAssembler.Core.LexicalAnalysis
             return strBuilder.ToString();
         }
 
-        public MyAsmTokenDefinitionsStore()
+        public MyTokenDefinitionsStore()
         {
             /* Special symbols */
             _comma                = @"^,";

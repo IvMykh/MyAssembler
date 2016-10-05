@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
+using MyAssembler.Core.SyntacticAnalysis;
 using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 
-namespace MyAssembler.Core.Translation
+namespace MyAssembler.Core.Translation.TranslationUnits.Commands
 {
     /*
      * ( R/M ) -> ( R )
@@ -13,8 +14,8 @@ namespace MyAssembler.Core.Translation
     public class MovCommand
         : AsmCommand
     {
-        public MovCommand(List<Token> tokens)
-            : base(tokens)
+        public MovCommand(List<Token> tokens, OperandsSetType operandsSetType)
+            : base(tokens, operandsSetType)
         {
         }
     }

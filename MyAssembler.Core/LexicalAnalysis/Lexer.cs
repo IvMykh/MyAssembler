@@ -64,7 +64,7 @@ namespace MyAssembler.Core.LexicalAnalysis
                     if (bestMatch.Value.Length == 0)
                     {
                         throw new LexicalErrorException(
-                            string.Format(Resources.UnexpectedTokenErrorMsgFormat,
+                            string.Format(Resources.UnexpectedTokenMsgFormat,
                                 remainingLine.First(),
                                 currLine + 1,
                                 currIndex + 1));
