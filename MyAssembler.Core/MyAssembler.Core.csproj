@@ -66,6 +66,15 @@
     <Compile Include="SyntacticAnalysis\LineParseResult.cs" />
     <Compile Include="SyntacticAnalysis\Parser.cs" />
     <Compile Include="SyntacticAnalysis\SyntacticalErrorException.cs" />
+    <Compile Include="Translation\BitStringManipHelper.cs" />
+    <Compile Include="Translation\MemoryManager.cs" />
+    <Compile Include="Translation\ParsersForConstants\BinConstantsParser.cs" />
+    <Compile Include="Translation\ParsersForConstants\ConstantsParser.cs" />
+    <Compile Include="Translation\ParsersForConstants\DecConstantsParser.cs" />
+    <Compile Include="Translation\ParsersForConstants\HexConstantsParser.cs" />
+    <Compile Include="Translation\RegisterBitsMapper.cs" />
+    <Compile Include="Translation\TranslationContext.cs" />
+    <Compile Include="Translation\TranslationErrorException.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AndCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Directives\DbDirective.cs" />

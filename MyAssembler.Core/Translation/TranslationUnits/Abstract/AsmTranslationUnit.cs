@@ -11,5 +11,10 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         {
             Tokens = tokens;
         }
+
+        public virtual void Translate(TranslationContext context)
+        {
+            // ...
+        }
     }
 }
