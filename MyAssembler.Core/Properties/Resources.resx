@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AH" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="AL" xml:space="preserve">
+    <value>000</value>
+  </data>
+  <data name="AX" xml:space="preserve">
+    <value>000</value>
+  </data>
+  <data name="BH" xml:space="preserve">
+    <value>111</value>
+  </data>
+  <data name="BL" xml:space="preserve">
+    <value>011</value>
+  </data>
+  <data name="BP" xml:space="preserve">
+    <value>101</value>
+  </data>
+  <data name="BX" xml:space="preserve">
+    <value>011</value>
+  </data>
+  <data name="CH" xml:space="preserve">
+    <value>101</value>
+  </data>
+  <data name="CL" xml:space="preserve">
+    <value>001</value>
+  </data>
   <data name="CmdExpectedMsgFormat" xml:space="preserve">
     <value>Command name expected (line {0}, index {1}).</value>
   </data>
@@ -135,11 +162,26 @@
   <data name="CommentStartSymbol" xml:space="preserve">
     <value>;</value>
   </data>
+  <data name="CX" xml:space="preserve">
+    <value>001</value>
+  </data>
+  <data name="DH" xml:space="preserve">
+    <value>110</value>
+  </data>
+  <data name="DI" xml:space="preserve">
+    <value>111</value>
+  </data>
+  <data name="DL" xml:space="preserve">
+    <value>010</value>
+  </data>
   <data name="DtvNotExistMsgFormat" xml:space="preserve">
     <value>"{0}": such directive does not exist (line {1}, index {2}).</value>
   </data>
   <data name="DtvNotImplementedMsgFormat" xml:space="preserve">
     <value>"{0}": directive is not implemented yet (line {1}, index {2}).</value>
+  </data>
+  <data name="DX" xml:space="preserve">
+    <value>010</value>
   </data>
   <data name="EndOfCmdExpectedMsgFormat" xml:space="preserve">
     <value>End of command expected (line {0}, index {1}).</value>
@@ -156,6 +198,12 @@
   <data name="InitValueOrQuestionExpectedMsgFormat" xml:space="preserve">
     <value>Valid initial value or '?' expected (line {0}, index {1}).</value>
   </data>
+  <data name="SI" xml:space="preserve">
+    <value>110</value>
+  </data>
+  <data name="SP" xml:space="preserve">
+    <value>100</value>
+  </data>
   <data name="UndefinedParseErrorMsgFormat" xml:space="preserve">
     <value>Line {0}: undefined parse error occurred.</value>
   </data>
@@ -170,5 +218,11 @@
   </data>
   <data name="Valid3rdOpExpectedMsgFormat" xml:space="preserve">
     <value>Valid third operand expected (line {0}, index {1}).</value>
+  </data>
+  <data name="W0" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="W1" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>

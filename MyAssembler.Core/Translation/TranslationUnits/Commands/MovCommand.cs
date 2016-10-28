@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
 using MyAssembler.Core.Translation.ParsersForConstants;
@@ -7,15 +6,6 @@ using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Commands
 {
-    using BitStrHelper = BitStringManipHelper;
-
-    /*
-     * R - R - 1000 100w mod reg r/m
-     * R - M - 1000 101w mod reg r/m
-     * M - R - 1000 100w mod reg r/m
-     * R - I - 1011w reg im8, 16, 32
-     * M - I - 1100 011w mod 000 r/m
-     */
     public class MovCommand
         : AsmCommand
     {
@@ -24,107 +14,121 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
         {
         }
 
-        // MOV BX,AX
-        private void translateForRR(TranslationContext context, int startPos)
+        private void checkForRegMemMismatch(
+            TranslationContext context, RegisterType register, string identifier)
         {
-            RegisterType firstReg = (RegisterType)Enum.Parse(
-                typeof(RegisterType), Tokens[startPos++].Value);
-            RegisterBitsMapResult mapRes1 = context.RegisterBitsMapper.Map(firstReg);
+            WValue wForReg = context.WValueHelper.WValueForRegister(register);
+            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
+            
+            if (idType == IdentifierType.Label)
+            {
+                throw new TranslationErrorException(
+                    string.Format("{0}: label identifier is not valid in this context.",
+                        identifier));
+            }
 
-            ++startPos; // Skipping comma.
-
-            RegisterType secondReg = (RegisterType)Enum.Parse(
-                typeof(RegisterType), Tokens[startPos++].Value);
-            RegisterBitsMapResult mapRes2 = context.RegisterBitsMapper.Map(secondReg);
-
-            if (mapRes1.W != mapRes2.W)
+            if (idType == IdentifierType.Byte && wForReg == WValue.One ||
+                idType == IdentifierType.Word && wForReg == WValue.Zero)
             {
                 throw new TranslationErrorException(
                     string.Format("{0} and {1}: operands type mismatch.",
-                        firstReg, 
+                        register,
+                        identifier));
+            }
+        }
+        
+        private void translateForRegReg(TranslationContext context, int startPos)
+        {
+            RegisterType firstReg = context.RegisterHelper.Parse(Tokens[startPos++].Value);
+            ++startPos; // Skipping comma.
+            RegisterType secondReg = context.RegisterHelper.Parse(Tokens[startPos++].Value);
+
+            WValue w1 = context.WValueHelper.WValueForRegister(firstReg);
+            WValue w2 = context.WValueHelper.WValueForRegister(secondReg);
+
+            if (w1 != w2)
+            {
+                throw new TranslationErrorException(
+                    string.Format("{0} and {1}: operands type mismatch.",
+                        firstReg,
                         secondReg));
             }
 
             var translatedBytes = new byte[2];
 
-            translatedBytes[0] = BitStrHelper.BitStringToByte(
-                string.Format("1000101{0}", mapRes1.W));
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
+                string.Format("1000101{0}", 
+                    context.WValueHelper.WValueToString(w1)));
 
             // mod reg r/m
-            translatedBytes[1] = BitStrHelper.BitStringToByte(
+            translatedBytes[1] = BitStringHelper.BitStringToByte(
                 string.Format("{0}{1}{2}",
                     "11",
-                    mapRes1.BitsString,
-                    mapRes2.BitsString));
+                    context.RegisterHelper.RegisterToBitString(firstReg),
+                    context.RegisterHelper.RegisterToBitString(secondReg)));
 
             context.AddTranslatedUnit(translatedBytes);
         }
-
-        // MOV BX,memcell
-        private void translateForRM(TranslationContext context, int startPos)
+        private void translateForRegMem(TranslationContext context, int startPos)
         {
-            RegisterType register = (RegisterType)Enum.Parse(
-                typeof(RegisterType), Tokens[startPos++].Value);
-            RegisterBitsMapResult mapRes = context.RegisterBitsMapper.Map(register);
-
-            byte[] translatedBytes = null;
-
-            translatedBytes = new byte[4];
-
-            translatedBytes[0] = BitStrHelper.BitStringToByte(
-                string.Format("1000101{0}", mapRes.W));
-
-            // mod reg r/m
-            translatedBytes[1] = BitStrHelper.BitStringToByte(
-                string.Format("{0}{1}{2}",
-                    "00",
-                    mapRes.BitsString,
-                    "110"));
-
-            context.AddTranslatedUnit(translatedBytes);
-        }
-        
-        // MOV memcell,BX
-        private void translateForMR(TranslationContext context, int startPos)
-        {
-            ++startPos; // Skip identifier.
+            RegisterType register = context.RegisterHelper.Parse(Tokens[startPos++].Value);
             ++startPos; // Skip comma.
+            string identifier = Tokens[startPos++].Value;
 
-            RegisterType register = (RegisterType)Enum.Parse(
-                typeof(RegisterType), Tokens[startPos++].Value);
-            RegisterBitsMapResult mapRes = context.RegisterBitsMapper.Map(register);
+            checkForRegMemMismatch(context, register, identifier);
 
+            WValue w1 = context.WValueHelper.WValueForRegister(register);
             byte[] translatedBytes = new byte[4];
 
-            translatedBytes[0] = BitStrHelper.BitStringToByte(
-                string.Format("1000100{0}", mapRes.W));
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
+                string.Format("1000101{0}", 
+                    context.WValueHelper.WValueToString(w1)));
 
             // mod reg r/m
-            translatedBytes[1] = BitStrHelper.BitStringToByte(
+            translatedBytes[1] = BitStringHelper.BitStringToByte(
                 string.Format("{0}{1}{2}",
                     "00",
-                    mapRes.BitsString,
+                    context.RegisterHelper.RegisterToBitString(register),
                     "110"));
 
             context.AddTranslatedUnit(translatedBytes);
         }
-        
-        // MOV BX,12
-        private void translateForRI(TranslationContext context, int startPos) 
+        private void translateForMemReg(TranslationContext context, int startPos)
         {
-            RegisterType register = (RegisterType)Enum.Parse(
-                typeof(RegisterType), Tokens[startPos++].Value);
-            RegisterBitsMapResult mapRes = context.RegisterBitsMapper.Map(register);
+            string identifier = Tokens[startPos++].Value;
+            ++startPos; // Skip comma.
+            RegisterType register = context.RegisterHelper.Parse(Tokens[startPos++].Value);
 
+            checkForRegMemMismatch(context, register, identifier);
+
+            WValue w2 = context.WValueHelper.WValueForRegister(register);
+            byte[] translatedBytes = new byte[4];
+
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
+                string.Format("1000100{0}", 
+                    context.WValueHelper.WValueToString(w2)));
+
+            // mod reg r/m
+            translatedBytes[1] = BitStringHelper.BitStringToByte(
+                string.Format("{0}{1}{2}",
+                    "00",
+                    context.RegisterHelper.RegisterToBitString(register),
+                    "110"));
+
+            context.AddTranslatedUnit(translatedBytes);
+        }
+        private void translateForRegIm(TranslationContext context, int startPos) 
+        {
+            RegisterType register = context.RegisterHelper.Parse(Tokens[startPos++].Value);
             ++startPos; // Skipping comma.
-
-            var constToken = Tokens[startPos++];
+            Token constToken = Tokens[startPos++];
             
             ConstantsParser parser = getParser(context, constToken.Type);
             byte[] constBytes = parser.Parse(constToken.Value);
 
-            if (context.RegisterBitsMapper.WStringToByte(mapRes.W) == 0 && 
-                constBytes.Length == 2)
+            WValue w1 = context.WValueHelper.WValueForRegister(register);
+
+            if (w1 == WValue.Zero && constBytes.Length == 2)
             {
                 throw new TranslationErrorException(
                     string.Format("{0} and {1}: operands type mismatch.",
@@ -133,13 +137,13 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             }
 
             // 2 or 3
-            int bytesCount = 2 + (context.RegisterBitsMapper.WStringToByte(mapRes.W));
+            int bytesCount = 2 + context.WValueHelper.WValueToByte(w1);
             byte[] translatedBytes = new byte[bytesCount];
 
-            translatedBytes[0] = BitStrHelper.BitStringToByte(
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
                 string.Format("1011{0}{1}", 
-                    mapRes.W, 
-                    mapRes.BitsString));
+                    context.WValueHelper.WValueToString(w1), 
+                    context.RegisterHelper.RegisterToBitString(register)));
 
             translatedBytes[1] = constBytes[0];
             
@@ -150,16 +154,60 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
 
             context.AddTranslatedUnit(translatedBytes);
         }
-
-        // MOV memcell,12
-        private void translateForMI(TranslationContext context, int startPos) 
+        private void translateForMemIm(TranslationContext context, int startPos) 
         {
-            // TODO: collect info about memory cells before translating this command.
-            // (either it is byte or word).
+            string identifier = Tokens[startPos++].Value;
+            ++startPos; // Skipping comma.
+            Token constToken = Tokens[startPos++];
 
+            ConstantsParser parser = getParser(context, constToken.Type);
+            byte[] constBytes = parser.Parse(constToken.Value);
 
+            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
 
-            throw new NotImplementedException();
+            if (idType == IdentifierType.Label)
+            {
+                throw new TranslationErrorException(
+                    string.Format("{0}: label identifier is not valid in this context.",
+                        identifier));
+            }
+
+            if (idType == IdentifierType.Byte && constBytes.Length == 2)
+            {
+                throw new TranslationErrorException(
+                    string.Format("{0} and {1}: operands type mismatch.",
+                        identifier,
+                        constToken.Value));
+            }
+
+            int bytesCount = 6;
+            byte[] translatedBytes = new byte[bytesCount];
+
+            int wForIdentifier = (idType == IdentifierType.Byte) ? 0 : 1;
+
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
+                string.Format("1100011{0}",
+                    wForIdentifier.ToString()));
+
+            // mod reg r/m
+            translatedBytes[1] = BitStringHelper.BitStringToByte("00000110");
+            
+            // Address.
+            translatedBytes[2] = 0x00;
+            translatedBytes[3] = 0x00;
+
+            translatedBytes[4] = constBytes[0];
+            
+            if (idType == IdentifierType.Byte)
+            {
+                translatedBytes[5] = 0x90; // NOP;
+            }
+            else if (constBytes.Length == 2)
+            {
+                translatedBytes[5] = constBytes[1];
+            }
+
+            context.AddTranslatedUnit(translatedBytes);
         }
 
         private ConstantsParser getParser(TranslationContext context, TokenType tokenType)
@@ -176,8 +224,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             }
         }
 
-
-        public override void Translate(TranslationContext context)
+        protected override void Translate(TranslationContext context)
         {
             int i = 1;
             if (Tokens[0].Type == TokenType.Identifier)
@@ -189,11 +236,11 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
 
             switch (OperandsSetType)
             {
-                case OperandsSetType.RR: translateForRR(context, i); break;
-                case OperandsSetType.RM: translateForRM(context, i); break;
-                case OperandsSetType.MR: translateForMR(context, i); break;
-                case OperandsSetType.RI: translateForRI(context, i); break;
-                case OperandsSetType.MI: translateForMI(context, i); break;
+                case OperandsSetType.RR: translateForRegReg(context, i); break;
+                case OperandsSetType.RM: translateForRegMem(context, i); break;
+                case OperandsSetType.MR: translateForMemReg(context, i); break;
+                case OperandsSetType.RI: translateForRegIm(context, i); break;
+                case OperandsSetType.MI: translateForMemIm(context, i); break;
 
                 default: throw new TranslationErrorException(
                     string.Format("MOV: operands set {0} is not supported.", 

@@ -35,7 +35,7 @@
             for (int i = 0; i < bytes.Length - 1; ++i)
             {
                 var bitString = clearedValue.Substring(endPos - BITS_IN_BYTE, BITS_IN_BYTE);
-                bytes[i] = BitStringManipHelper.BitStringToByte(bitString);
+                bytes[i] = BitStringHelper.BitStringToByte(bitString);
 
                 endPos -= BITS_IN_BYTE;
             }
@@ -43,7 +43,7 @@
             int countToSubstr = (remainingBitsCount == 0) ? BITS_IN_BYTE : remainingBitsCount;
             string lastBitString = clearedValue.Substring(0, countToSubstr);
 
-            bytes[bytes.Length - 1] = BitStringManipHelper.BitStringToByte(lastBitString);
+            bytes[bytes.Length - 1] = BitStringHelper.BitStringToByte(lastBitString);
 
             return bytes;
         }

@@ -2,7 +2,7 @@
 
 namespace MyAssembler.Core.Translation
 {
-    static class BitStringManipHelper
+    static class BitStringHelper
     {
         public static byte BitStringToByte(string bitString)
         {

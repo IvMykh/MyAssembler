@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq, Version=4.5.23.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Moq.4.5.23\lib\net45\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -60,6 +67,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ConstantsParsersTests\BinConstantsParsersTests.cs" />
+    <Compile Include="TranslationTests\GeneralTranslationTests.cs" />
+    <Compile Include="TranslationTests\MovTranslationTests.cs" />
+    <Compile Include="TranslationTests\TokensPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAssembler.Core\MyAssembler.Core.csproj">
@@ -75,6 +85,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="SampleFiles\SampleForLexer.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

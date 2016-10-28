@@ -33,6 +33,12 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.5.23\lib\net45\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,9 +50,13 @@
   <ItemGroup>
     <Compile Include="Assembler.cs" />
     <Compile Include="CompilationErrorException.cs" />
+    <Compile Include="LexicalAnalysis\CommandType.cs" />
+    <Compile Include="LexicalAnalysis\DirectiveType.cs" />
     <Compile Include="LexicalAnalysis\ITokenDefinitionsStore.cs" />
     <Compile Include="LexicalAnalysis\Lexer.cs" />
     <Compile Include="LexicalAnalysis\LexicalErrorException.cs" />
+    <Compile Include="LexicalAnalysis\RegisterType.cs" />
+    <Compile Include="LexicalAnalysis\SpecialSymbolType.cs" />
     <Compile Include="LexicalAnalysis\Token.cs" />
     <Compile Include="LexicalAnalysis\TokenDefinition.cs" />
     <Compile Include="LexicalAnalysis\TokenPosition.cs" />
@@ -66,13 +76,17 @@
     <Compile Include="SyntacticAnalysis\LineParseResult.cs" />
     <Compile Include="SyntacticAnalysis\Parser.cs" />
     <Compile Include="SyntacticAnalysis\SyntacticalErrorException.cs" />
-    <Compile Include="Translation\BitStringManipHelper.cs" />
-    <Compile Include="Translation\MemoryManager.cs" />
+    <Compile Include="Translation\BitStringHelper.cs" />
+    <Compile Include="DesignErrorException.cs" />
+    <Compile Include="Translation\ContextAcceptMode.cs" />
+    <Compile Include="Translation\IdentifierType.cs" />
+    <Compile Include="Translation\IMemoryManager.cs" />
+    <Compile Include="Translation\MyMemoryManager.cs" />
     <Compile Include="Translation\ParsersForConstants\BinConstantsParser.cs" />
     <Compile Include="Translation\ParsersForConstants\ConstantsParser.cs" />
     <Compile Include="Translation\ParsersForConstants\DecConstantsParser.cs" />
     <Compile Include="Translation\ParsersForConstants\HexConstantsParser.cs" />
-    <Compile Include="Translation\RegisterBitsMapper.cs" />
+    <Compile Include="Translation\RegisterHelper.cs" />
     <Compile Include="Translation\TranslationContext.cs" />
     <Compile Include="Translation\TranslationErrorException.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
@@ -92,6 +106,8 @@
     <Compile Include="Translation\TranslationUnits\Commands\OrCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\SubCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\XorCommand.cs" />
+    <Compile Include="Translation\WValue.cs" />
+    <Compile Include="Translation\WValueHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -99,6 +115,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

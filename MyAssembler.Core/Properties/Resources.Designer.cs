@@ -61,6 +61,87 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 100.
+        /// </summary>
+        internal static string AH {
+            get {
+                return ResourceManager.GetString("AH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 000.
+        /// </summary>
+        internal static string AL {
+            get {
+                return ResourceManager.GetString("AL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 000.
+        /// </summary>
+        internal static string AX {
+            get {
+                return ResourceManager.GetString("AX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 111.
+        /// </summary>
+        internal static string BH {
+            get {
+                return ResourceManager.GetString("BH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 011.
+        /// </summary>
+        internal static string BL {
+            get {
+                return ResourceManager.GetString("BL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 101.
+        /// </summary>
+        internal static string BP {
+            get {
+                return ResourceManager.GetString("BP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 011.
+        /// </summary>
+        internal static string BX {
+            get {
+                return ResourceManager.GetString("BX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 101.
+        /// </summary>
+        internal static string CH {
+            get {
+                return ResourceManager.GetString("CH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 001.
+        /// </summary>
+        internal static string CL {
+            get {
+                return ResourceManager.GetString("CL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command name expected (line {0}, index {1})..
         /// </summary>
         internal static string CmdExpectedMsgFormat {
@@ -115,6 +196,42 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 001.
+        /// </summary>
+        internal static string CX {
+            get {
+                return ResourceManager.GetString("CX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 110.
+        /// </summary>
+        internal static string DH {
+            get {
+                return ResourceManager.GetString("DH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 111.
+        /// </summary>
+        internal static string DI {
+            get {
+                return ResourceManager.GetString("DI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 010.
+        /// </summary>
+        internal static string DL {
+            get {
+                return ResourceManager.GetString("DL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}&quot;: such directive does not exist (line {1}, index {2})..
         /// </summary>
         internal static string DtvNotExistMsgFormat {
@@ -129,6 +246,15 @@ namespace MyAssembler.Core.Properties {
         internal static string DtvNotImplementedMsgFormat {
             get {
                 return ResourceManager.GetString("DtvNotImplementedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 010.
+        /// </summary>
+        internal static string DX {
+            get {
+                return ResourceManager.GetString("DX", resourceCulture);
             }
         }
         
@@ -178,6 +304,24 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 110.
+        /// </summary>
+        internal static string SI {
+            get {
+                return ResourceManager.GetString("SI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 100.
+        /// </summary>
+        internal static string SP {
+            get {
+                return ResourceManager.GetString("SP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Line {0}: undefined parse error occurred..
         /// </summary>
         internal static string UndefinedParseErrorMsgFormat {
@@ -219,6 +363,24 @@ namespace MyAssembler.Core.Properties {
         internal static string Valid3rdOpExpectedMsgFormat {
             get {
                 return ResourceManager.GetString("Valid3rdOpExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        internal static string W0 {
+            get {
+                return ResourceManager.GetString("W0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1.
+        /// </summary>
+        internal static string W1 {
+            get {
+                return ResourceManager.GetString("W1", resourceCulture);
             }
         }
     }

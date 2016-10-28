@@ -7,42 +7,6 @@ namespace MyAssembler.Core.LexicalAnalysis
     using DT = DirectiveType;
     using RT = RegisterType;
 
-    public enum CommandType
-    {
-        None,
-        MOV,
-        ADD,   SUB,   IMUL,   IDIV, 
-        AND,   OR,    NOT,    XOR, 
-        JMP,   JE,    JNE
-    }
-
-    public enum RegisterType
-    {
-        AX,   AL,   AH, 
-        BX,   BL,   BH, 
-        CX,   CL,   CH,
-        DX,   DL,   DH,
-        SI,   DI, 
-        SP,   BP
-    }
-
-    public enum DirectiveType
-    {
-        None,
-        DB,
-        DW 
-    }
-
-    public enum SpecialSymbolType
-    {
-        Comma,
-        OpenSquareBracket,
-        CloseSquareBracket,
-        Colon,
-        Plus,
-        QuestionMark
-    }
-
 
     public class MyTokenDefinitionsStore
         : ITokenDefinitionsStore
