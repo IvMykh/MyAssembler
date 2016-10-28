@@ -1,26 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyAssembler.Core.LexicalAnalysis;
-using MyAssembler.Core.Translation;
-using MyAssembler.Core.Translation.TranslationUnits.Abstract;
+using MyAssembler.Core.Translation.ContextInfrastructure;
 
 namespace MyAssembler.Tests.TranslationTests
 {
     [TestClass]
     public class GeneralTranslationTests
     {
-        /// <summary>
-        /// For testing purposes only.
-        /// </summary>
-        class TestTranslationUnit
-            : AsmTranslationUnit
-        {
-            public TestTranslationUnit(List<Token> tokens)
-                : base(tokens)
-            {
-            }
-        }
-
         private List<List<Token>> createTokensLists()
         {
             var finalList = new List<List<Token>>();

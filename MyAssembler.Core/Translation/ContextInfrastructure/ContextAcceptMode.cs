@@ -1,4 +1,4 @@
-﻿namespace MyAssembler.Core.Translation
+﻿namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public enum ContextAcceptMode
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MyAssembler.Core.Translation.ParsersForConstants;
+using MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants;
 
-namespace MyAssembler.Core.Translation
+namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public class TranslationContext
     {

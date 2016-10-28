@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace MyAssembler.Core.Translation.ParsersForConstants
+namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
 {
     public abstract class ConstantsParser
     {

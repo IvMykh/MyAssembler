@@ -5,6 +5,7 @@ using Moq;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
 using MyAssembler.Core.Translation;
+using MyAssembler.Core.Translation.ContextInfrastructure;
 using MyAssembler.Core.Translation.TranslationUnits.Commands;
 
 namespace MyAssembler.Tests.TranslationTests

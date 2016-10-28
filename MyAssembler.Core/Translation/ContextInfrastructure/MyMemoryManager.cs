@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyAssembler.Core.Translation
+namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public class MyMemoryManager
         : IMemoryManager

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
-using MyAssembler.Core.Translation.ParsersForConstants;
+using MyAssembler.Core.Translation.ContextInfrastructure;
+using MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants;
 using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Commands

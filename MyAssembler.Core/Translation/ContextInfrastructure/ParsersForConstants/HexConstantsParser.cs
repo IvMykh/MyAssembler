@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace MyAssembler.Core.Translation.ParsersForConstants
+namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
 {
     /// <summary>
     /// Returns array of bytes of the given hexadecimal value represented as string (in reverse order).

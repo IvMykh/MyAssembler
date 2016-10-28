@@ -1,5 +1,5 @@
-﻿namespace MyAssembler.Core.Translation.ParsersForConstants
-{
+﻿namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
+{ 
     /// <summary>
     /// Returns array of bytes of the given binary value represented as string (in reverse order).
     /// </summary>

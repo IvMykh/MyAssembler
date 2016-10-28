@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyAssembler.Core.Translation;
-using MyAssembler.Core.Translation.ParsersForConstants;
+using MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants;
 
 namespace MyAssembler.Tests.ConstantsParsersTests
 {

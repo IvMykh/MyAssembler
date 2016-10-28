@@ -78,16 +78,16 @@
     <Compile Include="SyntacticAnalysis\SyntacticalErrorException.cs" />
     <Compile Include="Translation\BitStringHelper.cs" />
     <Compile Include="DesignErrorException.cs" />
-    <Compile Include="Translation\ContextAcceptMode.cs" />
-    <Compile Include="Translation\IdentifierType.cs" />
-    <Compile Include="Translation\IMemoryManager.cs" />
-    <Compile Include="Translation\MyMemoryManager.cs" />
-    <Compile Include="Translation\ParsersForConstants\BinConstantsParser.cs" />
-    <Compile Include="Translation\ParsersForConstants\ConstantsParser.cs" />
-    <Compile Include="Translation\ParsersForConstants\DecConstantsParser.cs" />
-    <Compile Include="Translation\ParsersForConstants\HexConstantsParser.cs" />
-    <Compile Include="Translation\RegisterHelper.cs" />
-    <Compile Include="Translation\TranslationContext.cs" />
+    <Compile Include="Translation\ContextInfrastructure\ContextAcceptMode.cs" />
+    <Compile Include="Translation\ContextInfrastructure\IdentifierType.cs" />
+    <Compile Include="Translation\ContextInfrastructure\IMemoryManager.cs" />
+    <Compile Include="Translation\ContextInfrastructure\MyMemoryManager.cs" />
+    <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\BinConstantsParser.cs" />
+    <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\ConstantsParser.cs" />
+    <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\DecConstantsParser.cs" />
+    <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\HexConstantsParser.cs" />
+    <Compile Include="Translation\ContextInfrastructure\RegisterHelper.cs" />
+    <Compile Include="Translation\ContextInfrastructure\TranslationContext.cs" />
     <Compile Include="Translation\TranslationErrorException.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AndCommand.cs" />
@@ -106,8 +106,8 @@
     <Compile Include="Translation\TranslationUnits\Commands\OrCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\SubCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\XorCommand.cs" />
-    <Compile Include="Translation\WValue.cs" />
-    <Compile Include="Translation\WValueHelper.cs" />
+    <Compile Include="Translation\ContextInfrastructure\WValue.cs" />
+    <Compile Include="Translation\ContextInfrastructure\WValueHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

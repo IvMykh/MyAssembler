@@ -2,7 +2,7 @@
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.Properties;
 
-namespace MyAssembler.Core.Translation
+namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public class WValueHelper
     {
