@@ -14,29 +14,6 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             : base(tokens, operandsSetType)
         {
         }
-
-        private void checkForRegMemMismatch(
-            TranslationContext context, RegisterType register, string identifier)
-        {
-            WValue wForReg = context.WValueHelper.WValueForRegister(register);
-            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
-            
-            if (idType == IdentifierType.Label)
-            {
-                throw new TranslationErrorException(
-                    string.Format("{0}: label identifier is not valid in this context.",
-                        identifier));
-            }
-
-            if (idType == IdentifierType.Byte && wForReg == WValue.One ||
-                idType == IdentifierType.Word && wForReg == WValue.Zero)
-            {
-                throw new TranslationErrorException(
-                    string.Format("{0} and {1}: operands type mismatch.",
-                        register,
-                        identifier));
-            }
-        }
         
         private void translateForRegReg(TranslationContext context, int startPos)
         {
@@ -76,7 +53,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             ++startPos; // Skip comma.
             string identifier = Tokens[startPos++].Value;
 
-            checkForRegMemMismatch(context, register, identifier);
+            CheckForRegMemMismatch(context, register, identifier);
 
             WValue w1 = context.WValueHelper.WValueForRegister(register);
             byte[] translatedBytes = new byte[4];
@@ -100,7 +77,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             ++startPos; // Skip comma.
             RegisterType register = context.RegisterHelper.Parse(Tokens[startPos++].Value);
 
-            checkForRegMemMismatch(context, register, identifier);
+            CheckForRegMemMismatch(context, register, identifier);
 
             WValue w2 = context.WValueHelper.WValueForRegister(register);
             byte[] translatedBytes = new byte[4];
@@ -124,18 +101,12 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             ++startPos; // Skipping comma.
             Token constToken = Tokens[startPos++];
             
-            ConstantsParser parser = getParser(context, constToken.Type);
+            CheckForRegImMismatch(context, register, constToken);
+            
+            ConstantsParser parser = GetConstsParser(context, constToken.Type);
             byte[] constBytes = parser.Parse(constToken.Value);
 
             WValue w1 = context.WValueHelper.WValueForRegister(register);
-
-            if (w1 == WValue.Zero && constBytes.Length == 2)
-            {
-                throw new TranslationErrorException(
-                    string.Format("{0} and {1}: operands type mismatch.",
-                        register,
-                        constToken.Value));
-            }
 
             // 2 or 3
             int bytesCount = 2 + context.WValueHelper.WValueToByte(w1);
@@ -161,25 +132,12 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             ++startPos; // Skipping comma.
             Token constToken = Tokens[startPos++];
 
-            ConstantsParser parser = getParser(context, constToken.Type);
+            CheckForMemImMismatch(context, identifier, constToken);
+
+            ConstantsParser parser = GetConstsParser(context, constToken.Type);
             byte[] constBytes = parser.Parse(constToken.Value);
 
             IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
-
-            if (idType == IdentifierType.Label)
-            {
-                throw new TranslationErrorException(
-                    string.Format("{0}: label identifier is not valid in this context.",
-                        identifier));
-            }
-
-            if (idType == IdentifierType.Byte && constBytes.Length == 2)
-            {
-                throw new TranslationErrorException(
-                    string.Format("{0} and {1}: operands type mismatch.",
-                        identifier,
-                        constToken.Value));
-            }
 
             int bytesCount = 6;
             byte[] translatedBytes = new byte[bytesCount];
@@ -209,20 +167,6 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             }
 
             context.AddTranslatedUnit(translatedBytes);
-        }
-
-        private ConstantsParser getParser(TranslationContext context, TokenType tokenType)
-        {
-            switch (tokenType)
-            {
-                case TokenType.BinConstant: return context.BinConstsParser;
-                case TokenType.DecConstant: return context.DecConstsParser;
-                case TokenType.HexConstant: return context.HexConstsParser;
-
-                default: throw new TranslationErrorException(
-                    string.Format("{0}: such constant type is not supported.", 
-                        tokenType));
-            }
         }
 
         protected override void Translate(TranslationContext context)

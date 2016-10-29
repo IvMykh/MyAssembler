@@ -3,9 +3,10 @@ using MyAssembler.Core.LexicalAnalysis;
 
 namespace MyAssembler.Tests.TranslationTests
 {
-    enum PoolEntryType
+    public enum PoolEntryType
     {
         MOV,
+        ADD,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -18,7 +19,7 @@ namespace MyAssembler.Tests.TranslationTests
         WordConst
     }
 
-    class TokensPool
+    public class TokensPool
     {
         public const string SAMPLE_BYTE_MEMCELL = "ByteMemcell";
         public const string SAMPLE_WORD_MEMCELL = "WordMemcell";
@@ -33,6 +34,7 @@ namespace MyAssembler.Tests.TranslationTests
             _pool = new Dictionary<PoolEntryType, Token>();
 
             _pool.Add(PoolEntryType.MOV, new Token(TokenType.Command, "MOV"));
+            _pool.Add(PoolEntryType.ADD, new Token(TokenType.Command, "ADD"));
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));
             
             _pool.Add(PoolEntryType.AH, new Token(TokenType.Register, "AH"));

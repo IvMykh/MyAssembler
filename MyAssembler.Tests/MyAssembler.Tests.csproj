@@ -67,10 +67,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ConstantsParsersTests\BinConstantsParsersTests.cs" />
+    <Compile Include="TranslationTests\CommandTranslationTests.cs" />
     <Compile Include="TranslationTests\GeneralTranslationTests.cs" />
     <Compile Include="TranslationTests\MovTranslationTests.cs" />
     <Compile Include="TranslationTests\TestTranslationUnit.cs" />
     <Compile Include="TranslationTests\TokensPool.cs" />
+    <Compile Include="TranslationTests\AddTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAssembler.Core\MyAssembler.Core.csproj">
