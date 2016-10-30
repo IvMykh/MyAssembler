@@ -2,11 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
+using MyAssembler.Core.Translation;
 using MyAssembler.Core.Translation.TranslationUnits.Commands;
 
 namespace MyAssembler.Tests.TranslationTests
 {
-    using MyAssembler.Core.Translation;
     using PET = PoolEntryType;
 
     [TestClass]
