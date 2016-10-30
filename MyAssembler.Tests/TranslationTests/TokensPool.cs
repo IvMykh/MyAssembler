@@ -10,6 +10,7 @@ namespace MyAssembler.Tests.TranslationTests
         SUB,
         AND,
         OR,
+        XOR,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -41,6 +42,7 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.SUB, new Token(TokenType.Command, "SUB"));
             _pool.Add(PoolEntryType.AND, new Token(TokenType.Command, "AND"));
             _pool.Add(PoolEntryType.OR, new Token(TokenType.Command, "OR"));
+            _pool.Add(PoolEntryType.XOR, new Token(TokenType.Command, "XOR"));
 
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));
             
