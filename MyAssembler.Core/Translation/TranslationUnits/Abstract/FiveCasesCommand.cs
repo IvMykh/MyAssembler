@@ -14,13 +14,103 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         {
         }
 
-        protected abstract string RegRegFormat { get; }
-        protected abstract string RegMemFormat { get; }
-        protected abstract string MemRegFormat { get; }
-        protected abstract string RegImFormat  { get; }
-        protected abstract string MemImFormat  { get; }
+        protected abstract string RegRegFormat  { get; }
+        protected abstract string RegMemFormat  { get; }
+        protected abstract string MemRegFormat  { get; }
+        protected virtual string  RegImFormat   { get { return null; } }
+        protected virtual string  MemImFormat   { get { return null; } }
 
-        protected abstract string RegFieldForIm { get; }
+        protected virtual string  RegFieldForIm { get { return null; } }
+
+        protected virtual byte[] GetTranslatedBytesForRegIm(
+            TranslationContext context, RegisterType register, byte[] constBytes)
+        {
+            WValue w1 = context.WValueHelper.WValueForRegister(register);
+
+            byte[] translatedBytes = null;
+            int bytesCount = 0;
+            int s = 0;
+
+            if (w1 == WValue.Zero)
+            {
+                bytesCount = 3;
+                translatedBytes = new byte[bytesCount];
+            }
+            else
+            {
+                s = (constBytes.Length == 1) ? 1 : 0;
+                bytesCount = 2 + constBytes.Length;
+            }
+
+            translatedBytes = new byte[bytesCount];
+
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
+                    string.Format(RegImFormat,
+                        (w1 == WValue.One && constBytes.Length == 1) ? 1 : 0,
+                        context.WValueHelper.WValueToString(w1)));
+
+            translatedBytes[1] = BitStringHelper.BitStringToByte(
+                    string.Format("11{0}{1}",
+                        RegFieldForIm,
+                        context.RegisterHelper.RegisterToBitString(register)));
+
+            translatedBytes[2] = constBytes[0];
+
+            if (translatedBytes.Length == 4)
+            {
+                translatedBytes[3] = constBytes[1];
+            }
+
+            return translatedBytes;
+        }
+        
+        protected virtual byte[] GetTranslatedBytesForMemIm(
+            TranslationContext context, string identifier, byte[] constBytes)
+        {
+            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
+
+            byte[] translatedBytes = null;
+            int bytesCount = 0;
+            int s = 0;
+
+            if (idType == IdentifierType.Byte)
+            {
+                bytesCount = 5;
+                translatedBytes = new byte[bytesCount];
+            }
+            else
+            {
+                s = (constBytes.Length == 1) ? 1 : 0;
+                bytesCount = 4 + constBytes.Length;
+            }
+
+            translatedBytes = new byte[bytesCount];
+            int wForIdentifier = (idType == IdentifierType.Byte) ? 0 : 1;
+
+            translatedBytes[0] = BitStringHelper.BitStringToByte(
+                    string.Format(MemImFormat,
+                        (idType == IdentifierType.Word && constBytes.Length == 1) ? 1 : 0,
+                        wForIdentifier.ToString()));
+
+            // mod reg r/m
+            translatedBytes[1] = BitStringHelper.BitStringToByte(
+                string.Format("00{0}110",
+                    RegFieldForIm));
+
+            // Address.
+            translatedBytes[2] = 0x00;
+            translatedBytes[3] = 0x00;
+
+            translatedBytes[4] = constBytes[0];
+
+            if (translatedBytes.Length == 6)
+            {
+                translatedBytes[5] = constBytes[1];
+            }
+
+            return translatedBytes;
+        }
+
 
         private void translateForRegReg(TranslationContext context, int startPos)
         {
@@ -112,44 +202,8 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
             ConstantsParser parser = GetConstsParser(context, constToken.Type);
             byte[] constBytes = parser.Parse(constToken.Value);
-
-            WValue w1 = context.WValueHelper.WValueForRegister(register);
-
-            byte[] translatedBytes = null;
-            int bytesCount = 0;
-            int s = 0;
-
-            if (w1 == WValue.Zero)
-            {
-                bytesCount = 3;
-                translatedBytes = new byte[bytesCount];
-            }
-            else
-            {
-                s = (constBytes.Length == 1) ? 1 : 0;
-                bytesCount = 2 + constBytes.Length;
-            }
-
-            translatedBytes = new byte[bytesCount];
-
-            translatedBytes[0] = BitStringHelper.BitStringToByte(
-                    string.Format(RegImFormat,
-                        (w1 == WValue.One && constBytes.Length == 1) ? 1 : 0,
-                        context.WValueHelper.WValueToString(w1)));
-
-            translatedBytes[1] = BitStringHelper.BitStringToByte(
-                    string.Format("11{0}{1}",
-                        RegFieldForIm,
-                        context.RegisterHelper.RegisterToBitString(register)));
-
-            translatedBytes[2] = constBytes[0];
-
-            if (translatedBytes.Length == 4)
-            {
-                translatedBytes[3] = constBytes[1];
-            }
-
-            context.AddTranslatedUnit(translatedBytes);
+            
+            context.AddTranslatedUnit(GetTranslatedBytesForRegIm(context, register, constBytes));
         }
         private void translateForMemIm(TranslationContext context, int startPos)
         {
@@ -162,47 +216,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
             ConstantsParser parser = GetConstsParser(context, constToken.Type);
             byte[] constBytes = parser.Parse(constToken.Value);
 
-            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
-
-            byte[] translatedBytes = null;
-            int bytesCount = 0;
-            int s = 0;
-
-            if (idType == IdentifierType.Byte)
-            {
-                bytesCount = 5;
-                translatedBytes = new byte[bytesCount];
-            }
-            else
-            {
-                s = (constBytes.Length == 1) ? 1 : 0;
-                bytesCount = 4 + constBytes.Length;
-            }
-
-            translatedBytes = new byte[bytesCount];
-            int wForIdentifier = (idType == IdentifierType.Byte) ? 0 : 1;
-
-            translatedBytes[0] = BitStringHelper.BitStringToByte(
-                    string.Format(MemImFormat,
-                        (idType == IdentifierType.Word && constBytes.Length == 1) ? 1 : 0,
-                        wForIdentifier.ToString()));
-
-            translatedBytes[1] = BitStringHelper.BitStringToByte(
-                string.Format("00{0}110",
-                    RegFieldForIm));
-
-            // address - skip.
-            // translatedBytes[2]
-            // translatedBytes[3]
-
-            translatedBytes[4] = constBytes[0];
-
-            if (translatedBytes.Length == 6)
-            {
-                translatedBytes[5] = constBytes[1];
-            }
-
-            context.AddTranslatedUnit(translatedBytes);
+            context.AddTranslatedUnit(GetTranslatedBytesForMemIm(context, identifier, constBytes));
         }
 
         protected override void Translate(TranslationContext context)
