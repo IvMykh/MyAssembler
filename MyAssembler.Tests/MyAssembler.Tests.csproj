@@ -75,6 +75,7 @@
     <Compile Include="TranslationTests\AddTranslationTests.cs" />
     <Compile Include="TranslationTests\SubTranslationTests.cs" />
     <Compile Include="TranslationTests\AndTranslationTests.cs" />
+    <Compile Include="TranslationTests\OrTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAssembler.Core\MyAssembler.Core.csproj">
