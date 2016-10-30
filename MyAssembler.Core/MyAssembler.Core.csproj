@@ -89,7 +89,7 @@
     <Compile Include="Translation\ContextInfrastructure\RegisterHelper.cs" />
     <Compile Include="Translation\ContextInfrastructure\TranslationContext.cs" />
     <Compile Include="Translation\TranslationErrorException.cs" />
-    <Compile Include="Translation\TranslationUnits\Abstract\AdditiveCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Abstract\FiveCasesCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AndCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Directives\DbDirective.cs" />

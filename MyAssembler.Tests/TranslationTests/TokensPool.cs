@@ -8,6 +8,7 @@ namespace MyAssembler.Tests.TranslationTests
         MOV,
         ADD,
         SUB,
+        AND,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -37,6 +38,7 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.MOV, new Token(TokenType.Command, "MOV"));
             _pool.Add(PoolEntryType.ADD, new Token(TokenType.Command, "ADD"));
             _pool.Add(PoolEntryType.SUB, new Token(TokenType.Command, "SUB"));
+            _pool.Add(PoolEntryType.AND, new Token(TokenType.Command, "AND"));
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));
             
             _pool.Add(PoolEntryType.AH, new Token(TokenType.Register, "AH"));

@@ -6,10 +6,10 @@ using MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 {
-    public abstract class AdditiveCommand
+    public abstract class FiveCasesCommand
         : AsmCommand
     {
-        public AdditiveCommand(List<Token> tokens, OperandsSetType operandsSetType)
+        public FiveCasesCommand(List<Token> tokens, OperandsSetType operandsSetType)
             : base(tokens, operandsSetType)
         {
         }

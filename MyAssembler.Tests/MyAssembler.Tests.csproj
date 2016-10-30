@@ -74,6 +74,7 @@
     <Compile Include="TranslationTests\TokensPool.cs" />
     <Compile Include="TranslationTests\AddTranslationTests.cs" />
     <Compile Include="TranslationTests\SubTranslationTests.cs" />
+    <Compile Include="TranslationTests\AndTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAssembler.Core\MyAssembler.Core.csproj">

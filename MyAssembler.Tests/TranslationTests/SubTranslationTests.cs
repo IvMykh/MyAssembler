@@ -2,11 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
+using MyAssembler.Core.Translation;
 using MyAssembler.Core.Translation.TranslationUnits.Commands;
 
 namespace MyAssembler.Tests.TranslationTests
 {
-    using MyAssembler.Core.Translation;
     using PET = PoolEntryType;
 
     [TestClass]
@@ -222,6 +222,16 @@ namespace MyAssembler.Tests.TranslationTests
             var command = new SubCommand(tokens, OperandsSetType.MI);
 
             runTest(command, new List<byte[]> { new byte[] { 0x81, 0x2E, 0x00, 0x00, 0x10, 0x27 } });
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(TranslationErrorException))]
+        public void TestSubMemImMismatch()
+        {
+            var tokens = new List<Token> { P[PET.SUB], P[PET.ByteMemCell], P[PET.Comma], P[PET.WordConst] };
+            var command = new SubCommand(tokens, OperandsSetType.MI);
+
+            runExpectedExceptionTest(command);
         }
     }
 }

@@ -226,10 +226,10 @@ namespace MyAssembler.Tests.TranslationTests
 
         [TestMethod]
         [ExpectedException(typeof(TranslationErrorException))]
-        public void TestAddMemImMismatch()
+        public void TestMovMemImMismatch()
         {
-            var tokens = new List<Token> { P[PET.ADD], P[PET.ByteMemCell], P[PET.Comma], P[PET.WordConst] };
-            var command = new AddCommand(tokens, OperandsSetType.MI);
+            var tokens = new List<Token> { P[PET.MOV], P[PET.ByteMemCell], P[PET.Comma], P[PET.WordConst] };
+            var command = new MovCommand(tokens, OperandsSetType.MI);
 
             runExpectedExceptionTest(command);
         }

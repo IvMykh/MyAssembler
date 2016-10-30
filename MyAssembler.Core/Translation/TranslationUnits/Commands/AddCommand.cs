@@ -6,7 +6,7 @@ using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 namespace MyAssembler.Core.Translation.TranslationUnits.Commands
 {
     public class AddCommand
-        : AdditiveCommand
+        : FiveCasesCommand
     {
         public AddCommand(List<Token> tokens, OperandsSetType operandsSetType)
             : base(tokens, operandsSetType)
