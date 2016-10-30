@@ -77,6 +77,8 @@
     <Compile Include="TranslationTests\AndTranslationTests.cs" />
     <Compile Include="TranslationTests\OrTranslationTests.cs" />
     <Compile Include="TranslationTests\NotTranslationTests.cs" />
+    <Compile Include="TranslationTests\JeTranslationTests.cs" />
+    <Compile Include="TranslationTests\JneTranslationTests.cs" />
     <Compile Include="TranslationTests\XorTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>
