@@ -6,14 +6,9 @@ namespace MyAssembler.Tests.TranslationTests
     public enum PoolEntryType
     {
         MOV,
-        ADD,
-        SUB,
-        AND,
-        OR,
-        XOR,
-        NOT,
-        JE,
-        JNE,
+        ADD, SUB,
+        AND, OR, XOR, NOT,
+        JE, JNE, JMP,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -49,6 +44,7 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.NOT, new Token(TokenType.Command, "NOT"));
             _pool.Add(PoolEntryType.JE, new Token(TokenType.Command, "JE"));
             _pool.Add(PoolEntryType.JNE, new Token(TokenType.Command, "JNE"));
+            _pool.Add(PoolEntryType.JMP, new Token(TokenType.Command, "JMP"));
 
 
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));

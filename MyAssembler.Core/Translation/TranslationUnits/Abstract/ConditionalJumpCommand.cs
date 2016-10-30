@@ -6,7 +6,7 @@ using MyAssembler.Core.Translation.ContextInfrastructure;
 namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 {
     public abstract class ConditionalJumpCommand
-        : AsmCommand
+        : ControlFlowCommand
     {
         public ConditionalJumpCommand(List<Token> tokens, OperandsSetType operandsSetType)
             : base(tokens, operandsSetType)
@@ -15,26 +15,8 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
         protected abstract string SecondBytePlaceholder { get; }
 
-        protected override void Translate(TranslationContext context)
+        protected override byte[] GetTranslatedBytes()
         {
-            int i = 1;
-            if (Tokens[0].Type == TokenType.Identifier)
-            {
-                // Skip label and ':' tokens.
-                ++i;
-                ++i;
-            }
-
-            string identifier = Tokens[i].Value;
-            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
-
-            if (idType != IdentifierType.Label)
-            {
-                throw new TranslationErrorException(
-                    string.Format("'{0}': the identifier is not a label.",
-                        identifier));
-            }
-
             int bytesCount = 4;
             byte[] translatedBytes = new byte[bytesCount];
 
@@ -43,7 +25,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                 string.Format("1000{0}",
                     SecondBytePlaceholder));
 
-            context.AddTranslatedUnit(translatedBytes);
+            return translatedBytes;
         }
     }
 }
