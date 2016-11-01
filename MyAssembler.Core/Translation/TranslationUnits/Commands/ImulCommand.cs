@@ -5,6 +5,10 @@ using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Commands
 {
+    // imul <reg32>,<reg32>
+    // imul <reg32>,<mem>
+    // imul <reg32>,<reg32>,<con>
+    // imul <reg32>,<mem>,<con>
     public class ImulCommand
         : AsmCommand
     {

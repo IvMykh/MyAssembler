@@ -9,6 +9,7 @@ namespace MyAssembler.Tests.TranslationTests
         ADD, SUB,
         AND, OR, XOR, NOT,
         JE, JNE, JMP,
+        IDIV,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -45,22 +46,23 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.JE, new Token(TokenType.Command, "JE"));
             _pool.Add(PoolEntryType.JNE, new Token(TokenType.Command, "JNE"));
             _pool.Add(PoolEntryType.JMP, new Token(TokenType.Command, "JMP"));
+            _pool.Add(PoolEntryType.IDIV, new Token(TokenType.Command, "IDIV"));
 
 
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));
             
-            _pool.Add(PoolEntryType.AH, new Token(TokenType.Register, "AH"));
-            _pool.Add(PoolEntryType.AL, new Token(TokenType.Register, "AL"));
-            _pool.Add(PoolEntryType.AX, new Token(TokenType.Register, "AX"));
-            _pool.Add(PoolEntryType.BH, new Token(TokenType.Register, "BH"));
-            _pool.Add(PoolEntryType.BL, new Token(TokenType.Register, "BL"));
-            _pool.Add(PoolEntryType.BX, new Token(TokenType.Register, "BX"));
-            _pool.Add(PoolEntryType.CH, new Token(TokenType.Register, "CH"));
-            _pool.Add(PoolEntryType.CL, new Token(TokenType.Register, "CL"));
-            _pool.Add(PoolEntryType.CX, new Token(TokenType.Register, "CX"));
-            _pool.Add(PoolEntryType.DH, new Token(TokenType.Register, "DH"));
-            _pool.Add(PoolEntryType.DL, new Token(TokenType.Register, "DL"));
-            _pool.Add(PoolEntryType.DX, new Token(TokenType.Register, "DX"));
+            _pool.Add(PoolEntryType.AH, new Token(TokenType.Register, RegisterType.AH.ToString()));
+            _pool.Add(PoolEntryType.AL, new Token(TokenType.Register, RegisterType.AL.ToString()));
+            _pool.Add(PoolEntryType.AX, new Token(TokenType.Register, RegisterType.AX.ToString()));
+            _pool.Add(PoolEntryType.BH, new Token(TokenType.Register, RegisterType.BH.ToString()));
+            _pool.Add(PoolEntryType.BL, new Token(TokenType.Register, RegisterType.BL.ToString()));
+            _pool.Add(PoolEntryType.BX, new Token(TokenType.Register, RegisterType.BX.ToString()));
+            _pool.Add(PoolEntryType.CH, new Token(TokenType.Register, RegisterType.CH.ToString()));
+            _pool.Add(PoolEntryType.CL, new Token(TokenType.Register, RegisterType.CL.ToString()));
+            _pool.Add(PoolEntryType.CX, new Token(TokenType.Register, RegisterType.CX.ToString()));
+            _pool.Add(PoolEntryType.DH, new Token(TokenType.Register, RegisterType.DH.ToString()));
+            _pool.Add(PoolEntryType.DL, new Token(TokenType.Register, RegisterType.DL.ToString()));
+            _pool.Add(PoolEntryType.DX, new Token(TokenType.Register, RegisterType.DX.ToString()));
 
             _pool.Add(PoolEntryType.ByteMemCell, new Token(TokenType.Identifier, SAMPLE_BYTE_MEMCELL));
             _pool.Add(PoolEntryType.WordMemCell, new Token(TokenType.Identifier, SAMPLE_WORD_MEMCELL));

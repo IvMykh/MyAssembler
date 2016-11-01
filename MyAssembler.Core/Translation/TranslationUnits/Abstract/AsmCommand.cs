@@ -42,7 +42,6 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         protected void CheckForRegImMismatch(
             TranslationContext context, RegisterType register, Token constToken)
         {
-
             WValue w1 = context.WValueHelper.WValueForRegister(register);
 
             ConstantsParser parser = GetConstsParser(context, constToken.Type);

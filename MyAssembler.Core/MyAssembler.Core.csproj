@@ -92,6 +92,7 @@
     <Compile Include="Translation\TranslationUnits\Abstract\ConditionalJumpCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\ControlFlowCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\FiveCasesCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Abstract\SingleOperandCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AndCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Directives\DbDirective.cs" />
@@ -121,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Translation\TranslationUnits\TranslationUnits.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

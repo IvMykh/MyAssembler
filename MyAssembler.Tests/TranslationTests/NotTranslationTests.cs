@@ -17,7 +17,7 @@ namespace MyAssembler.Tests.TranslationTests
         [TestMethod]
         public void TestNotReg0()
         {
-            var tokens = new List<Token> { P[PET.ADD], P[PET.CH] };
+            var tokens = new List<Token> { P[PET.NOT], P[PET.CH] };
             var command = new NotCommand(tokens, OperandsSetType.R);
 
             runTest(command, new List<byte[]> { new byte[] { 0xF6, 0xD5 } });
@@ -26,7 +26,7 @@ namespace MyAssembler.Tests.TranslationTests
         [TestMethod]
         public void TestNotReg1()
         {
-            var tokens = new List<Token> { P[PET.ADD], P[PET.BX] };
+            var tokens = new List<Token> { P[PET.NOT], P[PET.BX] };
             var command = new NotCommand(tokens, OperandsSetType.R);
 
             runTest(command, new List<byte[]> { new byte[] { 0xF7, 0xD3 } });
@@ -35,7 +35,7 @@ namespace MyAssembler.Tests.TranslationTests
         [TestMethod]
         public void TestNotMem0()
         {
-            var tokens = new List<Token> { P[PET.ADD], P[PET.ByteMemCell] };
+            var tokens = new List<Token> { P[PET.NOT], P[PET.ByteMemCell] };
             var command = new NotCommand(tokens, OperandsSetType.M);
 
             runTest(command, new List<byte[]> { new byte[] { 0xF6, 0x16, 0x00, 0x00 } });
@@ -44,7 +44,7 @@ namespace MyAssembler.Tests.TranslationTests
         [TestMethod]
         public void TestNotMem1()
         {
-            var tokens = new List<Token> { P[PET.ADD], P[PET.WordMemCell] };
+            var tokens = new List<Token> { P[PET.NOT], P[PET.WordMemCell] };
             var command = new NotCommand(tokens, OperandsSetType.M);
 
             runTest(command, new List<byte[]> { new byte[] { 0xF7, 0x16, 0x00, 0x00 } });
@@ -54,7 +54,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestNotMemLabel()
         {
-            var tokens = new List<Token> { P[PET.ADD], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.NOT], P[PET.Label] };
             var command = new NotCommand(tokens, OperandsSetType.M);
 
             runExpectedExceptionTest(command);
