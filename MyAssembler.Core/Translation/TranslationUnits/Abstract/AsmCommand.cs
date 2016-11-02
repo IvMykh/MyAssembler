@@ -17,6 +17,20 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
             OperandsSetType = operandsSetType;
         }
 
+        protected void CheckForRegRegMismatch(
+            TranslationContext context, RegisterType firstReg, RegisterType secondReg)
+        {
+            WValue w1 = context.WValueHelper.WValueForRegister(firstReg);
+            WValue w2 = context.WValueHelper.WValueForRegister(secondReg);
+
+            if (w1 != w2)
+            {
+                throw new TranslationErrorException(
+                    string.Format("{0} and {1}: operands type mismatch.",
+                        firstReg,
+                        secondReg));
+            }
+        }
         protected void CheckForRegMemMismatch(
             TranslationContext context, RegisterType register, string identifier)
         {

@@ -81,6 +81,7 @@
     <Compile Include="TranslationTests\JneTranslationTests.cs" />
     <Compile Include="TranslationTests\JmpTranslationTests.cs" />
     <Compile Include="TranslationTests\IdivTranslationTests.cs" />
+    <Compile Include="TranslationTests\ImulTranslationTests.cs" />
     <Compile Include="TranslationTests\XorTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>

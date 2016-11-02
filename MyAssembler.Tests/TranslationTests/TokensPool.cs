@@ -9,7 +9,7 @@ namespace MyAssembler.Tests.TranslationTests
         ADD, SUB,
         AND, OR, XOR, NOT,
         JE, JNE, JMP,
-        IDIV,
+        IMUL, IDIV,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -46,8 +46,8 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.JE, new Token(TokenType.Command, "JE"));
             _pool.Add(PoolEntryType.JNE, new Token(TokenType.Command, "JNE"));
             _pool.Add(PoolEntryType.JMP, new Token(TokenType.Command, "JMP"));
+            _pool.Add(PoolEntryType.IMUL, new Token(TokenType.Command, "IMUL"));
             _pool.Add(PoolEntryType.IDIV, new Token(TokenType.Command, "IDIV"));
-
 
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));
             

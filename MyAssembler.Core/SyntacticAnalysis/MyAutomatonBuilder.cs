@@ -115,10 +115,10 @@ namespace MyAssembler.Core.SyntacticAnalysis
             return rootM;
         }
 
-        private MyAutomatonNode createForRriRmi()
+        private MyAutomatonNode createForArRrRriRmRmi()
         {
             var rootR = new MyAutomatonNode(
-                new List<Enum> { TT.Register }, OST.NotAccepting, Resources.CommaExpectedMsgFormat);
+                new List<Enum> { TT.Register }, OST.AR, Resources.CommaExpectedMsgFormat);
 
             var rootRComma = new MyAutomatonNode(
                 new List<Enum> { TT.Comma }, OST.NotAccepting, Resources.Valid2ndOpExpectedMsgFormat);
@@ -212,7 +212,9 @@ namespace MyAssembler.Core.SyntacticAnalysis
         private void constructImul(MyAutomatonNode colonNode)
         {
             var imulNode = createForCommands(CommandType.IMUL);
-            imulNode.AddChild(createForRriRmi());
+            
+            imulNode.AddChild(createForArRrRriRmRmi());
+            imulNode.AddChild(createForAM());
 
             colonNode.AddChild(imulNode);
             _constructedInstance.AddChild(imulNode);

@@ -27,22 +27,8 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         {
             WValue w1 = context.WValueHelper.WValueForRegister(register);
 
-            byte[] translatedBytes = null;
-            int bytesCount = 0;
-            int s = 0;
-
-            if (w1 == WValue.Zero)
-            {
-                bytesCount = 3;
-                translatedBytes = new byte[bytesCount];
-            }
-            else
-            {
-                s = (constBytes.Length == 1) ? 1 : 0;
-                bytesCount = 2 + constBytes.Length;
-            }
-
-            translatedBytes = new byte[bytesCount];
+            int bytesCount = (w1 == WValue.Zero) ? 3 : 2 + constBytes.Length;
+            byte[] translatedBytes = new byte[bytesCount];
 
             translatedBytes[0] = BitStringHelper.BitStringToByte(
                     string.Format(RegImFormat,
@@ -69,28 +55,15 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         {
             IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
 
-            byte[] translatedBytes = null;
-            int bytesCount = 0;
-            int s = 0;
+            int bytesCount = (idType == IdentifierType.Byte) ? 5 : 4 + constBytes.Length;
+            byte[] translatedBytes = new byte[bytesCount];
 
-            if (idType == IdentifierType.Byte)
-            {
-                bytesCount = 5;
-                translatedBytes = new byte[bytesCount];
-            }
-            else
-            {
-                s = (constBytes.Length == 1) ? 1 : 0;
-                bytesCount = 4 + constBytes.Length;
-            }
-
-            translatedBytes = new byte[bytesCount];
-            int wForIdentifier = (idType == IdentifierType.Byte) ? 0 : 1;
+            int w = (idType == IdentifierType.Byte) ? 0 : 1;
 
             translatedBytes[0] = BitStringHelper.BitStringToByte(
                     string.Format(MemImFormat,
                         (idType == IdentifierType.Word && constBytes.Length == 1) ? 1 : 0,
-                        wForIdentifier.ToString()));
+                        w.ToString()));
 
             // mod reg r/m
             translatedBytes[1] = BitStringHelper.BitStringToByte(
@@ -118,19 +91,11 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
             ++startPos; // Skipping comma.
             RegisterType secondReg = context.RegisterHelper.Parse(Tokens[startPos++].Value);
 
+            CheckForRegRegMismatch(context, firstReg, secondReg);
+
             WValue w1 = context.WValueHelper.WValueForRegister(firstReg);
-            WValue w2 = context.WValueHelper.WValueForRegister(secondReg);
-
-            if (w1 != w2)
-            {
-                throw new TranslationErrorException(
-                    string.Format("{0} and {1}: operands type mismatch.",
-                        firstReg,
-                        secondReg));
-            }
-
+            
             var translatedBytes = new byte[2];
-
             translatedBytes[0] = BitStringHelper.BitStringToByte(
                 string.Format(RegRegFormat,
                     context.WValueHelper.WValueToString(w1)));
