@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants;
+using MyAssembler.Core.Translation.OperandsTypeChecking;
 
 namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
@@ -14,14 +14,8 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
             }
         }
 
+        public TypeChecker Checker { get; private set; }
         public IMemoryManager MemoryManager { get; private set; }
-
-        public WValueHelper WValueHelper{ get; private set; }
-        public RegisterHelper RegisterHelper { get; private set; }
-
-        public BinConstantsParser BinConstsParser { get; private set; }
-        public DecConstantsParser DecConstsParser { get; private set; }
-        public HexConstantsParser HexConstsParser { get; private set; }
         
         public ContextAcceptMode AcceptMode { get; set; }
 
@@ -29,14 +23,8 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
         {
             _translatedBytes = new List<byte[]>();
 
+            Checker = new TypeChecker(this);
             MemoryManager = memoryManager;
-
-            WValueHelper = new WValueHelper();
-            RegisterHelper = new RegisterHelper();
-
-            BinConstsParser = new BinConstantsParser();
-            DecConstsParser = new DecConstantsParser();
-            HexConstsParser = new HexConstantsParser();
 
             // Initial mode.
             AcceptMode = ContextAcceptMode.CollectIdentifiersMode;

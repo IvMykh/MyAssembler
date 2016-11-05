@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
-using MyAssembler.Core.Translation.ContextInfrastructure;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 {

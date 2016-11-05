@@ -196,6 +196,24 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: value overflow..
+        /// </summary>
+        internal static string ConstantOverflowMsgFormat {
+            get {
+                return ResourceManager.GetString("ConstantOverflowMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: such constant type is not supported..
+        /// </summary>
+        internal static string ConstTypeNotSupportedMsgFormat {
+            get {
+                return ResourceManager.GetString("ConstTypeNotSupportedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 001.
         /// </summary>
         internal static string CX {
@@ -277,11 +295,38 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: the identifier is not a label (line {1}, index {2})..
+        /// </summary>
+        internal static string ExpectedLabelMsgFormat {
+            get {
+                return ResourceManager.GetString("ExpectedLabelMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Identifier or command name expected (line {0}, index {1})..
         /// </summary>
         internal static string IdfCmdExpectedMsgFormat {
             get {
                 return ResourceManager.GetString("IdfCmdExpectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: identifier was not collected at the previous pass..
+        /// </summary>
+        internal static string IdfNotCollectedMsgFormat {
+            get {
+                return ResourceManager.GetString("IdfNotCollectedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: identifier type is not supported..
+        /// </summary>
+        internal static string IdfTypeNotSupportedMsgFormat {
+            get {
+                return ResourceManager.GetString("IdfTypeNotSupportedMsgFormat", resourceCulture);
             }
         }
         
@@ -304,6 +349,51 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} ({1}) and {2}: operands type mismatch (line {3}, index {4})..
+        /// </summary>
+        internal static string MemImMismatchMsgFormat {
+            get {
+                return ResourceManager.GetString("MemImMismatchMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: such operand set type is not supported for this command (line {1}, index {2})..
+        /// </summary>
+        internal static string OSTNotSupportedMsgFormat {
+            get {
+                return ResourceManager.GetString("OSTNotSupportedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} and {1}: operands type mismatch (line {2}, index {3})..
+        /// </summary>
+        internal static string RegImMismatchMsgFormat {
+            get {
+                return ResourceManager.GetString("RegImMismatchMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} and {1} ({2}): operands type mismatch (line {3}, index {4})..
+        /// </summary>
+        internal static string RegMemMismatchMsgFormat {
+            get {
+                return ResourceManager.GetString("RegMemMismatchMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} and {1}: operands type mismatch (line {2}, index {3})..
+        /// </summary>
+        internal static string RegRegMismatchMsgFormat {
+            get {
+                return ResourceManager.GetString("RegRegMismatchMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 110.
         /// </summary>
         internal static string SI {
@@ -322,11 +412,38 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: translation mode is not supported..
+        /// </summary>
+        internal static string TranslModeNotSupportedMsgFormat {
+            get {
+                return ResourceManager.GetString("TranslModeNotSupportedMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Line {0}: undefined parse error occurred..
         /// </summary>
         internal static string UndefinedParseErrorMsgFormat {
             get {
                 return ResourceManager.GetString("UndefinedParseErrorMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: label identifier is not valid in this context. (line {1}, index {2}).
+        /// </summary>
+        internal static string UnexpectedLabelMsgFormat {
+            get {
+                return ResourceManager.GetString("UnexpectedLabelMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: unexpected register type..
+        /// </summary>
+        internal static string UnexpectedRegisterTypeMsgFormat {
+            get {
+                return ResourceManager.GetString("UnexpectedRegisterTypeMsgFormat", resourceCulture);
             }
         }
         
