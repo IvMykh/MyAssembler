@@ -6,12 +6,12 @@ using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 
 namespace MyAssembler.Tests.TranslationTests
 {
-    public abstract class CommandTranslationTests
+    public abstract class TranslationTests
     {
         public TokensPool P { get; protected set;}
         public TranslationContext Context { get; protected set; }
 
-        public CommandTranslationTests()
+        public TranslationTests()
         {
             P = new TokensPool();
 
@@ -33,18 +33,18 @@ namespace MyAssembler.Tests.TranslationTests
             Context.AcceptMode = ContextAcceptMode.TranslateMode;
         }
 
-        protected void runTest(AsmCommand command, List<byte[]> expectedBytes)
+        protected void runTest(AsmTranslationUnit unit, List<byte[]> expectedBytes)
         {
             // Act.
-            command.Accept(Context);
+            unit.Accept(Context);
 
             // Assert.
             assertTest(expectedBytes);
         }
-        protected void runExpectedExceptionTest(AsmCommand command)
+        protected void runExpectedExceptionTest(AsmTranslationUnit unit)
         {
             // Act.
-            command.Accept(Context);
+            unit.Accept(Context);
 
             // Assert.
             Assert.Fail();

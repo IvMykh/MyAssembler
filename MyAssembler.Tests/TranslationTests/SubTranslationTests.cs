@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
 
     [TestClass]
     public class SubTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
         // REG-REG
         [TestMethod]

@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
 
     [TestClass]
     public class MovTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
         // REG-REG
         [TestMethod]

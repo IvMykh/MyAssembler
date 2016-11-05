@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
     
     [TestClass]
     public class NotTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
 
         [TestMethod]

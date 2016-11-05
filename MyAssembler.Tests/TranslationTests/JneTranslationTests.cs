@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
 
     [TestClass]
     public class JneTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
         [TestMethod]
         public void TestJneLabel()

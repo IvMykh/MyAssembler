@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
 
     [TestClass]
     public class JmpTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
         [TestMethod]
         public void TestJmpLabel()

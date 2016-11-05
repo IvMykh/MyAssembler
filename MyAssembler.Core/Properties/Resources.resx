@@ -264,4 +264,7 @@
   <data name="OSTNotSupportedMsgFormat" xml:space="preserve">
     <value>{0}: such operand set type is not supported for this command (line {1}, index {2}).</value>
   </data>
+  <data name="InitializerOverflowMsgFormat" xml:space="preserve">
+    <value>'{0}': constant value exceeds {1} byte{2}.</value>
+  </data>
 </root>

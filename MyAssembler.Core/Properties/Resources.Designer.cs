@@ -340,6 +340,15 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: constant value exceeds {1} byte{2}..
+        /// </summary>
+        internal static string InitializerOverflowMsgFormat {
+            get {
+                return ResourceManager.GetString("InitializerOverflowMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Valid initial value or &apos;?&apos; expected (line {0}, index {1})..
         /// </summary>
         internal static string InitValueOrQuestionExpectedMsgFormat {

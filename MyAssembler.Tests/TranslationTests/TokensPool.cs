@@ -10,6 +10,7 @@ namespace MyAssembler.Tests.TranslationTests
         AND, OR, XOR, NOT,
         JE, JNE, JMP,
         IMUL, IDIV,
+        DB, DW,
         Comma,
         AH, AL, AX,
         BH, BL, BX,
@@ -19,16 +20,25 @@ namespace MyAssembler.Tests.TranslationTests
         WordMemCell,
         Label,
         ByteConst,
-        WordConst
+        WordConst,
+        QuestionMark,
+        ByteOverflow,
+        WordOverflow
     }
 
     public class TokensPool
     {
-        public const string SAMPLE_BYTE_MEMCELL = "ByteMemcell";
-        public const string SAMPLE_WORD_MEMCELL = "WordMemcell";
-        public const string SAMPLE_LABEL        = "label";
-        public const string SAMPLE_BYTE_CONST   = "100";
-        public const string SAMPLE_WORD_CONST   = "10000";
+        public const string SAMPLE_BYTE_MEMCELL         = "ByteMemcell";
+        public const string SAMPLE_WORD_MEMCELL         = "WordMemcell";
+        public const string SAMPLE_LABEL                = "label";
+        public const string SAMPLE_BYTE_CONST           = "100";
+        public const string SAMPLE_WORD_CONST           = "10000";
+        
+        public const string SAMPLE_BIN_CONST            = "1010B";
+        public const string SAMPLE_DEC_CONST            = "100";
+        public const string SAMPLE_HEX_CONST            = "0D1H";
+        public const string SAMPLE_BYTE_OVERFLOW_CONST  = "1000";
+        public const string SAMPLE_WORD_OVERFLOW_CONST  = "100000";
 
         Dictionary<PoolEntryType, Token> _pool;
 
@@ -48,6 +58,9 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.JMP, new Token(TokenType.Command, "JMP"));
             _pool.Add(PoolEntryType.IMUL, new Token(TokenType.Command, "IMUL"));
             _pool.Add(PoolEntryType.IDIV, new Token(TokenType.Command, "IDIV"));
+
+            _pool.Add(PoolEntryType.DB, new Token(TokenType.Directive, "DB"));
+            _pool.Add(PoolEntryType.DW, new Token(TokenType.Directive, "DW"));
 
             _pool.Add(PoolEntryType.Comma, new Token(TokenType.Comma, ","));
             
@@ -71,6 +84,10 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.ByteConst, new Token(TokenType.DecConstant, SAMPLE_BYTE_CONST));
             _pool.Add(PoolEntryType.WordConst, new Token(TokenType.DecConstant, SAMPLE_WORD_CONST));
 
+            _pool.Add(PoolEntryType.QuestionMark, new Token(TokenType.QuestionMark, "?"));
+
+            _pool.Add(PoolEntryType.ByteOverflow, new Token(TokenType.DecConstant, SAMPLE_BYTE_OVERFLOW_CONST));
+            _pool.Add(PoolEntryType.WordOverflow, new Token(TokenType.DecConstant, SAMPLE_WORD_OVERFLOW_CONST));
         }
 
         public Token this[PoolEntryType entryType]

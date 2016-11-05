@@ -67,7 +67,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ConstantsParsersTests\BinConstantsParsersTests.cs" />
-    <Compile Include="TranslationTests\CommandTranslationTests.cs" />
+    <Compile Include="TranslationTests\TranslationTests.cs" />
     <Compile Include="TranslationTests\GeneralTranslationTests.cs" />
     <Compile Include="TranslationTests\MovTranslationTests.cs" />
     <Compile Include="TranslationTests\TestTranslationUnit.cs" />
@@ -82,6 +82,7 @@
     <Compile Include="TranslationTests\JmpTranslationTests.cs" />
     <Compile Include="TranslationTests\IdivTranslationTests.cs" />
     <Compile Include="TranslationTests\ImulTranslationTests.cs" />
+    <Compile Include="TranslationTests\DirectivesTranslationTests.cs" />
     <Compile Include="TranslationTests\XorTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
 
     [TestClass]
     public class IdivTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
         [TestMethod]
         public void TestIdivReg0()

@@ -11,7 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
 
     [TestClass]
     public class ImulTranslationTests
-        : CommandTranslationTests
+        : TranslationTests
     {
         // AR.
         [TestMethod]
