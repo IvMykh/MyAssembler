@@ -1,4 +1,6 @@
-﻿namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
+﻿using MyAssembler.Core.Properties;
+
+namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
 { 
     /// <summary>
     /// Returns array of bytes of the given binary value represented as string (in reverse order).
@@ -25,8 +27,7 @@
             if (bytesCount > 2)
             {
                 throw new TranslationErrorException(
-                    string.Format("{0}: value overflow.", 
-                        value));
+                    string.Format(Resources.ConstantOverflowMsgFormat, value));
             }
 
             byte[] bytes = new byte[bytesCount];

@@ -2,6 +2,7 @@
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
 using MyAssembler.Core.Translation.ContextInfrastructure;
+using MyAssembler.Core.Translation.OperandsTypeChecking;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 {
@@ -18,71 +19,47 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
         private void translateForReg(TranslationContext context, int startPos)
         {
-            RegisterType register = context.RegisterHelper.Parse(Tokens[startPos].Value);
-            WValue w = context.WValueHelper.WValueForRegister(register);
+            Register reg = null;
+            context.Checker.CheckReg(Tokens, startPos, out reg);
 
             int bytesCount = 2;
             byte[] translatedBytes = new byte[bytesCount];
 
             translatedBytes[0] = BitStringHelper.BitStringToByte(
-                string.Format(OperationCodeFormat,
-                    context.WValueHelper.WValueToString(w)));
+                string.Format(OperationCodeFormat, reg.W));
 
             translatedBytes[1] = BitStringHelper.BitStringToByte(
-                string.Format(AddressingByteFormat,
-                    "11",
-                    context.RegisterHelper.RegisterToBitString(register)));
+                string.Format(AddressingByteFormat, "11", reg));
 
             context.AddTranslatedUnit(translatedBytes);
         }
         private void translateForMem(TranslationContext context, int startPos)
         {
-            string identifier = Tokens[startPos].Value;
-            IdentifierType idType = context.MemoryManager.GetIdentifierType(identifier);
-
-            if (idType == IdentifierType.Label)
-            {
-                throw new TranslationErrorException(
-                   string.Format("{0}: label identifier is not valid in this context.",
-                       identifier));
-            }
-
-            int w = (idType == IdentifierType.Byte) ? 0 : 1;
+            Identifier identifier = null;
+            context.Checker.CheckMem(Tokens, startPos, out identifier);
 
             int bytesCount = 4;
             byte[] translatedBytes = new byte[bytesCount];
 
             translatedBytes[0] = BitStringHelper.BitStringToByte(
                 string.Format(OperationCodeFormat,
-                    w.ToString()));
+                    identifier.W));
 
             translatedBytes[1] = BitStringHelper.BitStringToByte(
-                string.Format(AddressingByteFormat,
-                    "00",
-                    "110"));
+                string.Format(AddressingByteFormat, "00", "110"));
 
             context.AddTranslatedUnit(translatedBytes);
         }
-        
 
-        protected override void Translate(TranslationContext context)
+        protected override void TranslateCommand(TranslationContext context, int startPos)
         {
-            int i = 1;
-            if (Tokens[0].Type == TokenType.Identifier)
-            {
-                // Skip label and ':' tokens.
-                ++i;
-                ++i;
-            }
-
             switch (OperandsSetType)
             {
-                case OperandsSetType.R: translateForReg(context, i); break;
-                case OperandsSetType.M: translateForMem(context, i); break;
+                case OperandsSetType.R: translateForReg(context, startPos); break;
+                case OperandsSetType.M: translateForMem(context, startPos); break;
 
-                default: throw new TranslationErrorException(
-                    string.Format("Add: operands set {0} is not supported.",
-                        OperandsSetType));
+                default: 
+                    ThrowForUnsupportedOST(OperandsSetType, Tokens[startPos].Position); break;
             }
         }
     }

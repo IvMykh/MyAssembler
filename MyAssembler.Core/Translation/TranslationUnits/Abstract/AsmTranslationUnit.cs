@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
+using MyAssembler.Core.Properties;
 using MyAssembler.Core.Translation.ContextInfrastructure;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
@@ -75,8 +76,8 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                         throw new NotImplementedException();
                     } // break;
                 
-                default: throw new TranslationErrorException(
-                    string.Format("{0}: translation mode is not supported",
+                default: throw new DesignErrorException(
+                    string.Format(Resources.TranslModeNotSupportedMsgFormat,
                         context.AcceptMode));
             }
         }

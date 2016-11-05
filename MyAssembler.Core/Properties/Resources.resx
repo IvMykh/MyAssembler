@@ -225,4 +225,43 @@
   <data name="W1" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ConstantOverflowMsgFormat" xml:space="preserve">
+    <value>{0}: value overflow.</value>
+  </data>
+  <data name="ConstTypeNotSupportedMsgFormat" xml:space="preserve">
+    <value>{0}: such constant type is not supported.</value>
+  </data>
+  <data name="ExpectedLabelMsgFormat" xml:space="preserve">
+    <value>'{0}': the identifier is not a label (line {1}, index {2}).</value>
+  </data>
+  <data name="IdfNotCollectedMsgFormat" xml:space="preserve">
+    <value>'{0}': identifier was not collected at the previous pass.</value>
+  </data>
+  <data name="IdfTypeNotSupportedMsgFormat" xml:space="preserve">
+    <value>'{0}': identifier type is not supported.</value>
+  </data>
+  <data name="MemImMismatchMsgFormat" xml:space="preserve">
+    <value>{0} ({1}) and {2}: operands type mismatch (line {3}, index {4}).</value>
+  </data>
+  <data name="RegImMismatchMsgFormat" xml:space="preserve">
+    <value>{0} and {1}: operands type mismatch (line {2}, index {3}).</value>
+  </data>
+  <data name="RegMemMismatchMsgFormat" xml:space="preserve">
+    <value>{0} and {1} ({2}): operands type mismatch (line {3}, index {4}).</value>
+  </data>
+  <data name="RegRegMismatchMsgFormat" xml:space="preserve">
+    <value>{0} and {1}: operands type mismatch (line {2}, index {3}).</value>
+  </data>
+  <data name="TranslModeNotSupportedMsgFormat" xml:space="preserve">
+    <value>{0}: translation mode is not supported.</value>
+  </data>
+  <data name="UnexpectedLabelMsgFormat" xml:space="preserve">
+    <value>{0}: label identifier is not valid in this context. (line {1}, index {2})</value>
+  </data>
+  <data name="UnexpectedRegisterTypeMsgFormat" xml:space="preserve">
+    <value>'{0}': unexpected register type.</value>
+  </data>
+  <data name="OSTNotSupportedMsgFormat" xml:space="preserve">
+    <value>{0}: such operand set type is not supported for this command (line {1}, index {2}).</value>
+  </data>
 </root>

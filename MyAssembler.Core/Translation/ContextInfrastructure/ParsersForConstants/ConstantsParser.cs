@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using MyAssembler.Core.Properties;
 
 namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
 {
@@ -21,8 +22,7 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
             catch (OverflowException)
             {
                 throw new TranslationErrorException(
-                    string.Format("{0}: value overflow.",
-                        value));
+                    string.Format(Resources.ConstantOverflowMsgFormat, value));
             }
 
             byte[] bytes = BitConverter.GetBytes(parsedValue);

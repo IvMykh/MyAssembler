@@ -86,8 +86,13 @@
     <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\ConstantsParser.cs" />
     <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\DecConstantsParser.cs" />
     <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\HexConstantsParser.cs" />
-    <Compile Include="Translation\ContextInfrastructure\RegisterHelper.cs" />
     <Compile Include="Translation\ContextInfrastructure\TranslationContext.cs" />
+    <Compile Include="Translation\OperandsTypeChecking\Constant.cs" />
+    <Compile Include="Translation\OperandsTypeChecking\Identifier.cs" />
+    <Compile Include="Translation\OperandsTypeChecking\Operand.cs" />
+    <Compile Include="Translation\OperandsTypeChecking\Register.cs" />
+    <Compile Include="Translation\OperandsTypeChecking\TypeChecker.cs" />
+    <Compile Include="Translation\OperandsTypeChecking\WValueStore.cs" />
     <Compile Include="Translation\TranslationErrorException.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\ConditionalJumpCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Abstract\ControlFlowCommand.cs" />
@@ -110,8 +115,6 @@
     <Compile Include="Translation\TranslationUnits\Commands\OrCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\SubCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\XorCommand.cs" />
-    <Compile Include="Translation\ContextInfrastructure\WValue.cs" />
-    <Compile Include="Translation\ContextInfrastructure\WValueHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -122,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Translation\TranslationUnits\TranslationUnits.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

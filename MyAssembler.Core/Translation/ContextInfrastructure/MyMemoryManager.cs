@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MyAssembler.Core.Properties;
 
 namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
@@ -65,8 +66,7 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
             }
 
             throw new DesignErrorException(
-                string.Format("'{0}': identifier was not collected at the previous pass.",
-                    identifier));
+                string.Format(Resources.IdfNotCollectedMsgFormat, identifier));
         }
     }
 }
