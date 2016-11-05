@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
+using MyAssembler.Core.Translation.ContextInfrastructure;
 using MyAssembler.Core.Translation.TranslationUnits.Abstract;
 
 namespace MyAssembler.Tests.TranslationTests
@@ -13,6 +14,11 @@ namespace MyAssembler.Tests.TranslationTests
         public TestTranslationUnit(List<Token> tokens)
             : base(tokens)
         {
+        }
+
+        protected override void Translate(TranslationContext context)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

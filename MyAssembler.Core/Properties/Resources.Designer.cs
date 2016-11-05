@@ -124,6 +124,15 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: byte cell name is already defined..
+        /// </summary>
+        internal static string ByteCellRedefinitionMsgFormat {
+            get {
+                return ResourceManager.GetString("ByteCellRedefinitionMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 101.
         /// </summary>
         internal static string CH {
@@ -358,6 +367,15 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: label name is already defined..
+        /// </summary>
+        internal static string LabelRedefinitionMsgFormat {
+            get {
+                return ResourceManager.GetString("LabelRedefinitionMsgFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} ({1}) and {2}: operands type mismatch (line {3}, index {4})..
         /// </summary>
         internal static string MemImMismatchMsgFormat {
@@ -507,6 +525,15 @@ namespace MyAssembler.Core.Properties {
         internal static string W1 {
             get {
                 return ResourceManager.GetString("W1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos;: word cell name is already defined..
+        /// </summary>
+        internal static string WordCellRedefinitionMsgFormat {
+            get {
+                return ResourceManager.GetString("WordCellRedefinitionMsgFormat", resourceCulture);
             }
         }
     }

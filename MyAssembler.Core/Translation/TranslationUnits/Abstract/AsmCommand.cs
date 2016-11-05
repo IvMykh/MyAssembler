@@ -21,15 +21,26 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
         protected override sealed void Translate(TranslationContext context)
         {
+            string label = null;
             int i = 1;
+
             if (Tokens[0].Type == TokenType.Identifier)
             {
+                label = Tokens[0].Value;
+
                 // Skip label and ':' tokens.
                 ++i;
                 ++i;
             }
 
             TranslateCommand(context, i);
+
+            if (label != null)
+            {
+                short address = context.StartAddresses[context.StartAddresses.Count - 1];
+                context.MemoryManager.InsertLabelAddress(label, address);
+            }
+
         }
 
         protected void ThrowForUnsupportedOST(OperandsSetType ost, TokenPosition pos)

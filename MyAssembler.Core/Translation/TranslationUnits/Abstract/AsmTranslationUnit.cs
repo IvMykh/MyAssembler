@@ -53,10 +53,8 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                 }
             }
         }
-        protected virtual void Translate(TranslationContext context)
-        {
-            // TODO: make abstract in the end.
-        }
+        
+        protected abstract void Translate(TranslationContext context);
 
         public void Accept(TranslationContext context)
         {

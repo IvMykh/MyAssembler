@@ -19,7 +19,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Directives
         {
         }
 
-        protected override void EndTranslation(TranslationContext context, Constant constant)
+        protected override void InsertTranslatedBytes(TranslationContext context, Constant constant)
         {
             if (constant.Bytes.Length == 1)
             {
@@ -29,6 +29,12 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Directives
             {
                 context.AddTranslatedUnit(constant.Bytes);
             }
+        }
+
+        protected override void CollectMemoryCellAddress(TranslationContext context, string identifier)
+        {
+            short address = context.StartAddresses[context.StartAddresses.Count - 1];
+            context.MemoryManager.InsertWordCellAddress(identifier, address);
         }
     }
 }

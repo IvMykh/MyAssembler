@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MyAssembler.Core.Properties;
 
 namespace MyAssembler.Core.Translation.ContextInfrastructure
@@ -31,24 +32,62 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
         }
         public IReadOnlyDictionary<string, short> Labels
         {
-            get
-            {
+            get {
                 return _labels;
             }
         }
 
         public void AddByteCell(string byteCellName, short address = 0)
         {
-            _byteCells.Add(byteCellName, address);
+            try
+            {
+                _byteCells.Add(byteCellName, address);
+            }
+            catch (ArgumentException)
+            {
+                throw new TranslationErrorException(
+                    string.Format(Resources.ByteCellRedefinitionMsgFormat, byteCellName));
+            }
         }
         public void AddWordCell(string wordCellName, short address = 0)
         {
-            _wordCells.Add(wordCellName, address);
+            try
+            {
+                _wordCells.Add(wordCellName, address);
+            }
+            catch (ArgumentException)
+            {
+                throw new TranslationErrorException(
+                    string.Format(Resources.WordCellRedefinitionMsgFormat, wordCellName));
+            }
         }
         public void AddLabelInfo(string labelName, short address = 0)
         {
-            _labels.Add(labelName, address);
+            try
+            {
+                _labels.Add(labelName, address);
+            }
+            catch (ArgumentException)
+            {
+                throw new TranslationErrorException(
+                    string.Format(Resources.LabelRedefinitionMsgFormat, labelName));
+            }
         }
+
+
+        public void InsertByteCellAddress(string byteCellName, short address)
+        {
+            _byteCells[byteCellName] = address;
+        }
+        public void InsertWordCellAddress(string wordCellName, short address)
+        {
+            _wordCells[wordCellName] = address;
+        }
+        public void InsertLabelAddress(string labelName, short address)
+        {
+            _labels[labelName] = address;
+        }
+
 
         public IdentifierType GetIdentifierType(string identifier)
         {

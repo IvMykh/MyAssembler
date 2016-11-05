@@ -13,5 +13,9 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
         IReadOnlyDictionary<string, short> ByteCells { get; }
         IReadOnlyDictionary<string, short> WordCells { get; }
         IReadOnlyDictionary<string, short> Labels    { get; }
+
+        void InsertByteCellAddress(string byteCellName, short address);
+        void InsertWordCellAddress(string wordCellName, short address);
+        void InsertLabelAddress(string labelName, short address);
     }
 }

@@ -16,7 +16,9 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         {
         }
 
-        protected abstract void EndTranslation(TranslationContext context, Constant constant);
+        protected abstract void InsertTranslatedBytes(TranslationContext context, Constant constant);
+        protected abstract void CollectMemoryCellAddress(TranslationContext context, string identifier);
+
 
         protected override sealed void Translate(TranslationContext context)
         {
@@ -40,7 +42,8 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                         (CellSize > 1) ? "s" : ""));
             }
 
-            EndTranslation(context, constant);
+            InsertTranslatedBytes(context, constant);
+            CollectMemoryCellAddress(context, Tokens[0].Value);
         }
     }
 }

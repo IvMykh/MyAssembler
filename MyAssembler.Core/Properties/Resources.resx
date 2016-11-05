@@ -267,4 +267,13 @@
   <data name="InitializerOverflowMsgFormat" xml:space="preserve">
     <value>'{0}': constant value exceeds {1} byte{2}.</value>
   </data>
+  <data name="ByteCellRedefinitionMsgFormat" xml:space="preserve">
+    <value>'{0}': byte cell name is already defined.</value>
+  </data>
+  <data name="LabelRedefinitionMsgFormat" xml:space="preserve">
+    <value>'{0}': label name is already defined.</value>
+  </data>
+  <data name="WordCellRedefinitionMsgFormat" xml:space="preserve">
+    <value>'{0}': word cell name is already defined.</value>
+  </data>
 </root>

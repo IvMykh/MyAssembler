@@ -5,12 +5,22 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public class TranslationContext
     {
-        private List<byte[]> _translatedBytes;
+        private const short INIT_OFFSET = 100;
+
+        private List<byte[]> _translatedBytesList;
+        private List<short>  _startAddresses;
 
         public IReadOnlyList<byte[]> TranslatedBytes
         {
             get {
-                return _translatedBytes;
+                return _translatedBytesList;
+            }
+        }
+
+        public IReadOnlyList<short> StartAddresses
+        {
+            get {
+                return _startAddresses;
             }
         }
 
@@ -21,7 +31,8 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
 
         public TranslationContext(IMemoryManager memoryManager)
         {
-            _translatedBytes = new List<byte[]>();
+            _translatedBytesList = new List<byte[]>();
+            _startAddresses = new List<short>();
 
             Checker = new TypeChecker(this);
             MemoryManager = memoryManager;
@@ -32,7 +43,20 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
 
         public void AddTranslatedUnit(byte[] translatedBytes)
         {
-            _translatedBytes.Add(translatedBytes);
+            _translatedBytesList.Add(translatedBytes);
+
+            if (_translatedBytesList.Count == 1)
+            {
+                _startAddresses.Add(INIT_OFFSET);
+            }
+            else
+            {
+                int startAddress = 
+                    _startAddresses[_startAddresses.Count - 1] + 
+                    translatedBytes.Length; 
+                
+                _startAddresses.Add((short)startAddress);
+            }
         }
     }
 }
