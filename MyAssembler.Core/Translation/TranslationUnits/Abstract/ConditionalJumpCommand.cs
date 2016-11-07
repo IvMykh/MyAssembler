@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
 using MyAssembler.Core.SyntacticAnalysis;
+using MyAssembler.Core.Translation.ContextInfrastructure;
 
 namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 {
@@ -25,6 +26,14 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                     SecondBytePlaceholder));
 
             return translatedBytes;
+        }
+
+        protected override void UseAddress(TranslationContext context, short address)
+        {
+            int addrStartPos = 2;
+            short jumpValue = CalculateJumpValue(context, address);
+
+            context.InsertAddressValue(addrStartPos, jumpValue, true);
         }
     }
 }

@@ -67,23 +67,25 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ConstantsParsersTests\BinConstantsParsersTests.cs" />
-    <Compile Include="TranslationTests\TranslationTests.cs" />
+    <Compile Include="TranslationTests\DirectivesTranslationTests\DbTranslationTests.cs" />
+    <Compile Include="TranslationTests\DirectivesTranslationTests\DwTranslationTests.cs" />
+    <Compile Include="TranslationTests\Helpers\TranslationTests.cs" />
     <Compile Include="TranslationTests\GeneralTranslationTests.cs" />
-    <Compile Include="TranslationTests\MovTranslationTests.cs" />
-    <Compile Include="TranslationTests\TestTranslationUnit.cs" />
-    <Compile Include="TranslationTests\TokensPool.cs" />
-    <Compile Include="TranslationTests\AddTranslationTests.cs" />
-    <Compile Include="TranslationTests\SubTranslationTests.cs" />
-    <Compile Include="TranslationTests\AndTranslationTests.cs" />
-    <Compile Include="TranslationTests\OrTranslationTests.cs" />
-    <Compile Include="TranslationTests\NotTranslationTests.cs" />
-    <Compile Include="TranslationTests\JeTranslationTests.cs" />
-    <Compile Include="TranslationTests\JneTranslationTests.cs" />
-    <Compile Include="TranslationTests\JmpTranslationTests.cs" />
-    <Compile Include="TranslationTests\IdivTranslationTests.cs" />
-    <Compile Include="TranslationTests\ImulTranslationTests.cs" />
-    <Compile Include="TranslationTests\DirectivesTranslationTests.cs" />
-    <Compile Include="TranslationTests\XorTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\MovTranslationTests.cs" />
+    <Compile Include="TranslationTests\Helpers\TestTranslationUnit.cs" />
+    <Compile Include="TranslationTests\Helpers\TokensPool.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\AddTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\SubTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\AndTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\OrTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\NotTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\JeTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\JneTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\JmpTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\IdivTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\ImulTranslationTests.cs" />
+    <Compile Include="TranslationTests\AddressesInsertionTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\XorTranslationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyAssembler.Core\MyAssembler.Core.csproj">

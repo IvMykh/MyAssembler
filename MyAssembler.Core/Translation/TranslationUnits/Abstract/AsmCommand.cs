@@ -37,10 +37,31 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
             if (label != null)
             {
-                short address = context.StartAddresses[context.StartAddresses.Count - 1];
+                short address = context.StartAddresses[context.UnitCursor];
                 context.MemoryManager.InsertLabelAddress(label, address);
             }
 
+        }
+
+        protected abstract void UseAddress(TranslationContext context, short address);
+
+        protected override void PerformAddressInsertion(TranslationContext context)
+        {
+            // If we deal with memory cell...
+            if (OperandsSetType == OperandsSetType.M  ||
+                OperandsSetType == OperandsSetType.AM ||
+                OperandsSetType == OperandsSetType.MI ||
+                OperandsSetType == OperandsSetType.MR ||
+                OperandsSetType == OperandsSetType.RM ||
+                OperandsSetType == OperandsSetType.RMI)
+            {
+                Token idToken = Tokens.FindLast(t => t.Type == TokenType.Identifier);
+                IdentifierType idType = context.MemoryManager.GetIdentifierType(idToken.Value);
+
+                short address = context.MemoryManager.GetAddressFor(idToken.Value);
+
+                UseAddress(context, address);
+            }
         }
 
         protected void ThrowForUnsupportedOST(OperandsSetType ost, TokenPosition pos)

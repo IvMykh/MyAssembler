@@ -55,6 +55,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         }
         
         protected abstract void Translate(TranslationContext context);
+        protected abstract void PerformAddressInsertion(TranslationContext context);
 
         public void Accept(TranslationContext context)
         {
@@ -70,9 +71,9 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                     } break;
                 case ContextAcceptMode.InsertAddressMode:
                     {
-                        // So far...
-                        throw new NotImplementedException();
-                    } // break;
+                        PerformAddressInsertion(context);
+                        ++context.UnitCursor;
+                    } break;
                 
                 default: throw new DesignErrorException(
                     string.Format(Resources.TranslModeNotSupportedMsgFormat,

@@ -19,21 +19,21 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Directives
         {
         }
 
-        protected override void InsertTranslatedBytes(TranslationContext context, Constant constant)
+        protected override void InsertTranslatedBytes(TranslationContext context, byte[] translatedBytes)
         {
-            if (constant.Bytes.Length == 1)
+            if (translatedBytes.Length == 1)
             {
-                context.AddTranslatedUnit(new byte[2] { 0x00, constant.Bytes[0] });
+                context.AddTranslatedUnit(new byte[2] { 0x00, translatedBytes[0] });
             }
             else
             {
-                context.AddTranslatedUnit(constant.Bytes);
+                context.AddTranslatedUnit(translatedBytes);
             }
         }
 
         protected override void CollectMemoryCellAddress(TranslationContext context, string identifier)
         {
-            short address = context.StartAddresses[context.StartAddresses.Count - 1];
+            short address = context.StartAddresses[context.UnitCursor];
             context.MemoryManager.InsertWordCellAddress(identifier, address);
         }
     }

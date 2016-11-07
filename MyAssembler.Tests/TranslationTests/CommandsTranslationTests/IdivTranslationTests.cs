@@ -53,7 +53,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestIdivMemLabel()
         {
-            var tokens = new List<Token> { P[PET.IDIV], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.IDIV], P[PET.Label1] };
             var command = new IdivCommand(tokens, OperandsSetType.M);
 
             runExpectedExceptionTest(command);

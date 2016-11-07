@@ -77,7 +77,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestAndRegMemMismatchIdLabel()
         {
-            var tokens = new List<Token> { P[PET.AND], P[PET.AH], P[PET.Comma], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.AND], P[PET.AH], P[PET.Comma], P[PET.Label1] };
             var command = new AndCommand(tokens, OperandsSetType.RM);
 
             runExpectedExceptionTest(command);
@@ -128,7 +128,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestAndMemRegMismatchIdLabel()
         {
-            var tokens = new List<Token> { P[PET.AND], P[PET.Label], P[PET.Comma], P[PET.AH] };
+            var tokens = new List<Token> { P[PET.AND], P[PET.Label1], P[PET.Comma], P[PET.AH] };
             var command = new AndCommand(tokens, OperandsSetType.MR);
 
             runExpectedExceptionTest(command);

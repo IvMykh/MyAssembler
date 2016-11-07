@@ -5,7 +5,7 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public class TranslationContext
     {
-        private const short INIT_OFFSET = 100;
+        public const short INIT_OFFSET = 100;
 
         private List<byte[]> _translatedBytesList;
         private List<short>  _startAddresses;
@@ -23,40 +23,76 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
                 return _startAddresses;
             }
         }
+        
+        private ContextAcceptMode _acceptMode;
+        
+        public ContextAcceptMode AcceptMode 
+        { 
+            get { 
+                return _acceptMode; 
+            } 
+            set { 
+                _acceptMode = value;
+
+                if (value == ContextAcceptMode.InsertAddressMode)
+                    UnitCursor = 0;
+                else
+                    UnitCursor = -1;
+            }
+        }
+
+        public int UnitCursor { get; set; }
 
         public TypeChecker Checker { get; private set; }
         public IMemoryManager MemoryManager { get; private set; }
-        
-        public ContextAcceptMode AcceptMode { get; set; }
+
+
 
         public TranslationContext(IMemoryManager memoryManager)
         {
             _translatedBytesList = new List<byte[]>();
             _startAddresses = new List<short>();
 
+            // Initial mode.
+            AcceptMode = ContextAcceptMode.CollectIdentifiersMode; 
+
             Checker = new TypeChecker(this);
             MemoryManager = memoryManager;
-
-            // Initial mode.
-            AcceptMode = ContextAcceptMode.CollectIdentifiersMode;
         }
 
         public void AddTranslatedUnit(byte[] translatedBytes)
         {
             _translatedBytesList.Add(translatedBytes);
+            ++UnitCursor;
 
-            if (_translatedBytesList.Count == 1)
+            if (UnitCursor == 0)
             {
                 _startAddresses.Add(INIT_OFFSET);
             }
             else
             {
-                int startAddress = 
-                    _startAddresses[_startAddresses.Count - 1] + 
-                    translatedBytes.Length; 
+                int startAddress =
+                    _startAddresses[UnitCursor - 1] +
+                    _translatedBytesList[UnitCursor - 1].Length;
                 
                 _startAddresses.Add((short)startAddress);
             }
+        }
+        
+        public void InsertAddressValue(int addrStartPos, short addrValue, bool shouldRearrange = false)
+        {
+            byte upperByte = (byte)(addrValue >> 8);
+            byte lowerByte = (byte)(addrValue & 0xff);
+
+            if (shouldRearrange)
+            {
+                byte exchangeVal = upperByte;
+                upperByte = lowerByte;
+                lowerByte = exchangeVal;
+            }
+
+            _translatedBytesList[UnitCursor][addrStartPos]     = upperByte;
+            _translatedBytesList[UnitCursor][addrStartPos + 1] = lowerByte;
         }
     }
 }

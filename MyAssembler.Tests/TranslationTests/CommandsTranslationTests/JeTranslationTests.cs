@@ -16,7 +16,7 @@ namespace MyAssembler.Tests.TranslationTests
         [TestMethod]
         public void TestJeLabel()
         {
-            var tokens = new List<Token> { P[PET.JE], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.JE], P[PET.Label1] };
             var command = new JeCommand(tokens, OperandsSetType.M);
 
             runTest(command, new List<byte[]> { new byte[] { 0x0F, 0x84, 0x00, 0x00 } });

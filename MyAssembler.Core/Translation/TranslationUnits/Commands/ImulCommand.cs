@@ -158,5 +158,22 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
                     ThrowForUnsupportedOST(OperandsSetType, Tokens[startPos].Position); break;
             }
         }
+
+        protected override void UseAddress(TranslationContext context, short address)
+        {
+            int addrStartPos = 0;
+
+            switch (OperandsSetType)
+            {
+                case OperandsSetType.AM:  addrStartPos = 2; break;
+                case OperandsSetType.RM:  addrStartPos = 3; break;
+                case OperandsSetType.RMI: addrStartPos = 2; break;
+                
+                default: throw new DesignErrorException(
+                    string.Format("'{0}': unexpected operand set type in IMUL address insertion."));
+            }
+
+            context.InsertAddressValue(addrStartPos, address);
+        }
     }
 }

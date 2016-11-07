@@ -57,7 +57,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestImulAxMemMismatch()
         {
-            var tokens = new List<Token> { P[PET.IMUL], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.IMUL], P[PET.Label1] };
             var command = new ImulCommand(tokens, OperandsSetType.AM);
 
             runExpectedExceptionTest(command);
@@ -129,7 +129,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestImulRegMemMismatchLabel()
         {
-            var tokens = new List<Token> { P[PET.IMUL], P[PET.BX], P[PET.Comma], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.IMUL], P[PET.BX], P[PET.Comma], P[PET.Label1] };
             var command = new ImulCommand(tokens, OperandsSetType.RM);
 
             runExpectedExceptionTest(command);

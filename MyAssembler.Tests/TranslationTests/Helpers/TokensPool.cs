@@ -16,27 +16,29 @@ namespace MyAssembler.Tests.TranslationTests
         BH, BL, BX,
         CH, CL, CX,
         DH, DL, DX,
+        UninitByteMemCell,
         ByteMemCell,
         WordMemCell,
-        Label,
+        Label1,
+        Label2,
         ByteConst,
         WordConst,
         QuestionMark,
         ByteOverflow,
-        WordOverflow
+        WordOverflow,
+        Colon
     }
 
     public class TokensPool
     {
+        public const string SAMPLE_UNINIT_BYTE_MEMCELL  = "UninitByteMemcell";
         public const string SAMPLE_BYTE_MEMCELL         = "ByteMemcell";
         public const string SAMPLE_WORD_MEMCELL         = "WordMemcell";
-        public const string SAMPLE_LABEL                = "label";
+        public const string SAMPLE_LABEL_1              = "label1";
+        public const string SAMPLE_LABEL_2              = "label2";
         public const string SAMPLE_BYTE_CONST           = "100";
         public const string SAMPLE_WORD_CONST           = "10000";
         
-        public const string SAMPLE_BIN_CONST            = "1010B";
-        public const string SAMPLE_DEC_CONST            = "100";
-        public const string SAMPLE_HEX_CONST            = "0D1H";
         public const string SAMPLE_BYTE_OVERFLOW_CONST  = "1000";
         public const string SAMPLE_WORD_OVERFLOW_CONST  = "100000";
 
@@ -77,9 +79,11 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.DL, new Token(TokenType.Register, RegisterType.DL.ToString()));
             _pool.Add(PoolEntryType.DX, new Token(TokenType.Register, RegisterType.DX.ToString()));
 
+            _pool.Add(PoolEntryType.UninitByteMemCell, new Token(TokenType.Identifier, SAMPLE_UNINIT_BYTE_MEMCELL));
             _pool.Add(PoolEntryType.ByteMemCell, new Token(TokenType.Identifier, SAMPLE_BYTE_MEMCELL));
             _pool.Add(PoolEntryType.WordMemCell, new Token(TokenType.Identifier, SAMPLE_WORD_MEMCELL));
-            _pool.Add(PoolEntryType.Label, new Token(TokenType.Identifier, SAMPLE_LABEL));
+            _pool.Add(PoolEntryType.Label1, new Token(TokenType.Identifier, SAMPLE_LABEL_1));
+            _pool.Add(PoolEntryType.Label2, new Token(TokenType.Identifier, SAMPLE_LABEL_2));
 
             _pool.Add(PoolEntryType.ByteConst, new Token(TokenType.DecConstant, SAMPLE_BYTE_CONST));
             _pool.Add(PoolEntryType.WordConst, new Token(TokenType.DecConstant, SAMPLE_WORD_CONST));
@@ -88,6 +92,8 @@ namespace MyAssembler.Tests.TranslationTests
 
             _pool.Add(PoolEntryType.ByteOverflow, new Token(TokenType.DecConstant, SAMPLE_BYTE_OVERFLOW_CONST));
             _pool.Add(PoolEntryType.WordOverflow, new Token(TokenType.DecConstant, SAMPLE_WORD_OVERFLOW_CONST));
+
+            _pool.Add(PoolEntryType.Colon, new Token(TokenType.Colon, ":"));
         }
 
         public Token this[PoolEntryType entryType]

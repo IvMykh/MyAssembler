@@ -159,5 +159,11 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
                     ThrowForUnsupportedOST(OperandsSetType, Tokens[startPos].Position); break;
             }
         }
+
+        protected override void UseAddress(TranslationContext context, short address)
+        {
+            int addrStartPos = 2;
+            context.InsertAddressValue(addrStartPos, address);
+        }
     }
 }

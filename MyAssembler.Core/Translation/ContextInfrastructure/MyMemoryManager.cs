@@ -107,5 +107,23 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
             throw new DesignErrorException(
                 string.Format(Resources.IdfNotCollectedMsgFormat, identifier));
         }
+        public short GetAddressFor(string identifier)
+        {
+            if (_byteCells.ContainsKey(identifier))
+            {
+                return _byteCells[identifier];
+            }
+            else if (_wordCells.ContainsKey(identifier))
+            {
+                return _wordCells[identifier];
+            }
+            else if (_labels.ContainsKey(identifier))
+            {
+                return _labels[identifier];
+            }
+
+            throw new DesignErrorException(
+                string.Format(Resources.IdfNotCollectedMsgFormat, identifier));
+        }
     }
 }

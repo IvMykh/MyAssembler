@@ -77,7 +77,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestMovRegMemMismatchIdLabel()
         {
-            var tokens = new List<Token> { P[PET.MOV], P[PET.AH], P[PET.Comma], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.MOV], P[PET.AH], P[PET.Comma], P[PET.Label1] };
             var command = new MovCommand(tokens, OperandsSetType.RM);
 
             runExpectedExceptionTest(command);
@@ -128,7 +128,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestMovMemRegMismatchIdLabel()
         {
-            var tokens = new List<Token> { P[PET.MOV], P[PET.Label], P[PET.Comma], P[PET.AH] };
+            var tokens = new List<Token> { P[PET.MOV], P[PET.Label1], P[PET.Comma], P[PET.AH] };
             var command = new MovCommand(tokens, OperandsSetType.MR);
             
             runExpectedExceptionTest(command);

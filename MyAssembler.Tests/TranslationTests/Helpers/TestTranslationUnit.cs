@@ -20,5 +20,10 @@ namespace MyAssembler.Tests.TranslationTests
         {
             throw new System.NotImplementedException();
         }
+
+        protected override void PerformAddressInsertion(TranslationContext context)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

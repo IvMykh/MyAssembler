@@ -16,34 +16,40 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
         {
         }
 
-        protected abstract void InsertTranslatedBytes(TranslationContext context, Constant constant);
+        protected abstract void InsertTranslatedBytes(TranslationContext context, byte[] translatedBytes);
         protected abstract void CollectMemoryCellAddress(TranslationContext context, string identifier);
 
 
         protected override sealed void Translate(TranslationContext context)
         {
             Token constToken = Tokens[2];
+            byte[] translatedBytes = null;
 
-            if (constToken.Type == TokenType.QuestionMark)
+            if (constToken.Type != TokenType.QuestionMark)
             {
-                byte[] translatedBytes = new byte[CellSize];
-                context.AddTranslatedUnit(translatedBytes);
-                return;
+                var constant = new Constant(constToken.Value, constToken.Type);
+
+                if (constant.Bytes.Length > CellSize)
+                {
+                    throw new TranslationErrorException(
+                        string.Format(Resources.InitializerOverflowMsgFormat,
+                            constant.Value,
+                            CellSize,
+                            (CellSize > 1) ? "s" : ""));
+                }
+
+                translatedBytes = constant.Bytes;
+            }
+            else
+            {
+                translatedBytes = new byte[CellSize];
             }
 
-            var constant = new Constant(constToken.Value, constToken.Type);
-
-            if (constant.Bytes.Length > CellSize)
-            {
-                throw new TranslationErrorException(
-                    string.Format(Resources.InitializerOverflowMsgFormat,
-                        constant.Value,
-                        CellSize,
-                        (CellSize > 1) ? "s" : ""));
-            }
-
-            InsertTranslatedBytes(context, constant);
+            InsertTranslatedBytes(context, translatedBytes);
             CollectMemoryCellAddress(context, Tokens[0].Value);
         }
+
+        protected override void PerformAddressInsertion(TranslationContext context) 
+        { /* Do nothing. */ }
     }
 }

@@ -54,7 +54,7 @@ namespace MyAssembler.Tests.TranslationTests
         [ExpectedException(typeof(TranslationErrorException))]
         public void TestNotMemLabel()
         {
-            var tokens = new List<Token> { P[PET.NOT], P[PET.Label] };
+            var tokens = new List<Token> { P[PET.NOT], P[PET.Label1] };
             var command = new NotCommand(tokens, OperandsSetType.M);
 
             runExpectedExceptionTest(command);

@@ -23,5 +23,15 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
             context.AddTranslatedUnit(GetTranslatedBytes());
         }
+
+        protected short CalculateJumpValue(TranslationContext context, short targetAddress)
+        {
+            short currCommandLength = (short)context.TranslatedBytes[context.UnitCursor].Length;
+            short currAddress = context.StartAddresses[context.UnitCursor];
+
+            short jumpValue = (short)(targetAddress - currAddress - currCommandLength);
+
+            return jumpValue;
+        }
     }
 }

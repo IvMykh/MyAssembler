@@ -10,34 +10,34 @@ namespace MyAssembler.Tests.TranslationTests
     using PET = PoolEntryType;
 
     [TestClass]
-    public class JmpTranslationTests
+    public class JneTranslationTests
         : TranslationTests
     {
         [TestMethod]
-        public void TestJmpLabel()
+        public void TestJneLabel()
         {
-            var tokens = new List<Token> { P[PET.JMP], P[PET.Label] };
-            var command = new JmpCommand(tokens, OperandsSetType.M);
+            var tokens = new List<Token> { P[PET.JNE], P[PET.Label1] };
+            var command = new JneCommand(tokens, OperandsSetType.M);
 
-            runTest(command, new List<byte[]> { new byte[] { 0xE9, 0x00, 0x00 } });
+            runTest(command, new List<byte[]> { new byte[] { 0x0F, 0x85, 0x00, 0x00 } });
         }
 
         [TestMethod]
         [ExpectedException(typeof(TranslationErrorException))]
-        public void TestJmpByteMemCell()
+        public void TestJneByteMemCell()
         {
-            var tokens = new List<Token> { P[PET.JMP], P[PET.ByteMemCell] };
-            var command = new JmpCommand(tokens, OperandsSetType.M);
+            var tokens = new List<Token> { P[PET.JNE], P[PET.ByteMemCell] };
+            var command = new JneCommand(tokens, OperandsSetType.M);
 
             runExpectedExceptionTest(command);
         }
-        
+
         [TestMethod]
         [ExpectedException(typeof(TranslationErrorException))]
-        public void TestJmpWordMemCell()
+        public void TestJneWordMemCell()
         {
-            var tokens = new List<Token> { P[PET.JMP], P[PET.WordMemCell] };
-            var command = new JmpCommand(tokens, OperandsSetType.M);
+            var tokens = new List<Token> { P[PET.JNE], P[PET.WordMemCell] };
+            var command = new JneCommand(tokens, OperandsSetType.M);
 
             runExpectedExceptionTest(command);
         }
