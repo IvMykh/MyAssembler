@@ -194,6 +194,17 @@ namespace MyAssembler.Core.SyntacticAnalysis
 
             return rootM;
         }
+        private MyAutomatonNode createForI()
+        {
+            var rootM = new MyAutomatonNode(
+                new List<Enum> { 
+                    TT.BinConstant, 
+                    TT.DecConstant, 
+                    TT.HexConstant
+                }, OST.I, Resources.EndOfCmdExpectedMsgFormat);
+
+            return rootM;
+        }
 
         private void constructMovAddSubAndOrXor(MyAutomatonNode colonNode)
         {
@@ -259,6 +270,14 @@ namespace MyAssembler.Core.SyntacticAnalysis
             colonNode.AddChild(jneNode);
             _constructedInstance.AddChild(jneNode);
         }
+        private void constructInt(MyAutomatonNode colonNode)
+        {
+            var intNode = createForCommands(CommandType.INT);
+            intNode.AddChild(createForI());
+
+            colonNode.AddChild(intNode);
+            _constructedInstance.AddChild(intNode);
+        }
 
         public void Construct()
         {
@@ -282,6 +301,7 @@ namespace MyAssembler.Core.SyntacticAnalysis
             constructJmp(colonNode);
             constructJe(colonNode);
             constructJne(colonNode);
+            constructInt(colonNode);
         }
     }
 }

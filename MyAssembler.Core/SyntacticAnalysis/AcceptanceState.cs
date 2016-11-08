@@ -4,7 +4,7 @@
     {
         NotAccepting,
         None,
-        R,   M,
+        R,   M,   I,
         AR,  AM,
         RR,  RM,  MR,  RI,  MI,
         RRI, RMI

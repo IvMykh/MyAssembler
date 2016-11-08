@@ -6,6 +6,7 @@
         MOV,
         ADD,   SUB,  IMUL,  IDIV,
         AND,   OR,   NOT,   XOR,
-        JMP,   JE,   JNE
+        JMP,   JE,   JNE,
+        INT
     }
 }

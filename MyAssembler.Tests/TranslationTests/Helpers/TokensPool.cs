@@ -10,6 +10,7 @@ namespace MyAssembler.Tests.TranslationTests
         AND, OR, XOR, NOT,
         JE, JNE, JMP,
         IMUL, IDIV,
+        INT,
         DB, DW,
         Comma,
         AH, AL, AX,
@@ -60,6 +61,7 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.JMP, new Token(TokenType.Command, "JMP"));
             _pool.Add(PoolEntryType.IMUL, new Token(TokenType.Command, "IMUL"));
             _pool.Add(PoolEntryType.IDIV, new Token(TokenType.Command, "IDIV"));
+            _pool.Add(PoolEntryType.INT, new Token(TokenType.Command, "INT"));
 
             _pool.Add(PoolEntryType.DB, new Token(TokenType.Directive, "DB"));
             _pool.Add(PoolEntryType.DW, new Token(TokenType.Directive, "DW"));

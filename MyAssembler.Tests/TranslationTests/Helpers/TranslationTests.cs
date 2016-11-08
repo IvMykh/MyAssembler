@@ -8,16 +8,18 @@ namespace MyAssembler.Tests.TranslationTests
 {
     public abstract class TranslationTests
     {
-        public static TokensPool P { get; protected set;}
+        public static TokensPool P { get; private set; }
+        public static Mock<IMemoryManager> CommonMemoryManagerMock { get; private set; }
 
         static TranslationTests()
         {
             P = new TokensPool();
+            CommonMemoryManagerMock = createMemoryManagerMock();
         }
         
         public TranslationContext Context { get; protected set; }
 
-        private Mock<IMemoryManager> createMemoryManagerMock(
+        private static Mock<IMemoryManager> createMemoryManagerMock(
             short byteAddress = 0, 
             short wordAddress = 0, 
             short label1Address = 0, 
@@ -106,8 +108,21 @@ namespace MyAssembler.Tests.TranslationTests
             short label2Address = 0,
             short uninitByteAddress = 0)
         {
-            var memoryManagerMock = createMemoryManagerMock(
-                byteAddress, wordAddress, label1Address, label2Address, uninitByteAddress);
+            Mock<IMemoryManager> memoryManagerMock = null;
+
+            if (byteAddress != 0 ||
+                wordAddress != 0 ||
+                label1Address != 0 ||
+                label2Address != 0 ||
+                uninitByteAddress != 0)
+            {
+                memoryManagerMock = createMemoryManagerMock(
+                 byteAddress, wordAddress, label1Address, label2Address, uninitByteAddress);
+            }
+            else
+            {
+                memoryManagerMock = CommonMemoryManagerMock;
+            }
 
             Context = new TranslationContext(memoryManagerMock.Object);
             Context.AcceptMode = ContextAcceptMode.TranslateMode;

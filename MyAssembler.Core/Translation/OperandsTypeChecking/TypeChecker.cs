@@ -102,6 +102,17 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
 
             excludeUnexpectedLabel(idToken, id.Type);
         }
+        public void CheckIm8(List<Token> tokens, int startPos, out Constant constant)
+        {
+            var constToken = tokens[startPos];
+            constant = new Constant(constToken.Value, constToken.Type);
+
+            if (constant.Bytes.Length > 1)
+            {
+                throw new TranslationErrorException(
+                    string.Format(Resources.ConstantOverflowMsgFormat, constant.Value));
+            }
+        }
 
         public void CheckRegReg(
             List<Token> tokens, int startPos, out Register reg1, out Register reg2)
