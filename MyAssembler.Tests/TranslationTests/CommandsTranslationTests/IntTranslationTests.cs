@@ -5,7 +5,7 @@ using MyAssembler.Core.SyntacticAnalysis;
 using MyAssembler.Core.Translation;
 using MyAssembler.Core.Translation.TranslationUnits.Commands;
 
-namespace MyAssembler.Tests.TranslationTests.CommandsTranslationTests
+namespace MyAssembler.Tests.TranslationTests
 {
     using PET = PoolEntryType;
 

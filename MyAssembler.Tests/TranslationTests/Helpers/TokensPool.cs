@@ -24,6 +24,7 @@ namespace MyAssembler.Tests.TranslationTests
         Label2,
         ByteConst,
         WordConst,
+        Literal,
         QuestionMark,
         ByteOverflow,
         WordOverflow,
@@ -39,6 +40,7 @@ namespace MyAssembler.Tests.TranslationTests
         public const string SAMPLE_LABEL_2              = "label2";
         public const string SAMPLE_BYTE_CONST           = "100";
         public const string SAMPLE_WORD_CONST           = "10000";
+        public const string SAMPLE_LITERAL              = "Hello, world!";
         
         public const string SAMPLE_BYTE_OVERFLOW_CONST  = "1000";
         public const string SAMPLE_WORD_OVERFLOW_CONST  = "100000";
@@ -89,6 +91,7 @@ namespace MyAssembler.Tests.TranslationTests
 
             _pool.Add(PoolEntryType.ByteConst, new Token(TokenType.DecConstant, SAMPLE_BYTE_CONST));
             _pool.Add(PoolEntryType.WordConst, new Token(TokenType.DecConstant, SAMPLE_WORD_CONST));
+            _pool.Add(PoolEntryType.Literal, new Token(TokenType.Literal, SAMPLE_LITERAL));
 
             _pool.Add(PoolEntryType.QuestionMark, new Token(TokenType.QuestionMark, "?"));
 

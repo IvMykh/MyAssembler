@@ -214,7 +214,8 @@ namespace MyAssembler.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}: such constant type is not supported..
+        ///   Looks up a localized string similar to {0}: such 
+        ///    ant type is not supported..
         /// </summary>
         internal static string ConstTypeNotSupportedMsgFormat {
             get {

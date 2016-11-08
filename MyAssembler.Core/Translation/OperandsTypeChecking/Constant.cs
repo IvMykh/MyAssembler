@@ -8,9 +8,10 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
         : Operand
     {
         // Statics.
-        private static BinConstantsParser BinParser = new BinConstantsParser();
-        private static DecConstantsParser DecParser = new DecConstantsParser();
-        private static HexConstantsParser HexParser = new HexConstantsParser();
+        private static BinConstantsParser BinParser     = new BinConstantsParser();
+        private static DecConstantsParser DecParser     = new DecConstantsParser();
+        private static HexConstantsParser HexParser     = new HexConstantsParser();
+        private static LiteralParser      LiteralParser = new LiteralParser();
 
         // Instance.
         public string Value { get; private set; }
@@ -33,6 +34,7 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
                 case TokenType.BinConstant: return BinParser;
                 case TokenType.DecConstant: return DecParser;
                 case TokenType.HexConstant: return HexParser;
+                case TokenType.Literal:     return LiteralParser;
 
                 default: throw new DesignErrorException(
                     string.Format(Resources.ConstTypeNotSupportedMsgFormat, tokenType));

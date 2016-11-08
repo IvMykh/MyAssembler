@@ -41,10 +41,27 @@ namespace MyAssembler.Core.SyntacticAnalysis
 
             return root;
         }
-        private MyAutomatonNode createForMemCellInitializer()
+        private MyAutomatonNode createForDbMemCellInitializer()
         {
             var node = new MyAutomatonNode(
-                new List<Enum> { TT.BinConstant, TT.DecConstant, TT.HexConstant, TT.QuestionMark }, 
+                new List<Enum> { 
+                    TT.BinConstant, 
+                    TT.DecConstant, 
+                    TT.HexConstant, 
+                    TT.Literal, 
+                    TT.QuestionMark }, 
+                OST.None, Resources.EndOfDtvExpectedMsgFormat);
+
+            return node;
+        }
+        private MyAutomatonNode createForDwMemCellInitializer()
+        {
+            var node = new MyAutomatonNode(
+                new List<Enum> { 
+                    TT.BinConstant, 
+                    TT.DecConstant, 
+                    TT.HexConstant, 
+                    TT.QuestionMark },
                 OST.None, Resources.EndOfDtvExpectedMsgFormat);
 
             return node;
@@ -287,10 +304,18 @@ namespace MyAssembler.Core.SyntacticAnalysis
             // Label:
             var labelNode = createForIdentifier();
             var colonNode = createForColon();
-            var directiveNode = createForDirectives(DT.DB, DT.DW);
-            directiveNode.AddChild(createForMemCellInitializer());
+            
+            //var directiveNode = createForDirectives(DT.DB, DT.DW);
+            //directiveNode.AddChild(createForMemCellInitializer());
+            //labelNode.AddChildren(colonNode, directiveNode);
 
-            labelNode.AddChildren(colonNode, directiveNode);
+            var dbNode = createForDirectives(DT.DB);
+            dbNode.AddChild(createForDbMemCellInitializer());
+
+            var dwNode = createForDirectives(DT.DW);
+            dwNode.AddChild(createForDwMemCellInitializer());
+
+            labelNode.AddChildren(colonNode, dbNode, dwNode);
             
             _constructedInstance.AddChild(labelNode);
             

@@ -86,6 +86,7 @@
     <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\ConstantsParser.cs" />
     <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\DecConstantsParser.cs" />
     <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\HexConstantsParser.cs" />
+    <Compile Include="Translation\ContextInfrastructure\ParsersForConstants\LiteralParser.cs" />
     <Compile Include="Translation\ContextInfrastructure\TranslationContext.cs" />
     <Compile Include="Translation\OperandsTypeChecking\Constant.cs" />
     <Compile Include="Translation\OperandsTypeChecking\Identifier.cs" />

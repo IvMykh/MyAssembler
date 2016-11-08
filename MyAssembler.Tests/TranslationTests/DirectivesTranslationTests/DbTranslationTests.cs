@@ -22,6 +22,17 @@ namespace MyAssembler.Tests.TranslationTests.DirectivesTranslationTests
         }
 
         [TestMethod]
+        public void TestDbLiteral()
+        {
+            var tokens = new List<Token> { P[PET.ByteMemCell], P[PET.DB], P[PET.Literal] };
+            var dtv = new DbDirective(tokens);
+
+            runTest(dtv, new List<byte[]> { new byte[] { 
+                0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21 } 
+            });
+        }
+
+        [TestMethod]
         public void TestDb0()
         {
             var tokens = new List<Token> { P[PET.ByteMemCell], P[PET.DB], P[PET.ByteConst] };

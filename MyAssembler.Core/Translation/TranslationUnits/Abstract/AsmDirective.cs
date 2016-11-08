@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using MyAssembler.Core.LexicalAnalysis;
-using MyAssembler.Core.Properties;
 using MyAssembler.Core.Translation.ContextInfrastructure;
 using MyAssembler.Core.Translation.OperandsTypeChecking;
 
@@ -18,7 +17,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
 
         protected abstract void InsertTranslatedBytes(TranslationContext context, byte[] translatedBytes);
         protected abstract void CollectMemoryCellAddress(TranslationContext context, string identifier);
-
+        protected abstract void CheckForOverflow(TokenType constTokenType, Constant constant);
 
         protected override sealed void Translate(TranslationContext context)
         {
@@ -29,14 +28,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Abstract
             {
                 var constant = new Constant(constToken.Value, constToken.Type);
 
-                if (constant.Bytes.Length > CellSize)
-                {
-                    throw new TranslationErrorException(
-                        string.Format(Resources.InitializerOverflowMsgFormat,
-                            constant.Value,
-                            CellSize,
-                            (CellSize > 1) ? "s" : ""));
-                }
+                CheckForOverflow(constToken.Type, constant);
 
                 translatedBytes = constant.Bytes;
             }
