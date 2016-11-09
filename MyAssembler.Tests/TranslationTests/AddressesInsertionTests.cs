@@ -16,7 +16,7 @@ namespace MyAssembler.Tests.TranslationTests
         : TranslationTests
     {
         public AddressesInsertionTests()
-            : base(0x64, 0x65, 0x69, 0x7E, 0x80)
+            : base(0x100, 0x101, 0x105, 0x11A, 0x11C)
         {
         }
 
@@ -68,6 +68,9 @@ namespace MyAssembler.Tests.TranslationTests
                 new List<Token> { P[PET.SUB], P[PET.AL], P[PET.Comma], P[PET.UninitByteMemCell] };
             list.Add(new SubCommand(anotherSubRM0Tokens, OperandsSetType.RM));
 
+            var lea1Tokens = new List<Token> { P[PET.LEA], P[PET.DX], P[PET.Comma], P[PET.WordMemCell] };
+            list.Add(new LeaCommand(lea1Tokens, OperandsSetType.RM));
+
             return list;
         }
 
@@ -103,18 +106,19 @@ namespace MyAssembler.Tests.TranslationTests
                 new byte[] { 0x10, 0x27 },              // vise versa
                 new byte[] { 0x8B, 0xC3 },              // 0x89, 0xD8
                 new byte[] { 0x03, 0xC3 },              // 0x01, 0xD8
-                new byte[] { 0x2A, 0x06, 0x00, 0x64 },
-                new byte[] { 0x2B, 0x06, 0x00, 0x65 },
+                new byte[] { 0x2A, 0x06, 0x00, 0x01 },
+                new byte[] { 0x2B, 0x06, 0x01, 0x01 },
                 new byte[] { 0xE9, 0xF3, 0xFF },
                 new byte[] { 0x0F, 0x84, 0x04, 0x00 },
                 new byte[] { 0x0F, 0x85, 0x00, 0x00 },
                 new byte[] { 0xF7, 0xEA },
                 new byte[] { 0x00 },
-                new byte[] { 0x2A, 0x06, 0x00, 0x80 },
+                new byte[] { 0x2A, 0x06, 0x1C, 0x01 },
+                new byte[] { 0x8D, 0x16, 0x01, 0x01 },
             };
 
             var expectedStartAddressesList = new List<short> {
-                0x64, 0x65, 0x67, 0x69, 0x6B, 0x6F, 0x73, 0x76, 0x7A, 0x7E, 0x80, 0x81
+                0x100, 0x101, 0x103, 0x105, 0x107, 0x10B, 0x10F, 0x112, 0x116, 0x11A, 0x11C, 0x11D, 0x121
             };
 
 

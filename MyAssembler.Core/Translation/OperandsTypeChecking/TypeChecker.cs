@@ -127,7 +127,7 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
             excludeRegRegMismatch(reg1, reg2, reg1Token.Position);
         }
 
-        void checkForRegisterAndIdentifier(
+        private void checkForRegisterAndIdentifier(
             Token regToken, Token idToken, out Register reg, out Identifier id)
         {
             reg = new Register(regToken.Value);
@@ -182,6 +182,25 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
 
             excludeUnexpectedLabel(idToken, id.Type);
             excludeMemImMismatch(id, constant, idToken.Position);
+        }
+
+        public void CheckRegMemAddress(
+            List<Token> tokens, int startPos, out Register reg, out Identifier id)
+        {
+            Token regToken = tokens[startPos++];
+            ++startPos;
+            Token idToken = tokens[startPos++];
+
+            reg = new Register(regToken.Value);
+            id = new Identifier(idToken.Value, _context.MemoryManager.GetIdentifierType(idToken.Value));
+
+            excludeUnexpectedLabel(idToken, id.Type);
+
+            if (reg.W != WValueStore.ONE)
+            {
+                throw new TranslationErrorException(
+                    string.Format("{0}: 2-byte register expected.", reg.Type));
+            }
         }
 
 

@@ -102,6 +102,7 @@
     <Compile Include="Translation\TranslationUnits\Commands\AddCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\AndCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\IntCommand.cs" />
+    <Compile Include="Translation\TranslationUnits\Commands\LeaCommand.cs" />
     <Compile Include="Translation\TranslationUnits\Directives\DbDirective.cs" />
     <Compile Include="Translation\TranslationUnits\Directives\DwDirective.cs" />
     <Compile Include="Translation\TranslationUnits\Commands\JneCommand.cs" />

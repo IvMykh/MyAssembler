@@ -7,6 +7,7 @@
         ADD,   SUB,  IMUL,  IDIV,
         AND,   OR,   NOT,   XOR,
         JMP,   JE,   JNE,
-        INT
+        INT,
+        LEA
     }
 }

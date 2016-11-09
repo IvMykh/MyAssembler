@@ -223,6 +223,23 @@ namespace MyAssembler.Core.SyntacticAnalysis
             return rootI;
         }
 
+        private MyAutomatonNode createForRm()
+        {
+            var rootR = new MyAutomatonNode(
+                new List<Enum> { TT.Register }, OST.NotAccepting, Resources.CommaExpectedMsgFormat);
+
+            var rootRComma = new MyAutomatonNode(
+                new List<Enum> { TT.Comma }, OST.NotAccepting, Resources.Valid2ndOpExpectedMsgFormat);
+
+            var rootRCommaM = new MyAutomatonNode(
+                new List<Enum> { TT.Identifier }, OST.RM, Resources.EndOfCmdExpectedMsgFormat);
+
+            rootRComma.AddChildren(rootRCommaM);
+            rootR.AddChild(rootRComma);
+
+            return rootR;
+        }
+
         private void constructMovAddSubAndOrXor(MyAutomatonNode colonNode)
         {
             Enum[] commands = new Enum[] {
@@ -295,6 +312,14 @@ namespace MyAssembler.Core.SyntacticAnalysis
             colonNode.AddChild(intNode);
             _constructedInstance.AddChild(intNode);
         }
+        private void constructLea(MyAutomatonNode colonNode)
+        {
+            var leaNode = createForCommands(CommandType.LEA);
+            leaNode.AddChild(createForRm());
+
+            colonNode.AddChild(leaNode);
+            _constructedInstance.AddChild(leaNode);
+        }
 
         public void Construct()
         {
@@ -327,6 +352,7 @@ namespace MyAssembler.Core.SyntacticAnalysis
             constructJe(colonNode);
             constructJne(colonNode);
             constructInt(colonNode);
+            constructLea(colonNode);
         }
     }
 }

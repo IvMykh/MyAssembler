@@ -5,7 +5,7 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
 {
     public class TranslationContext
     {
-        public const short INIT_OFFSET = 100;
+        public const short INIT_OFFSET = 0x100;
 
         private List<byte[]> _translatedBytesList;
         private List<short>  _startAddresses;
@@ -79,17 +79,14 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure
             }
         }
         
-        public void InsertAddressValue(int addrStartPos, short addrValue, bool shouldRearrange = false)
+        public void InsertAddressValue(int addrStartPos, short addrValue)
         {
             byte upperByte = (byte)(addrValue >> 8);
             byte lowerByte = (byte)(addrValue & 0xff);
 
-            if (shouldRearrange)
-            {
-                byte exchangeVal = upperByte;
-                upperByte = lowerByte;
-                lowerByte = exchangeVal;
-            }
+            byte exchangeVal = upperByte;
+            upperByte = lowerByte;
+            lowerByte = exchangeVal;
 
             _translatedBytesList[UnitCursor][addrStartPos]     = upperByte;
             _translatedBytesList[UnitCursor][addrStartPos + 1] = lowerByte;

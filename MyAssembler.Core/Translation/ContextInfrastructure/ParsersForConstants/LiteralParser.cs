@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
 {
@@ -11,7 +7,9 @@ namespace MyAssembler.Core.Translation.ContextInfrastructure.ParsersForConstants
     {
         public override byte[] Parse(string value)
         {
-            return Encoding.ASCII.GetBytes(value.ToCharArray());
+            return Encoding.ASCII.GetBytes
+                (value.Substring(1, value.Length - 2) // remove open and closing quote.
+                      .ToCharArray());
         }
     }
 }

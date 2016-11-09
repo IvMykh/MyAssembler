@@ -42,6 +42,7 @@ namespace MyAssembler.Core.SyntacticAnalysis
                 case CommandType.JE:   return new JeCommand(tokens, ost);
                 case CommandType.JNE:  return new JneCommand(tokens, ost);
                 case CommandType.INT:  return new IntCommand(tokens, ost);
+                case CommandType.LEA: return new LeaCommand(tokens, ost);
 
                 default: throw new SyntacticalErrorException(
                     string.Format(Resources.CmdNotImplementedMsgFormat,

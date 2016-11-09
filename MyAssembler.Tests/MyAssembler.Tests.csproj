@@ -69,6 +69,7 @@
     </Compile>
     <Compile Include="ConstantsParsersTests\BinConstantsParsersTests.cs" />
     <Compile Include="TranslationTests\CommandsTranslationTests\IntTranslationTests.cs" />
+    <Compile Include="TranslationTests\CommandsTranslationTests\LeaTranslationTests.cs" />
     <Compile Include="TranslationTests\DirectivesTranslationTests\DbTranslationTests.cs" />
     <Compile Include="TranslationTests\DirectivesTranslationTests\DwTranslationTests.cs" />
     <Compile Include="TranslationTests\Helpers\TranslationTests.cs" />

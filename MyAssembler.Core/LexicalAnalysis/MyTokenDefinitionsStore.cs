@@ -64,7 +64,9 @@ namespace MyAssembler.Core.LexicalAnalysis
                                      CT.ADD.ToString(), CT.SUB.ToString(), CT.IMUL.ToString(), CT.IDIV.ToString(),
                                      CT.AND.ToString(), CT.OR .ToString(), CT.NOT .ToString(), CT.XOR .ToString(),
                                      CT.JMP.ToString(),
-                                     CT.JE .ToString(), CT.JNE.ToString(), CT.INT.ToString());
+                                     CT.JE .ToString(), CT.JNE.ToString(), 
+                                     CT.INT.ToString(),
+                                     CT.LEA.ToString());
 
             _identifier  = @"^[A-Z][_A-Z0-9]*";
             

@@ -29,7 +29,7 @@ namespace MyAssembler.Core.Translation.TranslationUnits.Commands
             int addrStartPos = 1;
             short jumpValue = CalculateJumpValue(context, address);
 
-            context.InsertAddressValue(addrStartPos, jumpValue, true);
+            context.InsertAddressValue(addrStartPos, jumpValue);
         }
     }
 }

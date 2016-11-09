@@ -11,6 +11,7 @@ namespace MyAssembler.Tests.TranslationTests
         JE, JNE, JMP,
         IMUL, IDIV,
         INT,
+        LEA,
         DB, DW,
         Comma,
         AH, AL, AX,
@@ -40,7 +41,7 @@ namespace MyAssembler.Tests.TranslationTests
         public const string SAMPLE_LABEL_2              = "label2";
         public const string SAMPLE_BYTE_CONST           = "100";
         public const string SAMPLE_WORD_CONST           = "10000";
-        public const string SAMPLE_LITERAL              = "Hello, world!";
+        public const string SAMPLE_LITERAL              = "\"Hello, world!\"";
         
         public const string SAMPLE_BYTE_OVERFLOW_CONST  = "1000";
         public const string SAMPLE_WORD_OVERFLOW_CONST  = "100000";
@@ -64,6 +65,8 @@ namespace MyAssembler.Tests.TranslationTests
             _pool.Add(PoolEntryType.IMUL, new Token(TokenType.Command, "IMUL"));
             _pool.Add(PoolEntryType.IDIV, new Token(TokenType.Command, "IDIV"));
             _pool.Add(PoolEntryType.INT, new Token(TokenType.Command, "INT"));
+            _pool.Add(PoolEntryType.LEA, new Token(TokenType.Command, "LEA"));
+
 
             _pool.Add(PoolEntryType.DB, new Token(TokenType.Directive, "DB"));
             _pool.Add(PoolEntryType.DW, new Token(TokenType.Directive, "DW"));
