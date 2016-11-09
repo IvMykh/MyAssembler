@@ -28,12 +28,12 @@ namespace MyAssembler.Core
             return linesOfCode;
         }
 
-        public void Translate(string filePath)
+        public IReadOnlyList<byte[]> Translate(string filePath)
         {
             var lexer = new Lexer(new MyTokenDefinitionsStore());
             var parser = new Parser(new MyAutomatonBuilder());
 
-            List<string> sourceLines = loadFile("1.asm");
+            List<string> sourceLines = loadFile(filePath);
             List<List<Token>> tokensLists = lexer.Tokenize(sourceLines);
             List<AsmTranslationUnit> translationUnits = parser.Parse(tokensLists);
 
@@ -61,8 +61,7 @@ namespace MyAssembler.Core
                 unit.Accept(context);
             }
 
-            var translatedBytes = context.TranslatedBytes;
-            // ...
+            return context.TranslatedBytes;
         }
 
     }

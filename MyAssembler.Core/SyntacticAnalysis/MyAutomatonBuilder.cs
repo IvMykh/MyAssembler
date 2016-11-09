@@ -213,14 +213,14 @@ namespace MyAssembler.Core.SyntacticAnalysis
         }
         private MyAutomatonNode createForI()
         {
-            var rootM = new MyAutomatonNode(
+            var rootI = new MyAutomatonNode(
                 new List<Enum> { 
                     TT.BinConstant, 
                     TT.DecConstant, 
                     TT.HexConstant
                 }, OST.I, Resources.EndOfCmdExpectedMsgFormat);
 
-            return rootM;
+            return rootI;
         }
 
         private void constructMovAddSubAndOrXor(MyAutomatonNode colonNode)
