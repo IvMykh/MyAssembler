@@ -5,9 +5,9 @@ using MyAssembler.Core.Properties;
 
 namespace MyAssembler.Core.SyntacticAnalysis
 {
+    using DT  = DirectiveType;
     using OST = OperandsSetType;
     using TT  = TokenType;
-    using DT  = DirectiveType;
 
     public class MyAutomatonBuilder
         : IAutomatonBuilder
@@ -329,10 +329,6 @@ namespace MyAssembler.Core.SyntacticAnalysis
             // Label:
             var labelNode = createForIdentifier();
             var colonNode = createForColon();
-            
-            //var directiveNode = createForDirectives(DT.DB, DT.DW);
-            //directiveNode.AddChild(createForMemCellInitializer());
-            //labelNode.AddChildren(colonNode, directiveNode);
 
             var dbNode = createForDirectives(DT.DB);
             dbNode.AddChild(createForDbMemCellInitializer());
