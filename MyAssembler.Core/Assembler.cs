@@ -28,20 +28,19 @@ namespace MyAssembler.Core
             return linesOfCode;
         }
 
-        public IReadOnlyList<byte[]> Translate(string filePath)
+        public TranslationResult Translate(string sourceCode)
         {
             var lexer = new Lexer(new MyTokenDefinitionsStore());
             var parser = new Parser(new MyAutomatonBuilder());
 
-            List<string> sourceLines = loadFile(filePath);
+            string[] sourceLines = sourceCode.Split('\n');
             List<List<Token>> tokensLists = lexer.Tokenize(sourceLines);
             List<AsmTranslationUnit> translationUnits = parser.Parse(tokensLists);
 
-            // TODO: move this to Translator class.
 
             var context = new TranslationContext(new MyMemoryManager());
             context.AcceptMode = ContextAcceptMode.CollectIdentifiersMode;
-            
+
             foreach (var unit in translationUnits)
             {
                 unit.Accept(context);
@@ -60,9 +59,15 @@ namespace MyAssembler.Core
             {
                 unit.Accept(context);
             }
-
-            return context.TranslatedBytes;
+            
+            return new TranslationResult {
+                 TokensLists        = tokensLists,
+                 TranslatedBytes    = context.TranslatedBytes,
+                 Labels             = context.MemoryManager.Labels,
+                 ByteCells          = context.MemoryManager.ByteCells,
+                 WordCells          = context.MemoryManager.WordCells,
+                 Addresses          = context.StartAddresses
+            };
         }
-
     }
 }

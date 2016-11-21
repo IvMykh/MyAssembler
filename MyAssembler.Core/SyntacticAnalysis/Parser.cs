@@ -47,7 +47,7 @@ namespace MyAssembler.Core.SyntacticAnalysis
                 default: throw new SyntacticalErrorException(
                     string.Format(Resources.CmdNotImplementedMsgFormat,
                         definitionToken.Value,
-                        definitionToken.Position.Line,
+                        definitionToken.Position.Line + 1,
                         definitionToken.Position.StartIndex));
             }
         }
@@ -64,7 +64,7 @@ namespace MyAssembler.Core.SyntacticAnalysis
                 default: throw new SyntacticalErrorException(
                     string.Format(Resources.DtvNotImplementedMsgFormat,
                         definitionToken.Value,
-                        definitionToken.Position.Line,
+                        definitionToken.Position.Line + 1,
                         definitionToken.Position.StartIndex));
             }
         }
@@ -111,7 +111,7 @@ namespace MyAssembler.Core.SyntacticAnalysis
                 {
                     throw new SyntacticalErrorException(
                         string.Format(parseResult.ErrorMsgFormat,
-                            parseResult.Position.Line,
+                            parseResult.Position.Line + 1,
                             parseResult.Position.StartIndex));
                 }
             }

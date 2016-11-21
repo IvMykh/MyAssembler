@@ -21,7 +21,7 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
                 throw new TranslationErrorException(
                     string.Format(Resources.UnexpectedLabelMsgFormat,
                         idToken.Value,
-                        idToken.Position.Line,
+                        idToken.Position.Line + 1,
                         idToken.Position.StartIndex));
             }
         }
@@ -87,7 +87,7 @@ namespace MyAssembler.Core.Translation.OperandsTypeChecking
                 throw new TranslationErrorException(
                     string.Format(Resources.ExpectedLabelMsgFormat,
                         idToken.Value,
-                        idToken.Position.Line,
+                        idToken.Position.Line + 1,
                         idToken.Position.StartIndex));
             }
         }

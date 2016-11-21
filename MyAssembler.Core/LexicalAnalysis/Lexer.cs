@@ -17,11 +17,11 @@ namespace MyAssembler.Core.LexicalAnalysis
             _tokenDefinitions = store.GetTokenDefinitions();
         }
 
-        private void prepareCode(List<string> lines)
+        private void prepareCode(string[] lines)
         {
             var commentStartSymbol = char.Parse(Resources.CommentStartSymbol);
 
-            for (int i = 0; i < lines.Count; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 int commentStartPos = lines[i].IndexOf(commentStartSymbol);
 
@@ -33,7 +33,7 @@ namespace MyAssembler.Core.LexicalAnalysis
             }
         }
 
-        public List<List<Token>> Tokenize(List<string> linesOfCode)
+        public List<List<Token>> Tokenize(string[] linesOfCode)
         {
             prepareCode(linesOfCode);
 
