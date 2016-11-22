@@ -107,7 +107,7 @@
 
         <Menu Grid.Row="0" Style="{StaticResource MenuStyle}" >
             <MenuItem Header="File">
-                <MenuItem Header="New..." 
+                <MenuItem Header="New" 
                           Command="{Binding NewFileCommand}" 
                           InputGestureText="Ctrl+N" 
                           ToolTip="Clear editor's workspace" />

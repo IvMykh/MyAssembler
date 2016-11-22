@@ -222,6 +222,30 @@ namespace MyAssembler.UI.ViewModel
                 WordCellItems = getWordCellItems(result);
                 LabelItems = getLabelItems(result);
 
+                // Write binary file and .bat file
+                
+                var batFilePath = Path.Combine(
+                    Resources.BuildOutputDirectory, Resources.RunBatFileName); 
+                            
+                File.WriteAllText(batFilePath, 
+                    string.Format(Resources.RunBatFileContent, Resources.ProgramComFileName));
+
+
+                var comFilePath = Path.Combine(
+                    Resources.BuildOutputDirectory, Resources.ProgramComFileName); 
+
+                using (var stream = new FileStream(
+                    comFilePath, FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    using (var binaryWriter = new BinaryWriter(stream))
+                    {
+                        foreach (var item in result.TranslatedBytes)
+                        {
+                            binaryWriter.Write(item);
+                        }
+                    }
+                }
+
                 return result;
             }
             catch (CompilationErrorException cee)
@@ -254,25 +278,6 @@ namespace MyAssembler.UI.ViewModel
                         {
                             var batFilePath = Path.Combine(
                                 Resources.BuildOutputDirectory, Resources.RunBatFileName); 
-                            
-                            File.WriteAllText(batFilePath, 
-                                string.Format(Resources.RunBatFileContent, Resources.ProgramComFileName));
-
-
-                            var comFilePath = Path.Combine(
-                                Resources.BuildOutputDirectory, Resources.ProgramComFileName); 
-
-                            using (var stream = new FileStream(
-                                comFilePath, FileMode.OpenOrCreate, FileAccess.Write))
-                            {
-                                using (var binaryWriter = new BinaryWriter(stream))
-                                {
-                                    foreach (var item in result.TranslatedBytes)
-                                    {
-                                        binaryWriter.Write(item);
-                                    }
-                                }
-                            }
 
                             Process.Start(
                                 Resources.DosBoxExePath,
