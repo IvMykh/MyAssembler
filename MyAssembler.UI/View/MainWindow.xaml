@@ -1,0 +1,14 @@
+﻿<Window x:Class="MyAssembler.UI.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:View="clr-namespace:MyAssembler.UI.View"
+        xmlns:ViewModel="clr-namespace:MyAssembler.UI.ViewModel"
+        WindowStartupLocation="CenterScreen"
+        Title="My Assembler" Height="600" Width="700">
+    
+    <Window.DataContext>
+        <ViewModel:Presenter />
+    </Window.DataContext>
+
+    <View:MyAssemblerControl />
+</Window>

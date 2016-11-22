@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyAssembler.UI
+namespace MyAssembler.UI.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MyAssemblerControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MyAssemblerControl : UserControl
     {
-        public MainWindow()
+        public MyAssemblerControl()
         {
             InitializeComponent();
         }

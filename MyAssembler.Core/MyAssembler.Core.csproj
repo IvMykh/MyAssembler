@@ -76,6 +76,7 @@
     <Compile Include="SyntacticAnalysis\LineParseResult.cs" />
     <Compile Include="SyntacticAnalysis\Parser.cs" />
     <Compile Include="SyntacticAnalysis\SyntacticalErrorException.cs" />
+    <Compile Include="TranslationResult.cs" />
     <Compile Include="Translation\BitStringHelper.cs" />
     <Compile Include="DesignErrorException.cs" />
     <Compile Include="Translation\ContextInfrastructure\ContextAcceptMode.cs" />

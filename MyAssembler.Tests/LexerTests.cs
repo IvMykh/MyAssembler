@@ -21,19 +21,19 @@ namespace MyAssembler.Tests
                     string.Empty, 
                     string.Empty, 
                     string.Empty 
-                };
+                }.ToArray<string>();
 
             // Act.
             var tokenslists = _testedInstance.Tokenize(strings);
 
             // Assert.
-            Assert.AreEqual(tokenslists.Count(), strings.Count);
+            Assert.AreEqual(tokenslists.Count(), strings.Length);
         }
 
         private void runTest(string sampleString, List<Token> expectedTokens)
         {
             // Arrange.
-            var sampleStrings = new List<string> { sampleString };
+            var sampleStrings = new string[] { sampleString };
 
             // Act.
             var tokensLists = _testedInstance.Tokenize(sampleStrings);
@@ -318,7 +318,7 @@ namespace MyAssembler.Tests
         public void TestGeneralTokenization()
         {
             // Arrange.
-            var linesOfCode = new List<string>(File.ReadAllLines(Resources.SampleFileForLexer));
+            var linesOfCode = File.ReadAllLines(Resources.SampleFileForLexer);
             var expectedTokensLists = getTokensLists();
 
             // Act.

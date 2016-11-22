@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyAssembler.UI.Properties
-{
-
-
+namespace MyAssembler.UI.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,49 +22,162 @@ namespace MyAssembler.UI.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    internal class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyAssembler.UI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Build output cleared successfully.
+        /// </summary>
+        internal static string BuildOutputClearedStatus {
+            get {
+                return ResourceManager.GetString("BuildOutputClearedStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ./../../../Build output/.
+        /// </summary>
+        internal static string BuildOutputDirectory {
+            get {
+                return ResourceManager.GetString("BuildOutputDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Built successfully!.
+        /// </summary>
+        internal static string BuiltSuccessfullyStatus {
+            get {
+                return ResourceManager.GetString("BuiltSuccessfullyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ./../../../Samples/.
+        /// </summary>
+        internal static string DataDirectory {
+            get {
+                return ResourceManager.GetString("DataDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occurred!.
+        /// </summary>
+        internal static string ErrorOccurredStatus {
+            get {
+                return ResourceManager.GetString("ErrorOccurredStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assembly Language Files (*.asm)|*.asm.
+        /// </summary>
+        internal static string FileDialogFilter {
+            get {
+                return ResourceManager.GetString("FileDialogFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opened successfully.
+        /// </summary>
+        internal static string OpenedSuccessfullyStatus {
+            get {
+                return ResourceManager.GetString("OpenedSuccessfullyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Program.com.
+        /// </summary>
+        internal static string ProgramComFileName {
+            get {
+                return ResourceManager.GetString("ProgramComFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        internal static string ReadyStatus {
+            get {
+                return ResourceManager.GetString("ReadyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to @echo off
+        ///CLS
+        ///{0}
+        ///PAUSE
+        ///EXIT.
+        /// </summary>
+        internal static string RunBatFileContent {
+            get {
+                return ResourceManager.GetString("RunBatFileContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RunProgram.bat.
+        /// </summary>
+        internal static string RunBatFileName {
+            get {
+                return ResourceManager.GetString("RunBatFileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saved successfully.
+        /// </summary>
+        internal static string SavedSuccessfullyStatus {
+            get {
+                return ResourceManager.GetString("SavedSuccessfullyStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text editor emptied.
+        /// </summary>
+        internal static string TextEditorEmptiedStatus {
+            get {
+                return ResourceManager.GetString("TextEditorEmptiedStatus", resourceCulture);
             }
         }
     }

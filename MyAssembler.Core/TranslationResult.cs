@@ -3,7 +3,7 @@ using MyAssembler.Core.LexicalAnalysis;
 
 namespace MyAssembler.Core
 {
-    public struct TranslationResult
+    public class TranslationResult
     {
         public IReadOnlyList<IReadOnlyList<Token>> TokensLists { get; set; }
         public IReadOnlyList<byte[]> TranslatedBytes { get; set; }

@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="MyAssembler.UI.View.MyAssemblerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ViewModel="clr-namespace:MyAssembler.UI.ViewModel"
+             xmlns:Converters="clr-namespace:MyAssembler.UI.ViewModel.Converters"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance ViewModel:Presenter}"
+             d:DesignHeight="600" d:DesignWidth="700">
+    
+    <Control.InputBindings>
+        <KeyBinding Modifiers="Control" Key="N" Command="{Binding NewFileCommand}" />
+        <KeyBinding Modifiers="Control" Key="O" Command="{Binding OpenFileCommand}" />
+        <KeyBinding Modifiers="Control" Key="S" Command="{Binding SaveFileCommand}" />
+
+        <KeyBinding Modifiers="Ctrl+Shift" Key="B" Command="{Binding BuildCommand}" />
+        <KeyBinding Modifiers="Ctrl"       Key="R" Command="{Binding RunCommand}" />
+        <KeyBinding Modifiers="Ctrl"       Key="D" Command="{Binding ClearBuildOutputCommand}" />
+    </Control.InputBindings>
+    
+    <Control.Resources>
+        <Converters:StyleConverter x:Key="myStyleConverter" />
+        
+        <Style x:Key="MenuStyle" TargetType="Menu">
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>    
+        <Style x:Key="CodeEditorStyle" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="AcceptsReturn" Value="True" />
+            <Setter Property="AcceptsTab" Value="True" />
+            <Setter Property="TextElement.FontFamily" Value="Consolas" />
+            <Setter Property="TextElement.FontSize" Value="14" />
+        </Style>
+        <Style x:Key="TabControlStyle" TargetType="TabControl">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        
+        <Style x:Key="StatusBarStyle" TargetType="StatusBar">
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style x:Key="NeutralStatusBarStyle" TargetType="StatusBar" 
+               BasedOn="{StaticResource StatusBarStyle}">
+            
+            <Setter Property="Background" Value="#d1eaf9" />
+            <Setter Property="BorderBrush" Value="LightBlue" />
+        </Style>
+        <Style x:Key="SuccessStatusBarStyle" TargetType="StatusBar" 
+               BasedOn="{StaticResource StatusBarStyle}">
+
+            <Setter Property="Background" Value="#aaffbb" />
+            <Setter Property="BorderBrush" Value="Green" />
+        </Style>
+        <Style x:Key="FailStatusBarStyle" TargetType="StatusBar" 
+               BasedOn="{StaticResource StatusBarStyle}">
+
+            <Setter Property="Background" Value="#ffc6c6" />
+            <Setter Property="BorderBrush" Value="Red" />
+        </Style>
+
+        <Style x:Key="StatusBarItemStyle" TargetType="StatusBarItem" >
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+
+        <Style x:Key="StatusTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        
+        <Style x:Key="DataGridTitleStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+        </Style>
+        <Style x:Key="DataGridStyle" TargetType="DataGrid">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="IsReadOnly" Value="True" />
+        </Style>
+
+        <Style x:Key="StatusBarStackPanelStyle" TargetType="StackPanel">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Orientation" Value="Vertical" />
+
+        </Style>
+        
+    </Control.Resources>
+    
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25px" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Style="{StaticResource MenuStyle}" >
+            <MenuItem Header="File">
+                <MenuItem Header="New..." 
+                          Command="{Binding NewFileCommand}" 
+                          InputGestureText="Ctrl+N" 
+                          ToolTip="Clear editor's workspace" />
+                <MenuItem Header="Open..." 
+                          Command="{Binding OpenFileCommand}" 
+                          InputGestureText="Ctrl+O"
+                          ToolTip="Read source code from file" />
+                <MenuItem Header="Save as..." 
+                          Command="{Binding SaveFileCommand}" 
+                          InputGestureText="Ctrl+S"
+                          ToolTip="Save editor's content to file" />
+            </MenuItem>
+            
+            <MenuItem Header="Assembler">
+                <MenuItem Header="Build" 
+                          Command="{Binding BuildCommand}" 
+                          InputGestureText="Ctrl+Shift+B"
+                          ToolTip="Build current source code" />
+                <MenuItem Header="Run"
+                          Command="{Binding RunCommand}"
+                          InputGestureText="Ctrl+R"
+                          ToolTip="Build current source code and execute it" />
+                <MenuItem Header="Clear output" 
+                          Command="{Binding ClearBuildOutputCommand}" 
+                          InputGestureText="Ctrl+D" 
+                          ToolTip="Clear previous build results" />
+            </MenuItem>
+            
+            <MenuItem Header="Help">
+                <MenuItem Header="About program..." 
+                          Command="{Binding ShowAboutCommand}"
+                          ToolTip="Show information about this program" />
+            </MenuItem>
+        </Menu>
+
+        <TabControl Grid.Row="1" 
+                    Style="{StaticResource TabControlStyle}"
+                    SelectedIndex="{Binding SelectedTabIndex}">
+
+            <TabItem Header="Editor" 
+                     ToolTip="Source code editor">
+                <ScrollViewer>
+                    <TextBox Style="{StaticResource CodeEditorStyle}"
+                             Text="{Binding SourceCode, UpdateSourceTrigger=PropertyChanged}">
+                    </TextBox>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Build Protocol" 
+                     ToolTip="The protocol of previous build">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Protocol" Style="{StaticResource DataGridTitleStyle}" />
+                    <DataGrid ItemsSource="{Binding ProtocolItems}" Style="{StaticResource DataGridStyle}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*"  Header="Line #" 
+                                                Binding="{Binding LineNumber}" />
+                            <DataGridTextColumn Width="5*" Header="Assembly code" 
+                                                Binding="{Binding AsmCode}" />
+                            <DataGridTextColumn Width="2*" Header="Address" 
+                                                Binding="{Binding Address}" />
+                            <DataGridTextColumn Width="5*" Header="Machine code" 
+                                                Binding="{Binding MachineCode}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Labels" 
+                     ToolTip="Information about all labels from the previous build">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Labels" Style="{StaticResource DataGridTitleStyle}" />
+
+                    <DataGrid ItemsSource="{Binding LabelItems}" Style="{StaticResource DataGridStyle}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Identifier" 
+                                                Binding="{Binding Identifier}" />
+                            <DataGridTextColumn Width="*" Header="Address" 
+                                                Binding="{Binding Address}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Byte Memory Cells" 
+                     ToolTip="Information about all byte memory cells from the previous build">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Byte Memory Cells" Style="{StaticResource DataGridTitleStyle}" />
+
+                    <DataGrid ItemsSource="{Binding ByteCellItems}" Style="{StaticResource DataGridStyle}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Identifier" 
+                                                Binding="{Binding Identifier}" />
+                            <DataGridTextColumn Width="*" Header="Address" 
+                                                Binding="{Binding Address}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Word Memory Cells" 
+                     ToolTip="Information about all word memory cells from the previous build">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Word Memory Cells" Style="{StaticResource DataGridTitleStyle}" />
+
+                    <DataGrid ItemsSource="{Binding WordCellItems}" Style="{StaticResource DataGridStyle}" >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="Identifier" 
+                                                Binding="{Binding Identifier}" />
+                            <DataGridTextColumn Width="*" Header="Address" 
+                                                Binding="{Binding Address}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar Grid.Row="2" 
+                   ToolTip="Current status of Assembler">
+            <StatusBar.Style>
+                <MultiBinding Converter="{StaticResource myStyleConverter}">
+                    <MultiBinding.Bindings>
+                        <Binding RelativeSource="{RelativeSource Self}"/>
+                        <Binding Path="StatusBarStyle" />
+                    </MultiBinding.Bindings>
+                </MultiBinding>
+            </StatusBar.Style>
+            
+            <StackPanel Style="{StaticResource StatusBarStackPanelStyle}">
+                <StatusBarItem Style="{StaticResource StatusBarItemStyle}">
+                    <TextBlock Text="{Binding Status}" Style="{StaticResource StatusTextBlockStyle}" />
+                </StatusBarItem>
+                <StatusBarItem Style="{StaticResource StatusBarItemStyle}">
+                    <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource StatusTextBlockStyle}" />
+                </StatusBarItem>
+            </StackPanel>
+        </StatusBar>
+
+    </Grid>
+</UserControl>
