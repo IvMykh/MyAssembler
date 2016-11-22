@@ -70,7 +70,7 @@ namespace MyAssembler.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ./../../../Build output/.
+        ///   Looks up a localized string similar to .\..\..\..\BuildOutput\.
         /// </summary>
         internal static string BuildOutputDirectory {
             get {
@@ -88,11 +88,29 @@ namespace MyAssembler.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ./../../../Samples/.
+        ///   Looks up a localized string similar to .\..\..\..\Samples\.
         /// </summary>
         internal static string DataDirectory {
             get {
                 return ResourceManager.GetString("DataDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .\..\..\..\DOSBox-0.74\dosbox.
+        /// </summary>
+        internal static string DosBoxExePath {
+            get {
+                return ResourceManager.GetString("DosBoxExePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot; -noconsole.
+        /// </summary>
+        internal static string DosBoxParameterFormat {
+            get {
+                return ResourceManager.GetString("DosBoxParameterFormat", resourceCulture);
             }
         }
         
@@ -155,7 +173,7 @@ namespace MyAssembler.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RunProgram.bat.
+        ///   Looks up a localized string similar to RUN.BAT.
         /// </summary>
         internal static string RunBatFileName {
             get {

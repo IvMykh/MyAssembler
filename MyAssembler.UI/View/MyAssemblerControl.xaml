@@ -158,72 +158,79 @@
 
             <TabItem Header="Build Protocol" 
                      ToolTip="The protocol of previous build">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Protocol" Style="{StaticResource DataGridTitleStyle}" />
-                    <DataGrid ItemsSource="{Binding ProtocolItems}" Style="{StaticResource DataGridStyle}" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*"  Header="Line #" 
-                                                Binding="{Binding LineNumber}" />
-                            <DataGridTextColumn Width="5*" Header="Assembly code" 
-                                                Binding="{Binding AsmCode}" />
-                            <DataGridTextColumn Width="2*" Header="Address" 
-                                                Binding="{Binding Address}" />
-                            <DataGridTextColumn Width="5*" Header="Machine code" 
-                                                Binding="{Binding MachineCode}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Protocol" Style="{StaticResource DataGridTitleStyle}" />
+                            <DataGrid ItemsSource="{Binding ProtocolItems}" Style="{StaticResource DataGridStyle}" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="*"  Header="Line #" 
+                                                    Binding="{Binding LineNumber}" />
+                                    <DataGridTextColumn Width="5*" Header="Assembly code" 
+                                                    Binding="{Binding AsmCode}" />
+                                    <DataGridTextColumn Width="2*" Header="Address" 
+                                                    Binding="{Binding Address}" />
+                                    <DataGridTextColumn Width="5*" Header="Machine code" 
+                                                    Binding="{Binding MachineCode}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Labels" 
                      ToolTip="Information about all labels from the previous build">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Labels" Style="{StaticResource DataGridTitleStyle}" />
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Labels" Style="{StaticResource DataGridTitleStyle}" />
 
-                    <DataGrid ItemsSource="{Binding LabelItems}" Style="{StaticResource DataGridStyle}" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="Identifier" 
-                                                Binding="{Binding Identifier}" />
-                            <DataGridTextColumn Width="*" Header="Address" 
-                                                Binding="{Binding Address}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        <DataGrid ItemsSource="{Binding LabelItems}" Style="{StaticResource DataGridStyle}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="Identifier" 
+                                                    Binding="{Binding Identifier}" />
+                                <DataGridTextColumn Width="*" Header="Address" 
+                                                    Binding="{Binding Address}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Byte Memory Cells" 
                      ToolTip="Information about all byte memory cells from the previous build">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Byte Memory Cells" Style="{StaticResource DataGridTitleStyle}" />
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Byte Memory Cells" Style="{StaticResource DataGridTitleStyle}" />
+                        <DataGrid ItemsSource="{Binding ByteCellItems}" Style="{StaticResource DataGridStyle}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="Identifier" 
+                                                    Binding="{Binding Identifier}" />
+                                <DataGridTextColumn Width="*" Header="Address" 
+                                                    Binding="{Binding Address}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                    <DataGrid ItemsSource="{Binding ByteCellItems}" Style="{StaticResource DataGridStyle}" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="Identifier" 
-                                                Binding="{Binding Identifier}" />
-                            <DataGridTextColumn Width="*" Header="Address" 
-                                                Binding="{Binding Address}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Word Memory Cells" 
                      ToolTip="Information about all word memory cells from the previous build">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Text="Word Memory Cells" Style="{StaticResource DataGridTitleStyle}" />
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Word Memory Cells" Style="{StaticResource DataGridTitleStyle}" />
 
-                    <DataGrid ItemsSource="{Binding WordCellItems}" Style="{StaticResource DataGridStyle}" >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="Identifier" 
-                                                Binding="{Binding Identifier}" />
-                            <DataGridTextColumn Width="*" Header="Address" 
-                                                Binding="{Binding Address}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        <DataGrid ItemsSource="{Binding WordCellItems}" Style="{StaticResource DataGridStyle}" >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Header="Identifier" 
+                                                    Binding="{Binding Identifier}" />
+                                <DataGridTextColumn Width="*" Header="Address" 
+                                                    Binding="{Binding Address}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
 

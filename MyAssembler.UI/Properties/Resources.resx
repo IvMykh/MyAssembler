@@ -121,13 +121,19 @@
     <value>Build output cleared successfully</value>
   </data>
   <data name="BuildOutputDirectory" xml:space="preserve">
-    <value>./../../../Build output/</value>
+    <value>.\..\..\..\BuildOutput\</value>
   </data>
   <data name="BuiltSuccessfullyStatus" xml:space="preserve">
     <value>Built successfully!</value>
   </data>
   <data name="DataDirectory" xml:space="preserve">
-    <value>./../../../Samples/</value>
+    <value>.\..\..\..\Samples\</value>
+  </data>
+  <data name="DosBoxExePath" xml:space="preserve">
+    <value>.\..\..\..\DOSBox-0.74\dosbox</value>
+  </data>
+  <data name="DosBoxParameterFormat" xml:space="preserve">
+    <value>"{0}" -noconsole</value>
   </data>
   <data name="ErrorOccurredStatus" xml:space="preserve">
     <value>Error occurred!</value>
@@ -152,7 +158,7 @@ PAUSE
 EXIT</value>
   </data>
   <data name="RunBatFileName" xml:space="preserve">
-    <value>RunProgram.bat</value>
+    <value>RUN.BAT</value>
   </data>
   <data name="SavedSuccessfullyStatus" xml:space="preserve">
     <value>Saved successfully</value>

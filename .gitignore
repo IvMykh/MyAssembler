@@ -260,3 +260,4 @@ __pycache__/
 *.pyc
 
 MyAssembler.TryItYourself/
+BuildOutput/

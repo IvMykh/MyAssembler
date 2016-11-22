@@ -274,17 +274,9 @@ namespace MyAssembler.UI.ViewModel
                                 }
                             }
 
-                            //if (Environment.Is64BitOperatingSystem)
-                            //{
-                            //    Process.Start(
-                            //        @".\..\..\..\DOSBox-0.74\dosbox",
-                            //        string.Format("{0} -noconsole", Path.GetFullPath(batFilePath)));
-                            //}
-                            //else
-                            //{
-                            //    Process.Start(Path.GetFullPath(batFilePath));
-                            //}
-
+                            Process.Start(
+                                Resources.DosBoxExePath,
+                                string.Format(Resources.DosBoxParameterFormat, Path.GetFullPath(batFilePath)));
                         }
                     });
             }
