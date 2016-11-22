@@ -267,7 +267,8 @@ namespace MyAssembler.Core.SyntacticAnalysis
         private void constructIdiv(MyAutomatonNode colonNode)
         {
             var idivNode = createForCommands(CommandType.IDIV);
-            idivNode.AddChildren(createForAR(), createForAM());
+            //idivNode.AddChildren(createForAR(), createForAM());
+            idivNode.AddChildren(createForR(), createForM());
 
             colonNode.AddChild(idivNode);
             _constructedInstance.AddChild(idivNode);
