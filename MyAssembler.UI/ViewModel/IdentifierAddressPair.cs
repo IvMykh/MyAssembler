@@ -3,6 +3,6 @@
     struct IdentifierAddressPair
     {
         public string   Identifier  { get; set; }
-        public short    Address     { get; set; }
+        public string    Address     { get; set; }
     }
 }

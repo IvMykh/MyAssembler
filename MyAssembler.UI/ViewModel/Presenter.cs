@@ -163,7 +163,7 @@ namespace MyAssembler.UI.ViewModel
             {
                 items.Add(new IdentifierAddressPair {
                     Identifier = item.Key,
-                    Address = item.Value
+                    Address = string.Format("{0:X2}", item.Value)
                 });
             }
 
@@ -178,7 +178,7 @@ namespace MyAssembler.UI.ViewModel
             {
                 items.Add(new IdentifierAddressPair {
                     Identifier = item.Key,
-                    Address = item.Value
+                    Address = string.Format("{0:X2}", item.Value)
                 });
             }
 
@@ -194,7 +194,7 @@ namespace MyAssembler.UI.ViewModel
             {
                 items.Add(new IdentifierAddressPair {
                     Identifier = item.Key,
-                    Address = item.Value
+                    Address = string.Format("{0:X2}", item.Value)
                 });
             }
 
